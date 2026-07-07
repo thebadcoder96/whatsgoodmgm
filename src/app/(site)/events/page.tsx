@@ -9,7 +9,7 @@ export const metadata = { title: 'All events' }
 
 export default async function EventsPage({ searchParams }: { searchParams: Promise<Record<string, string | undefined>> }) {
   const { category, free, q, days: daysParam } = await searchParams
-  const windowDays = Math.min(Number(daysParam) || 30, 90)
+  const windowDays = Math.min(Math.max(Number(daysParam) || 30, 1), 90)
   const now = new Date()
   const to = new Date(now.getTime() + windowDays * 86_400_000)
 
@@ -19,7 +19,7 @@ export default async function EventsPage({ searchParams }: { searchParams: Promi
 
   const filtered = events.filter(e =>
     (!category || e.category === category) &&
-    (!free || /free/i.test(e.priceText ?? '')))
+    (!free || /^free/i.test((e.priceText ?? '').trim()))) // free = free general admission, not "$8, kids free"
 
   const occurrences = q
     ? filtered.map(e => ({ e, occursAt: e.startDateTime }))
