@@ -100,21 +100,22 @@ export default function MapView({ events }: { events: EventDoc[] }) {
                 ref={el => {
                   cardRefs.current[g.key] = el
                 }}
-                role="button"
-                tabIndex={0}
-                aria-pressed={on}
-                onClick={() => selectFromCard(g)}
-                onKeyDown={e => {
-                  if (e.key === 'Enter' || e.key === ' ') {
-                    e.preventDefault()
-                    selectFromCard(g)
-                  }
-                }}
-                className={`cursor-pointer rounded-r-lg border-l-2 bg-[var(--surface)] px-4 py-3 ring-1 transition-colors hover:bg-[var(--surface-2)] ${
+                className={`relative cursor-pointer rounded-r-lg border-l-2 bg-[var(--surface)] px-4 py-3 ring-1 transition-colors hover:bg-[var(--surface-2)] ${
                   on ? 'ring-2 ring-[var(--accent)]' : 'ring-white/5'
                 }`}
                 style={{ borderLeftColor: g.hue }}
               >
+                {/* Stretched button: covers the whole card surface (header row
+                    included) so any click selects the venue. The event-title
+                    links and directions link sit above it at z-10 and keep
+                    their own navigation. */}
+                <button
+                  type="button"
+                  aria-pressed={on}
+                  aria-label={`show ${g.name} on the map`}
+                  onClick={() => selectFromCard(g)}
+                  className="absolute inset-0 z-0 cursor-pointer rounded-r-lg"
+                />
                 <div className="flex items-baseline justify-between gap-3">
                   <h3 className="text-xs font-semibold uppercase tracking-[0.08em]">{g.name}</h3>
                   {g.neighborhood && (
@@ -126,8 +127,7 @@ export default function MapView({ events }: { events: EventDoc[] }) {
                     <li key={e._id}>
                       <Link
                         href={`/events/${e.slug}`}
-                        onClick={ev => ev.stopPropagation()}
-                        className="font-medium leading-snug hover:text-[var(--accent)]"
+                        className="relative z-10 font-medium leading-snug hover:text-[var(--accent)]"
                       >
                         {e.title}
                       </Link>
@@ -139,8 +139,7 @@ export default function MapView({ events }: { events: EventDoc[] }) {
                   href={directionsUrl(g.lat, g.lng)}
                   target="_blank"
                   rel="noopener noreferrer"
-                  onClick={ev => ev.stopPropagation()}
-                  className="link-gold mt-2 inline-block text-xs"
+                  className="link-gold relative z-10 mt-2 inline-block text-xs"
                 >
                   directions →
                 </a>

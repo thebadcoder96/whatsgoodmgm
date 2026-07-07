@@ -97,14 +97,24 @@ textarea:focus-visible {
   box-shadow: 0 0 0 2px var(--accent), 0 0 0 4px var(--accent-ink);
 }
 
-/* Leaflet popovers should sit on our warm surface, not stock white. */
-.leaflet-popup-content-wrapper,
-.leaflet-popup-tip {
-  background: var(--surface-2);
+/* Leaflet popovers should sit on our warm surface, not stock white.
+   leaflet.css is imported by the client MapView and lands AFTER this file,
+   so its equal-specificity `.leaflet-popup-content-wrapper { background: #fff }`
+   was winning. Scope everything under .leaflet-container to out-rank it
+   regardless of stylesheet order. */
+.leaflet-container .leaflet-popup-content-wrapper {
+  background: var(--surface);
   color: var(--ink);
+  border: 1px solid rgba(255, 255, 255, 0.1);
 }
-.leaflet-popup-content a {
+.leaflet-container .leaflet-popup-tip {
+  background: var(--surface);
+}
+.leaflet-container .leaflet-popup-content a {
   color: var(--accent);
+}
+.leaflet-container .leaflet-popup a.leaflet-popup-close-button {
+  color: var(--ink-dim);
 }
 .wg-popup strong {
   font-family: var(--font-fraunces), Georgia, serif;
