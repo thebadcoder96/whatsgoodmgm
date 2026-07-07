@@ -12,7 +12,7 @@ export default async function EventPage({ params }: { params: Promise<{ slug: st
 
   return (
     <article className="mx-auto max-w-2xl">
-      {event.imageUrl && <img src={event.imageUrl} alt="" className="mb-6 w-full rounded-xl object-cover" />}
+      {event.imageUrl && <img src={event.imageUrl} alt={`Flyer for ${event.title}`} className="mb-6 w-full rounded-xl object-cover" />}
       <p className="text-sm uppercase tracking-widest text-[var(--accent)]">{event.category}</p>
       <h1 className="mt-1 font-display text-3xl font-bold">{event.title}</h1>
       <p className="mt-2 text-[var(--ink-dim)]">
