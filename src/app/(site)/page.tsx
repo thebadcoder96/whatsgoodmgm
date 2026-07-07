@@ -1,65 +1,43 @@
-import Image from "next/image";
+import Link from 'next/link'
+import { sanityFetch } from '@/lib/sanity/fetch'
+import { LATEST_WEEKLY_PICK, UPCOMING_OR_RECURRING, type EventDoc } from '@/lib/sanity/queries'
+import { expandOccurrences } from '@/lib/events/occurrences'
+import { EventCard } from '@/components/EventCard'
+import { WeeklyPickHero } from '@/components/WeeklyPickHero'
 
-export default function Home() {
+export const revalidate = 3600
+
+export default async function HomePage() {
+  const now = new Date()
+  const in3days = new Date(now.getTime() + 3 * 86_400_000)
+  const [pick, events] = await Promise.all([
+    sanityFetch<any>(LATEST_WEEKLY_PICK),
+    sanityFetch<EventDoc[]>(UPCOMING_OR_RECURRING, { from: now.toISOString() }),
+  ])
+
+  const thisWeekend = events
+    .flatMap(e => expandOccurrences(e, now.toISOString(), in3days.toISOString()).map(occursAt => ({ e, occursAt })))
+    .sort((a, b) => a.occursAt.localeCompare(b.occursAt))
+    .slice(0, 6)
+
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
+    <div className="space-y-10">
+      {pick ? <WeeklyPickHero pick={pick} /> : (
+        <section className="rounded-xl border border-white/10 p-8 text-center">
+          <h1 className="text-3xl font-bold">Know what&apos;s good in the Gump.</h1>
+          <p className="mt-2 text-[var(--ink-dim)]">The weekly pick lands every Thursday.</p>
+        </section>
+      )}
+      <section>
+        <h2 className="text-xl font-semibold">This weekend</h2>
+        <div className="mt-4 grid gap-3 md:grid-cols-2">
+          {thisWeekend.map(({ e, occursAt }) => <EventCard key={`${e._id}${occursAt}`} event={e} occursAt={occursAt} />)}
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
+        {thisWeekend.length === 0 && <p className="mt-4 text-[var(--ink-dim)]">Quiet few days — check the full list.</p>}
+        <Link href="/events" className="mt-6 inline-block rounded-md bg-[var(--accent)] px-4 py-2 font-medium text-[var(--accent-ink)]">
+          See everything happening →
+        </Link>
+      </section>
     </div>
-  );
+  )
 }
