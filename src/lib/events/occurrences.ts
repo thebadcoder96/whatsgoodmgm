@@ -7,6 +7,8 @@ const DAY = 86_400_000
 
 /**
  * Expand an event into occurrence ISO datetimes within [fromIso, toIso].
+ * Monthly events recur on the same day-of-month, clamped to the last day
+ * of shorter months (e.g. a day-31 event lands on Feb 28 / Apr 30).
  * Known v1 limitation: fixed-ms steps keep UTC time constant, so local
  * Montgomery times shift by 1h across the two DST boundaries per year.
  */
@@ -25,14 +27,18 @@ export function expandOccurrences(e: RecurringInput, fromIso: string, toIso: str
     if (t < from.getTime()) t += Math.ceil((from.getTime() - t) / step) * step
     for (; t <= to.getTime(); t += step) out.push(new Date(t).toISOString())
   } else {
-    // monthly: same day-of-month and UTC time as the first occurrence
-    let d = new Date(Date.UTC(from.getUTCFullYear(), from.getUTCMonth(), start.getUTCDate(),
-      start.getUTCHours(), start.getUTCMinutes(), start.getUTCSeconds()))
-    if (d < start) d = new Date(start)
-    while (d <= to) {
-      if (d >= from) out.push(d.toISOString())
-      d = new Date(Date.UTC(d.getUTCFullYear(), d.getUTCMonth() + 1, start.getUTCDate(),
+    // monthly: same day-of-month as the first occurrence, clamped to shorter months
+    const dom = start.getUTCDate()
+    let y = start.getUTCFullYear()
+    let mo = start.getUTCMonth()
+    while (true) {
+      const lastDay = new Date(Date.UTC(y, mo + 1, 0)).getUTCDate()
+      const d = new Date(Date.UTC(y, mo, Math.min(dom, lastDay),
         start.getUTCHours(), start.getUTCMinutes(), start.getUTCSeconds()))
+      if (d > to) break
+      if (d >= from && d >= start) out.push(d.toISOString())
+      mo += 1
+      if (mo === 12) { mo = 0; y += 1 }
     }
   }
   return out

@@ -31,4 +31,13 @@ describe('expandOccurrences', () => {
     const e: RecurringInput = { startDateTime: '2026-05-15T18:00:00Z', recurrence: { frequency: 'monthly' } }
     expect(expandOccurrences(e, win.from, win.to)).toEqual(['2026-07-15T18:00:00.000Z'])
   })
+  it('clamps monthly day-31 events to the last day of shorter months (no skipped months)', () => {
+    const e: RecurringInput = { startDateTime: '2026-01-31T18:00:00Z', recurrence: { frequency: 'monthly' } }
+    expect(expandOccurrences(e, '2026-01-01T00:00:00Z', '2026-12-31T23:59:59Z')).toEqual([
+      '2026-01-31T18:00:00.000Z', '2026-02-28T18:00:00.000Z', '2026-03-31T18:00:00.000Z',
+      '2026-04-30T18:00:00.000Z', '2026-05-31T18:00:00.000Z', '2026-06-30T18:00:00.000Z',
+      '2026-07-31T18:00:00.000Z', '2026-08-31T18:00:00.000Z', '2026-09-30T18:00:00.000Z',
+      '2026-10-31T18:00:00.000Z', '2026-11-30T18:00:00.000Z', '2026-12-31T18:00:00.000Z',
+    ])
+  })
 })
