@@ -1,15 +1,24 @@
 import type { Metadata } from 'next'
-import { Geist, Geist_Mono } from 'next/font/google'
+import { Fraunces, Epilogue, IBM_Plex_Mono } from 'next/font/google'
 import './globals.css'
 
-const geistSans = Geist({
-  variable: '--font-geist-sans',
+const fraunces = Fraunces({
   subsets: ['latin'],
+  variable: '--font-fraunces',
+  display: 'swap',
 })
 
-const geistMono = Geist_Mono({
-  variable: '--font-geist-mono',
+const epilogue = Epilogue({
   subsets: ['latin'],
+  variable: '--font-epilogue',
+  display: 'swap',
+})
+
+const plexMono = IBM_Plex_Mono({
+  subsets: ['latin'],
+  weight: ['400', '500'],
+  variable: '--font-plex-mono',
+  display: 'swap',
 })
 
 export const metadata: Metadata = {
@@ -19,7 +28,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${geistSans.variable} ${geistMono.variable}`}>
+    <html lang="en" className={`${fraunces.variable} ${epilogue.variable} ${plexMono.variable}`}>
       <body className="min-h-screen antialiased">
         {children}
       </body>

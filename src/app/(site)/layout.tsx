@@ -13,7 +13,7 @@ export default function SiteLayout({ children }: { children: React.ReactNode }) 
     <>
       <header className="border-b border-white/10">
         <div className="mx-auto flex max-w-5xl items-center justify-between px-4 py-4">
-          <Link href="/" className="font-bold tracking-tight text-[var(--accent)]">WhatsGood<span className="text-[var(--ink)]">MGM</span></Link>
+          <Link href="/" className="font-display font-bold tracking-tight text-[var(--accent)]">WhatsGood<span className="text-[var(--ink)]">MGM</span></Link>
           <nav className="flex gap-4 text-sm text-[var(--ink-dim)]">
             {nav.map(n => <Link key={n.href} href={n.href} className="hover:text-[var(--ink)]">{n.label}</Link>)}
           </nav>

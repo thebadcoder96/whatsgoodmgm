@@ -1,17 +1,22 @@
 @import "tailwindcss";
 
 :root {
-  --bg: #0c0e12;
-  --surface: #14171d;
-  --ink: #e8e6e1;
-  --ink-dim: #9a978f;
+  --bg: #12100d;
+  --surface: #1b1813;
+  --ink: #ede8dd;
+  --ink-dim: #a49d8f;
   --accent: #e0b64f;      /* warm gold — "what's good" */
   --accent-ink: #12100a;
+
+  --hue-kudzu: #9ab87f;
+  --hue-brick: #d08862;
+  --hue-river: #8fb0c4;
 }
 
 @theme inline {
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: var(--font-epilogue);
+  --font-display: var(--font-fraunces);
+  --font-mono: var(--font-plex-mono);
 }
 
 body {
