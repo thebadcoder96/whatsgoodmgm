@@ -4,14 +4,150 @@ import { useEffect, useRef, useState, useTransition, type KeyboardEvent } from '
 
 const pill = 'rounded-full border border-white/10 bg-[var(--surface-2)] px-3.5 py-1.5 text-[var(--ink)] focus:border-[var(--accent-deep)]'
 
-// Custom chevron, drawn once as a data-URI so native <select> chrome (the
-// clashing bit) can be switched off via appearance-none while keeping an
-// affordance that it's a dropdown.
-const chevron =
-  "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6' fill='none'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%23a49d8f' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E\")"
+type Option = { value: string; label: string }
 
-const select =
-  `${pill} appearance-none bg-no-repeat bg-[right_0.9rem_center] bg-[length:10px_6px] pr-8 cursor-pointer`
+/**
+ * Custom listbox dropdown so the OPEN state matches the site too — native
+ * <select> popups are OS chrome and can't be themed. Follows the WAI-ARIA
+ * "select-only combobox" pattern: focus stays on the pill button and
+ * aria-activedescendant tracks the highlighted option.
+ */
+function PillSelect({ id, label, value, options, onChange }: {
+  id: string
+  label: string
+  value: string
+  options: readonly Option[]
+  onChange: (value: string) => void
+}) {
+  const [open, setOpen] = useState(false)
+  const selectedIndex = Math.max(0, options.findIndex(o => o.value === value))
+  const [active, setActive] = useState(selectedIndex)
+  const rootRef = useRef<HTMLDivElement>(null)
+  const buttonRef = useRef<HTMLButtonElement>(null)
+
+  function openPanel() {
+    setActive(selectedIndex)
+    setOpen(true)
+  }
+
+  function choose(i: number) {
+    setOpen(false)
+    buttonRef.current?.focus()
+    if (options[i] && options[i].value !== value) onChange(options[i].value)
+  }
+
+  // Click outside closes.
+  useEffect(() => {
+    if (!open) return
+    function onDocPointerDown(e: PointerEvent) {
+      if (rootRef.current && !rootRef.current.contains(e.target as Node)) setOpen(false)
+    }
+    document.addEventListener('pointerdown', onDocPointerDown)
+    return () => document.removeEventListener('pointerdown', onDocPointerDown)
+  }, [open])
+
+  function onKeyDown(e: KeyboardEvent<HTMLButtonElement>) {
+    if (!open) {
+      if (e.key === 'Enter' || e.key === ' ' || e.key === 'ArrowDown' || e.key === 'ArrowUp') {
+        e.preventDefault()
+        openPanel()
+      }
+      return
+    }
+    switch (e.key) {
+      case 'ArrowDown':
+        e.preventDefault()
+        setActive(i => Math.min(i + 1, options.length - 1))
+        break
+      case 'ArrowUp':
+        e.preventDefault()
+        setActive(i => Math.max(i - 1, 0))
+        break
+      case 'Home':
+        e.preventDefault()
+        setActive(0)
+        break
+      case 'End':
+        e.preventDefault()
+        setActive(options.length - 1)
+        break
+      case 'Enter':
+      case ' ':
+        e.preventDefault()
+        choose(active)
+        break
+      case 'Escape':
+        e.preventDefault()
+        setOpen(false)
+        buttonRef.current?.focus()
+        break
+      case 'Tab':
+        setOpen(false)
+        break
+    }
+  }
+
+  return (
+    <div ref={rootRef} className="relative">
+      <button
+        ref={buttonRef}
+        type="button"
+        id={id}
+        aria-label={label}
+        aria-haspopup="listbox"
+        aria-expanded={open}
+        aria-controls={`${id}-listbox`}
+        aria-activedescendant={open ? `${id}-opt-${active}` : undefined}
+        onClick={() => (open ? setOpen(false) : openPanel())}
+        onKeyDown={onKeyDown}
+        className={`${pill} flex cursor-pointer items-center gap-2`}
+      >
+        {options[selectedIndex]?.label}
+        <svg
+          aria-hidden="true"
+          width="10"
+          height="6"
+          viewBox="0 0 10 6"
+          fill="none"
+          className={`shrink-0 transition-transform duration-150 ${open ? 'rotate-180' : ''}`}
+        >
+          <path d="M1 1l4 4 4-4" stroke="var(--ink-dim)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+        </svg>
+      </button>
+      {open && (
+        <ul
+          id={`${id}-listbox`}
+          role="listbox"
+          aria-label={label}
+          className="absolute left-0 top-full z-20 mt-2 max-h-64 min-w-full max-w-[calc(100vw-2rem)] overflow-y-auto rounded-xl border border-white/10 bg-[var(--surface-2)] py-1.5 shadow-lg shadow-black/40"
+        >
+          {options.map((o, i) => {
+            const selected = i === selectedIndex
+            return (
+              <li
+                key={o.value}
+                id={`${id}-opt-${i}`}
+                role="option"
+                aria-selected={selected}
+                onMouseEnter={() => setActive(i)}
+                onClick={() => choose(i)}
+                className={`flex cursor-pointer items-center gap-2 whitespace-nowrap px-3.5 py-1.5 ${
+                  i === active ? 'bg-white/5' : ''
+                } ${selected ? 'text-[var(--accent)]' : 'text-[var(--ink)]'}`}
+              >
+                <span
+                  aria-hidden="true"
+                  className={`h-1.5 w-1.5 shrink-0 rounded-full ${selected ? 'bg-[var(--accent)]' : 'bg-transparent'}`}
+                />
+                {o.label}
+              </li>
+            )
+          })}
+        </ul>
+      )}
+    </div>
+  )
+}
 
 type Props = {
   q?: string
@@ -72,6 +208,16 @@ export default function EventFilters({ q, category, days, free, categories }: Pr
     }
   }, [])
 
+  const categoryOptions: Option[] = [
+    { value: '', label: 'all categories' },
+    ...categories.map(c => ({ value: c, label: c })),
+  ]
+  const daysOptions: Option[] = [
+    { value: '7', label: 'next 7 days' },
+    { value: '30', label: 'next 30 days' },
+    { value: '90', label: 'next 90 days' },
+  ]
+
   return (
     <form
       className="mt-5 flex flex-wrap items-center gap-2 border-b border-white/5 pb-5 text-sm"
@@ -97,40 +243,21 @@ export default function EventFilters({ q, category, days, free, categories }: Pr
         className={`${pill} min-w-40`}
       />
 
-      <label className="sr-only" htmlFor="events-category">
-        category
-      </label>
-      <select
+      <PillSelect
         id="events-category"
-        name="category"
-        defaultValue={category ?? ''}
-        onChange={e => navigate(current({ category: e.target.value }))}
-        className={select}
-        style={{ backgroundImage: chevron }}
-      >
-        <option value="">all categories</option>
-        {categories.map(c => (
-          <option key={c} value={c}>
-            {c}
-          </option>
-        ))}
-      </select>
+        label="category"
+        value={category ?? ''}
+        options={categoryOptions}
+        onChange={v => navigate(current({ category: v }))}
+      />
 
-      <label className="sr-only" htmlFor="events-days">
-        date range
-      </label>
-      <select
+      <PillSelect
         id="events-days"
-        name="days"
-        defaultValue={days ?? '30'}
-        onChange={e => navigate(current({ days: e.target.value }))}
-        className={select}
-        style={{ backgroundImage: chevron }}
-      >
-        <option value="7">next 7 days</option>
-        <option value="30">next 30 days</option>
-        <option value="90">next 90 days</option>
-      </select>
+        label="date range"
+        value={days ?? '30'}
+        options={daysOptions}
+        onChange={v => navigate(current({ days: v }))}
+      />
 
       <label className={`${pill} flex cursor-pointer items-center gap-1.5 text-[var(--ink-dim)]`}>
         <input
@@ -143,6 +270,12 @@ export default function EventFilters({ q, category, days, free, categories }: Pr
         />{' '}
         free only
       </label>
+
+      {/* No-JS fallback (degraded, accepted): the custom dropdowns require JS,
+          but these hidden inputs keep the active category/days in the URL when
+          the search box is submitted natively via Enter. */}
+      {category ? <input type="hidden" name="category" value={category} /> : null}
+      {days && days !== '30' ? <input type="hidden" name="days" value={days} /> : null}
 
       <span
         aria-hidden={!pending}
