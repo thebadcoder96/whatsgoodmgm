@@ -32,6 +32,13 @@ export default function SiteLayout({ children }: { children: React.ReactNode }) 
           made in Montgomery, for Montgomery. no ads, no algorithm — just what&apos;s good.
         </p>
         <p className="mt-2 font-mono text-xs text-[var(--ink-dim)]">fresh every thursday</p>
+        <p className="mt-4 font-mono text-[11px] text-[var(--ink-dim)]">
+          <a href="https://www.mmintelligence.ai" className="link-gold" target="_blank" rel="noopener noreferrer">
+            built by MM Intelligence
+          </a>
+          {' · '}© 2026{' · '}
+          <Link href="/privacy" className="link-gold">privacy</Link>
+        </p>
       </footer>
     </>
   )
