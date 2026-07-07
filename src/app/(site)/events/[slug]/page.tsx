@@ -26,6 +26,19 @@ export default async function EventPage({ params }: { params: Promise<{ slug: st
       {event.venue && (
         <p className="mt-1.5 text-xs uppercase tracking-[0.08em] text-[var(--ink-dim)]">
           {event.venue.name}{event.venue.address && ` · ${event.venue.address}`}
+          {event.venue.lat != null && event.venue.lng != null && (
+            <>
+              {' · '}
+              <a
+                href={`https://www.google.com/maps/dir/?api=1&destination=${event.venue.lat},${event.venue.lng}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="link-gold text-[var(--accent)]"
+              >
+                directions →
+              </a>
+            </>
+          )}
         </p>
       )}
       {event.description && <p className="mt-8 whitespace-pre-line leading-7">{event.description}</p>}

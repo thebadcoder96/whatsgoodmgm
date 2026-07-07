@@ -77,6 +77,26 @@ textarea:focus-visible {
   filter: invert(1) hue-rotate(200deg) brightness(0.72) contrast(0.9) saturate(0.4) sepia(0.3);
 }
 
+/* Map pins: gold dot in a category-hue ring. Grows a touch on hover; the
+   selected pin gets a gold halo so it reads as "this one" next to its card. */
+.wg-pin {
+  width: 22px;
+  height: 22px;
+  margin: 3px;
+  border-radius: 50%;
+  background: var(--accent);
+  border: 3px solid var(--pin-hue, var(--accent));
+  box-shadow: 0 0 0 1px var(--accent-ink), 0 1px 4px rgba(0, 0, 0, 0.5);
+  transition: transform 150ms ease, box-shadow 150ms ease;
+}
+.wg-pin:hover {
+  transform: scale(1.18);
+}
+.wg-pin--on {
+  transform: scale(1.12);
+  box-shadow: 0 0 0 2px var(--accent), 0 0 0 4px var(--accent-ink);
+}
+
 /* Leaflet popovers should sit on our warm surface, not stock white. */
 .leaflet-popup-content-wrapper,
 .leaflet-popup-tip {
@@ -85,6 +105,27 @@ textarea:focus-visible {
 }
 .leaflet-popup-content a {
   color: var(--accent);
+}
+.wg-popup strong {
+  font-family: var(--font-fraunces), Georgia, serif;
+  font-size: 14px;
+}
+.wg-popup ul {
+  margin: 6px 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.wg-popup li {
+  line-height: 1.35;
+}
+.wg-popup-when {
+  display: block;
+  font-family: var(--font-plex-mono), monospace;
+  font-size: 11px;
+  color: var(--ink-dim);
 }
 .leaflet-container .leaflet-control-attribution {
   background: var(--surface);
