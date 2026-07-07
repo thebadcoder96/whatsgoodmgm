@@ -1,6 +1,7 @@
 import { defineField, defineType } from 'sanity'
+import { CATEGORIES } from '@/lib/events/categories'
 
-export const CATEGORIES = ['music','arts','food','family','nightlife','community','sports','education','festival','other']
+export { CATEGORIES }
 
 export const event = defineType({
   name: 'event', title: 'Event', type: 'document',
