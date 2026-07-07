@@ -20,6 +20,8 @@ export const eventbriteFetcher: Fetcher = {
 
       for (const ev of data.events ?? []) {
         if (!ev.start?.utc) { console.warn(`  SKIP malformed event (no start): ${ev.name?.text ?? ev.id ?? 'unknown'}`); continue }
+        // online/virtual events aren't Montgomery events — this site is about being somewhere
+        if (ev.online_event === true) { console.log(`  SKIP online event: ${ev.name?.text ?? ev.id}`); continue }
         if (new Date(ev.start.utc).getTime() > cutoff) { hasMore = false; break }
         out.push({
           title: ev.name?.text ?? 'Untitled event',
