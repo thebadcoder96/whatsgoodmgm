@@ -19,7 +19,8 @@ export const eventbriteFetcher: Fetcher = {
       const data = await res.json()
 
       for (const ev of data.events ?? []) {
-        if (new Date(ev.start?.utc).getTime() > cutoff) { hasMore = false; break }
+        if (!ev.start?.utc) { console.warn(`  SKIP malformed event (no start): ${ev.name?.text ?? ev.id ?? 'unknown'}`); continue }
+        if (new Date(ev.start.utc).getTime() > cutoff) { hasMore = false; break }
         out.push({
           title: ev.name?.text ?? 'Untitled event',
           startDateTime: new Date(ev.start.utc).toISOString(),
@@ -39,6 +40,7 @@ export const eventbriteFetcher: Fetcher = {
       }
       hasMore = hasMore && !!data.pagination?.has_more_items
       page += 1
+      if (page > 20) { console.warn(`  Pagination cap reached for org ${source.identifier}`); break }
     }
     return out
   },

@@ -20,10 +20,12 @@ export async function loadExisting(client: SanityClient): Promise<ExistingEvent[
 }
 
 async function upsertVenue(client: SanityClient, v: NonNullable<NormalizedEvent['venue']>, dryRun: boolean): Promise<string> {
-  const id = `venue-${normalizeText(v.name).replace(/\s+/g, '-')}`
+  // Sanity document IDs must be ASCII [A-Za-z0-9._-]; strip anything normalizeText kept (e.g. accents).
+  const idSlug = normalizeText(v.name).replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '') || 'unnamed'
+  const id = `venue-${idSlug}`
   if (!dryRun) {
     await client.createIfNotExists({ _id: id, _type: 'venue', name: v.name, address: v.address, lat: v.lat, lng: v.lng,
-      slug: { current: id.replace('venue-', '') } })
+      slug: { current: idSlug } })
   }
   return id
 }
@@ -52,9 +54,10 @@ export async function writeEvents(client: SanityClient, incoming: NormalizedEven
 
     const likelyRecurring = isLikelyRecurring(comparable, approved)
     console.log(`  CREATE ${ev.title} @ ${ev.startDateTime}${likelyRecurring ? ' [likely recurring]' : ''}`)
+    let newId = 'dry-run-pending' // harmless in dry-run: the merge patch is skipped too
     if (!dryRun) {
       const venueId = ev.venue ? await upsertVenue(client, ev.venue, dryRun) : undefined
-      await client.create({
+      const createdDoc = await client.create({
         _type: 'event', status: 'pending', featured: false, likelyRecurring,
         title: ev.title, startDateTime: ev.startDateTime, endDateTime: ev.endDateTime,
         description: ev.description, priceText: ev.priceText, imageUrl: ev.imageUrl,
@@ -63,8 +66,9 @@ export async function writeEvents(client: SanityClient, incoming: NormalizedEven
         dedupeKey: makeDedupeKey(ev.title, ev.venue?.name ?? '', ev.startDateTime),
         ...(venueId ? { venue: { _type: 'reference', _ref: venueId } } : {}),
       })
+      newId = createdDoc._id
     }
-    existing.push({ ...comparable, _id: 'new', status: 'pending', sourceUrl: ev.sourceUrl }) // in-batch dedup
+    existing.push({ ...comparable, _id: newId, status: 'pending', sourceUrl: ev.sourceUrl }) // in-batch dedup
     created += 1
   }
   return { created, merged, skipped }

@@ -5,7 +5,7 @@ import { makeIngestClient, writeEvents } from './lib/writer'
 
 // Local dev reads .env.local (gitignored); CI (GitHub Actions) injects env vars directly via
 // the workflow's `env:` block, so a missing .env.local there is expected and harmless.
-config({ path: '.env.local' })
+config({ path: '.env.local', quiet: true })
 
 const FETCHERS: Record<string, Fetcher> = { eventbrite: eventbriteFetcher }
 const WINDOW_DAYS = 60
