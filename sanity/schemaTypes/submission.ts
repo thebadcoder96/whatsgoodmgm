@@ -11,7 +11,7 @@ export const submission = defineType({
     defineField({ name: 'eventTitle', type: 'string' }),
     defineField({ name: 'eventDate', type: 'string', description: 'As typed by submitter — verify before promoting' }),
     defineField({ name: 'eventVenueText', type: 'string' }),
-    defineField({ name: 'eventUrl', type: 'url' }),
+    defineField({ name: 'eventUrl', type: 'url', validation: r => r.uri({ scheme: ['http', 'https'] }) }),
     defineField({ name: 'eventDescription', type: 'text' }),
     defineField({ name: 'status', type: 'string', initialValue: 'new',
       options: { list: ['new','reviewed','added','ignored'], layout: 'radio' } }),
