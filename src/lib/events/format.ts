@@ -11,3 +11,10 @@ export function formatEventDate(iso: string): string {
     timeZone: TZ, weekday: 'long', month: 'long', day: 'numeric',
   }).format(new Date(iso))
 }
+
+// weekOf is a date-only string (YYYY-MM-DD) with no time component. Parsing it directly
+// as `new Date(iso)` treats it as UTC midnight, which formats as the PREVIOUS day in
+// America/Chicago. Anchor it to noon UTC so the calendar date can't shift across timezones.
+export function formatWeekOf(dateOnly: string): string {
+  return formatEventDate(`${dateOnly}T12:00:00Z`)
+}
