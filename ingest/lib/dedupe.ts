@@ -14,9 +14,17 @@ function titleMatch(a: ComparableEvent, b: ComparableEvent): boolean {
   return fuzz.token_set_ratio(av, bv) >= VENUE_THRESHOLD
 }
 
-/** Same real-world event: same Montgomery calendar day + fuzzy title/venue match. */
+const MAX_START_DRIFT_MS = 2 * 60 * 60 * 1000 // cross-source listings drift (door vs show time); sequels are further apart
+
+/**
+ * Same real-world event: same Montgomery calendar day, start within 2h, fuzzy title/venue match.
+ * Known limitation: one event listed with start times >2h apart across sources will create two
+ * pending docs — the human approval queue catches those.
+ */
 export function isSameEvent(incoming: ComparableEvent, existing: ComparableEvent): boolean {
-  return localDay(incoming.startDateTime) === localDay(existing.startDateTime) && titleMatch(incoming, existing)
+  return localDay(incoming.startDateTime) === localDay(existing.startDateTime) &&
+    Math.abs(new Date(incoming.startDateTime).getTime() - new Date(existing.startDateTime).getTime()) <= MAX_START_DRIFT_MS &&
+    titleMatch(incoming, existing)
 }
 
 /** Same title+venue as an approved event on a DIFFERENT day → probably a recurring series. */

@@ -22,6 +22,18 @@ describe('isSameEvent', () => {
       existing,
     )).toBe(false)
   })
+  it('does not merge same-day sequel events hours apart (e.g. finals rounds)', () => {
+    expect(isSameEvent(
+      { title: 'Trivia Night at The Alley Championship', venueName: 'The Alley', startDateTime: '2026-07-08T03:00:00Z' },
+      existing, // 2026-07-08T00:30:00Z — same local day, 2.5h earlier
+    )).toBe(false)
+  })
+  it('merges cross-source listings with minor start-time drift', () => {
+    expect(isSameEvent(
+      { title: 'Trivia Night', venueName: 'The Alley', startDateTime: '2026-07-08T01:00:00Z' },
+      existing, // 30 min drift
+    )).toBe(true)
+  })
 })
 
 describe('isLikelyRecurring', () => {

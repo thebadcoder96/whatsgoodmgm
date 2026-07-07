@@ -21,4 +21,7 @@ describe('makeSlug', () => {
   it('builds title-date slugs', () => {
     expect(makeSlug('Jazz Night @ The Alley', '2026-07-10T23:00:00Z')).toBe('jazz-night-the-alley-2026-07-10')
   })
+  it('falls back to "event" for titles with no ascii alphanumerics', () => {
+    expect(makeSlug('!!!', '2026-07-10T23:00:00Z')).toBe('event-2026-07-10')
+  })
 })

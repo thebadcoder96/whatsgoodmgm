@@ -15,5 +15,6 @@ export function makeDedupeKey(title: string, venueName: string, startIso: string
 }
 
 export function makeSlug(title: string, startIso: string): string {
-  return `${title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '')}-${localDay(startIso)}`
+  const base = title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '')
+  return `${base || 'event'}-${localDay(startIso)}`
 }
