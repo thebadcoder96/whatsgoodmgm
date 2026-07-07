@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "test": "vitest run"
+    "test": "vitest run",
+    "ingest": "tsx ingest/run.ts"
   },
   "dependencies": {
     "@portabletext/react": "^6.2.0",
