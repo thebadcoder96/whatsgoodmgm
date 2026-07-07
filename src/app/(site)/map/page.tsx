@@ -9,7 +9,7 @@ export default async function MapPage() {
   const events = await sanityFetch<EventDoc[]>(UPCOMING_OR_RECURRING, { from: new Date().toISOString() })
   return (
     <div>
-      <h1 className="mb-4 font-display text-2xl font-bold">Where it&apos;s happening</h1>
+      <h1 className="mb-5 font-display text-2xl font-semibold tracking-tight md:text-3xl">where it&apos;s happening</h1>
       <MapViewLoader events={events} />
     </div>
   )

@@ -27,28 +27,36 @@ export default async function EventsPage({ searchParams }: { searchParams: Promi
         .flatMap(e => expandOccurrences(e, now.toISOString(), to.toISOString()).map(occursAt => ({ e, occursAt })))
         .sort((a, b) => a.occursAt.localeCompare(b.occursAt))
 
+  const pill = 'rounded-full border border-white/10 bg-[var(--surface-2)] px-3.5 py-1.5 text-[var(--ink)] focus:border-[var(--accent-deep)]'
+
   return (
     <div>
-      <h1 className="font-display text-2xl font-bold">All events</h1>
-      <form className="mt-4 flex flex-wrap items-center gap-3 text-sm" method="GET">
-        <input name="q" defaultValue={q} placeholder="Search events…"
-          className="rounded-md border border-white/15 bg-[var(--surface)] px-3 py-2" />
-        <select name="category" defaultValue={category ?? ''} className="rounded-md border border-white/15 bg-[var(--surface)] px-3 py-2">
-          <option value="">All categories</option>
+      <h1 className="font-display text-2xl font-semibold tracking-tight md:text-3xl">all events</h1>
+      <form className="mt-5 flex flex-wrap items-center gap-2 border-b border-white/5 pb-5 text-sm" method="GET">
+        <input name="q" defaultValue={q} placeholder="search events…" className={`${pill} min-w-40`} />
+        <select name="category" defaultValue={category ?? ''} className={pill}>
+          <option value="">all categories</option>
           {CATEGORIES.map(c => <option key={c} value={c}>{c}</option>)}
         </select>
-        <select name="days" defaultValue={daysParam ?? '30'} className="rounded-md border border-white/15 bg-[var(--surface)] px-3 py-2">
-          <option value="7">Next 7 days</option>
-          <option value="30">Next 30 days</option>
-          <option value="90">Next 90 days</option>
+        <select name="days" defaultValue={daysParam ?? '30'} className={pill}>
+          <option value="7">next 7 days</option>
+          <option value="30">next 30 days</option>
+          <option value="90">next 90 days</option>
         </select>
-        <label className="flex items-center gap-1.5"><input type="checkbox" name="free" value="1" defaultChecked={!!free} /> Free only</label>
-        <button className="rounded-md bg-[var(--accent)] px-3 py-2 font-medium text-[var(--accent-ink)]">Filter</button>
+        <label className={`${pill} flex cursor-pointer items-center gap-1.5 text-[var(--ink-dim)]`}>
+          <input type="checkbox" name="free" value="1" defaultChecked={!!free} className="accent-[var(--accent)]" /> free only
+        </label>
+        <button className="rounded-full bg-[var(--accent)] px-4 py-1.5 font-medium text-[var(--accent-ink)]">filter</button>
       </form>
       <div className="mt-6 grid gap-3 md:grid-cols-2">
         {occurrences.map(({ e, occursAt }) => <EventCard key={`${e._id}${occursAt}`} event={e} occursAt={occursAt} />)}
       </div>
-      {occurrences.length === 0 && <p className="mt-6 text-[var(--ink-dim)]">Nothing matches — try widening the filters.</p>}
+      {occurrences.length === 0 && (
+        <p className="mt-8 border-y border-dotted border-[var(--accent)]/40 py-4 font-display italic text-[var(--ink-dim)]">
+          quiet on that front. the Gump&apos;s not asleep, though — try loosening a filter, or{' '}
+          <a href="/events" className="link-gold">clear them all</a>.
+        </p>
+      )}
     </div>
   )
 }

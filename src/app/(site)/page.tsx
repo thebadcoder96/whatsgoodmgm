@@ -23,19 +23,25 @@ export default async function HomePage() {
   return (
     <div className="space-y-10">
       {pick ? <WeeklyPickHero pick={pick} /> : (
-        <section className="rounded-xl border border-white/10 p-8 text-center">
-          <h1 className="text-3xl font-bold">Know what&apos;s good in the Gump.</h1>
-          <p className="mt-2 text-[var(--ink-dim)]">The weekly pick lands every Thursday.</p>
+        <section className="border-y border-[var(--accent-deep)]">
+          <div className="my-1 border-y border-dotted border-[var(--accent)]/40 px-4 py-12 text-center">
+            <h1 className="font-display text-3xl font-semibold tracking-tight md:text-4xl">Know what&apos;s good in the Gump.</h1>
+            <p className="mt-3 font-mono text-[13px] text-[var(--ink-dim)]">the weekly pick lands every thursday</p>
+          </div>
         </section>
       )}
       <section>
-        <h2 className="text-xl font-semibold">This weekend</h2>
+        <h2 className="font-display text-xl font-semibold italic">this weekend</h2>
         <div className="mt-4 grid gap-3 md:grid-cols-2">
           {thisWeekend.map(({ e, occursAt }) => <EventCard key={`${e._id}${occursAt}`} event={e} occursAt={occursAt} />)}
         </div>
-        {thisWeekend.length === 0 && <p className="mt-4 text-[var(--ink-dim)]">Quiet few days — check the full list.</p>}
-        <Link href="/events" className="mt-6 inline-block rounded-md bg-[var(--accent)] px-4 py-2 font-medium text-[var(--accent-ink)]">
-          See everything happening →
+        {thisWeekend.length === 0 && (
+          <p className="mt-4 border-y border-dotted border-[var(--accent)]/40 py-4 font-display italic text-[var(--ink-dim)]">
+            quiet few days. the Gump&apos;s not asleep, though — <Link href="/events" className="link-gold">see everything upcoming</Link>.
+          </p>
+        )}
+        <Link href="/events" className="link-gold mt-6 inline-block font-medium">
+          see everything happening →
         </Link>
       </section>
     </div>
