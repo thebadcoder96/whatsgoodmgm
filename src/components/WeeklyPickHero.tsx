@@ -17,7 +17,7 @@ export function WeeklyPickHero({ pick }: { pick: Pick }) {
   const isFresh = !!pick.publishedAt && Date.now() - Date.parse(pick.publishedAt) < FRESH_WINDOW_MS
   return (
     <section className="border-y border-[var(--accent-deep)]">
-      <div className="relative my-1 border-y border-dotted border-[var(--accent)]/40 px-4 py-10 md:px-8 md:py-14">
+      <div className="relative my-1 border-y border-dotted border-[var(--accent)]/40 px-4 py-7 md:px-8 md:py-9">
         <div aria-hidden className="pointer-events-none absolute inset-0 bg-[radial-gradient(60%_50%_at_50%_0%,rgba(224,182,79,0.10),transparent_70%)]" />
         <div className="relative">
           <div className="flex items-start justify-between gap-4">
@@ -28,25 +28,25 @@ export function WeeklyPickHero({ pick }: { pick: Pick }) {
               </span>
             )}
           </div>
-          <h1 className="font-display mt-4 text-4xl font-semibold leading-[1.05] tracking-tight text-balance md:text-6xl">
+          <h1 className="font-display mt-3 text-4xl font-semibold leading-[1.05] tracking-tight text-balance md:text-6xl">
             {pick.headline}
           </h1>
           {pick.body && (
-            <div className="font-display mt-6 max-w-prose space-y-4 text-lg leading-8">
+            <div className="font-display mt-5 max-w-prose space-y-3 text-lg leading-8">
               <PortableText value={pick.body} />
             </div>
           )}
           {pick.author && (
-            <p className="mt-6 font-mono text-[13px] text-[var(--ink-dim)]">
+            <p className="mt-5 font-mono text-[13px] text-[var(--ink-dim)]">
               picked by {pick.author.handle ?? pick.author.name}
               {pick.publishedAt && `, ${formatEventDate(pick.publishedAt).toLowerCase()}`}
             </p>
           )}
-          <Link href="/events" className="link-gold mt-6 inline-block font-medium">
+          <Link href="/events" className="link-gold mt-5 inline-block font-medium">
             see everything this weekend →
           </Link>
           {!!pick.featuredEvents?.length && (
-            <div className="mt-8 grid gap-3 md:grid-cols-3">
+            <div className="mt-6 grid gap-3 md:grid-cols-3">
               {pick.featuredEvents.map(e => <EventCard key={e._id} event={e} />)}
             </div>
           )}
