@@ -32,16 +32,18 @@ export default function SiteLayout({ children }: { children: React.ReactNode }) 
           made in Montgomery, for Montgomery. no ads, no algorithm — just what&apos;s good.
         </p>
         <p className="mt-2 font-mono text-xs text-[var(--ink-dim)]">fresh every thursday</p>
-        <p className="mt-4 font-mono text-[11px] text-[var(--ink-dim)]">
+        <p className="mt-5 text-sm text-[var(--ink)]">
           in collaboration with{' '}
-          <a href="https://www.reddit.com/user/More-Ideal5423/" className="link-gold" target="_blank" rel="noopener noreferrer">
+          <a href="https://www.reddit.com/user/More-Ideal5423/" className="link-gold font-medium" target="_blank" rel="noopener noreferrer">
             TNTDIM
           </a>
-          {' · '}
-          <a href="https://www.mmintelligence.ai" className="link-gold" target="_blank" rel="noopener noreferrer">
-            built by MM Intelligence
+          {' '}&middot; built by{' '}
+          <a href="https://www.mmintelligence.ai" className="link-gold font-medium" target="_blank" rel="noopener noreferrer">
+            MM Intelligence
           </a>
-          {' · '}© 2026{' · '}
+        </p>
+        <p className="mt-3 font-mono text-[11px] text-[var(--ink-dim)]">
+          © 2026{' · '}
           <Link href="/privacy" className="link-gold">privacy</Link>
         </p>
       </footer>
