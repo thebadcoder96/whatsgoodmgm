@@ -197,7 +197,7 @@ export default async function EventPage({ params }: { params: Promise<{ slug: st
 
       {moreAtVenue.length > 0 && (
         <section className="mt-12">
-          <h2 className="font-display text-xl italic">more at the {venue!.name}</h2>
+          <h2 className="font-display text-xl italic">more at {venue!.name}</h2>
           <div className="mt-4 grid gap-3">
             {moreAtVenue.map(e => (
               <EventCard key={e._id} event={e} />
