@@ -43,6 +43,7 @@ export default function SiteLayout({ children }: { children: React.ReactNode }) 
           </a>
           {' '}&middot; © 2026 &middot;{' '}
           <Link href="/privacy" className="link-gold">privacy</Link>
+          {' '}&middot; <Link href="/guide" className="link-gold">guide</Link>
         </p>
       </footer>
     </>
