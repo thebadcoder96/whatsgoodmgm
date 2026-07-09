@@ -205,32 +205,34 @@ export default function MapView({ events }: { events: EventDoc[] }) {
   }
 
   return (
-    <div className="flex flex-col gap-4 md:h-[75vh] md:flex-row">
-      {/* List panel - left on desktop, below the map on mobile. */}
-      <aside className="order-2 flex flex-col md:order-1 md:min-h-0 md:w-[38%] md:min-w-[300px] md:max-w-[440px]">
-        {/* Date pills + status - sticky above the list on mobile. */}
-        <div className="sticky top-0 z-20 bg-[var(--bg)] pb-3 pt-1 md:static md:z-auto md:pt-0">
-          <div className="flex flex-wrap gap-2" role="group" aria-label="date range">
-            {RANGES.map(r => {
-              const on = range === r.key
-              return (
-                <button
-                  key={r.key}
-                  type="button"
-                  aria-pressed={on}
-                  onClick={() => setRange(r.key)}
-                  className={`rounded-full border px-3 py-1 text-xs transition-colors ${
-                    on
-                      ? 'border-[var(--accent-deep)] text-[var(--accent)]'
-                      : 'border-white/10 text-[var(--ink-dim)] hover:border-white/20 hover:text-[var(--ink)]'
-                  }`}
-                >
-                  {r.label}
-                </button>
-              )
-            })}
-          </div>
-          <p className="mt-3 font-mono text-[11px] uppercase tracking-[0.14em] text-[var(--ink-dim)]">
+    <div className="flex flex-col gap-4">
+      {/* Toolbar: pills + status span the full width above both the list and
+          the map, one row that wraps on mobile. Sticky above the list while
+          the page scrolls; static once the list/map row itself has a scroll
+          container on desktop. */}
+      <div className="sticky top-0 z-20 flex flex-wrap items-center justify-between gap-x-4 gap-y-2 bg-[var(--bg)] pb-3 pt-1 md:static md:z-auto md:pt-0">
+        <div className="flex flex-wrap gap-2" role="group" aria-label="date range">
+          {RANGES.map(r => {
+            const on = range === r.key
+            return (
+              <button
+                key={r.key}
+                type="button"
+                aria-pressed={on}
+                onClick={() => setRange(r.key)}
+                className={`rounded-full border px-3 py-1 text-xs transition-colors ${
+                  on
+                    ? 'border-[var(--accent-deep)] text-[var(--accent)]'
+                    : 'border-white/10 text-[var(--ink-dim)] hover:border-white/20 hover:text-[var(--ink)]'
+                }`}
+              >
+                {r.label}
+              </button>
+            )
+          })}
+        </div>
+        <div className="flex flex-wrap items-center gap-3">
+          <p className="font-mono text-[11px] uppercase tracking-[0.14em] text-[var(--ink-dim)]">
             {listed.length} {listed.length === 1 ? 'event' : 'events'} · {venues.length}{' '}
             {venues.length === 1 ? 'spot' : 'spots'} on the map
           </p>
@@ -238,191 +240,196 @@ export default function MapView({ events }: { events: EventDoc[] }) {
             <button
               type="button"
               onClick={clearVenue}
-              className="mt-2 inline-flex items-center gap-1.5 rounded-full border border-dotted border-[var(--accent)]/60 px-3 py-1 text-xs text-[var(--accent)] transition-colors hover:border-[var(--accent)]"
+              className="inline-flex items-center gap-1.5 rounded-full border border-dotted border-[var(--accent)]/60 px-3 py-1 text-xs text-[var(--accent)] transition-colors hover:border-[var(--accent)]"
             >
               showing events at {venueFilter.name.toLowerCase()} · clear
               <span aria-hidden="true">×</span>
             </button>
           )}
         </div>
+      </div>
 
-        {/* The scrolling stack of per-event cards, grouped by day. */}
-        <div className="wg-scroll flex flex-col gap-2 md:min-h-0 md:flex-1 md:overflow-y-auto md:pr-2">
-          {days.map(day => (
-            <section key={day.key} aria-label={day.label}>
-              <div className="bg-[var(--bg)] pb-1.5 pt-1 md:sticky md:top-0 md:z-10">
-                <h2 className="font-display text-sm italic text-[var(--ink-dim)]">{day.label}</h2>
-                <div aria-hidden="true" className="mt-1 h-px w-10 bg-[var(--accent-deep)]" />
-              </div>
-              <div className="mt-1.5 flex flex-col gap-2">
-                {day.occs.map(o => {
-                  const hue = categoryHue(o.e.category)
-                  const v = o.e.venue
-                  const k = venueKey(v)
-                  const isFree = /^free/i.test((o.e.priceText ?? '').trim())
-                  const ringOn = k !== null && selected === k && !venueFilter
-                  return (
-                    <article
-                      key={`${o.e._id}-${o.occursAt}`}
-                      onMouseEnter={() => k && setHovered(k)}
-                      onMouseLeave={() => setHovered(null)}
-                      className={`relative rounded-r-lg border-l-2 bg-[var(--surface)] px-4 py-3 ring-1 transition-colors ${
-                        ringOn ? 'ring-[var(--accent)]' : 'ring-white/5'
-                      } ${k ? 'cursor-pointer hover:bg-[var(--surface-2)]' : ''}`}
-                      style={{ borderLeftColor: hue }}
-                    >
-                      {/* Stretched button: any click on the card surface pans the
-                          map to this venue. Title + directions links sit above it
-                          at z-10 and keep their own navigation. */}
-                      {k && (
-                        <button
-                          type="button"
-                          aria-label={`show ${v!.name} on the map`}
-                          onClick={() => showOnMap(k)}
-                          className="absolute inset-0 z-0 cursor-pointer rounded-r-lg"
-                        />
-                      )}
-                      <div className="flex items-baseline justify-between gap-3">
-                        <h3 className="font-semibold leading-snug">
-                          <Link href={`/events/${o.e.slug}`} className="relative z-10 hover:text-[var(--accent)]">
-                            {o.e.title}
-                          </Link>
-                        </h3>
-                        {o.e.category && (
-                          <span className="shrink-0 text-[11px] tracking-[0.14em]" style={{ color: hue }}>
-                            {o.e.category}
-                          </span>
+      <div className="flex flex-col gap-4 md:h-[75vh] md:flex-row">
+        {/* List panel - left on desktop, below the map on mobile. */}
+        <aside className="order-2 flex flex-col md:order-1 md:min-h-0 md:w-[38%] md:min-w-[300px] md:max-w-[440px]">
+          {/* The scrolling stack of per-event cards, grouped by day. */}
+          <div className="wg-scroll flex flex-col gap-2 md:min-h-0 md:flex-1 md:overflow-y-auto md:pr-2">
+            {days.map(day => (
+              <section key={day.key} aria-label={day.label}>
+                <div className="bg-[var(--bg)] pb-1.5 pt-1 md:sticky md:top-0 md:z-10">
+                  <h2 className="font-display text-sm italic text-[var(--ink-dim)]">{day.label}</h2>
+                  <div aria-hidden="true" className="mt-1 h-px w-10 bg-[var(--accent-deep)]" />
+                </div>
+                <div className="mt-1.5 flex flex-col gap-2">
+                  {day.occs.map(o => {
+                    const hue = categoryHue(o.e.category)
+                    const v = o.e.venue
+                    const k = venueKey(v)
+                    const isFree = /^free/i.test((o.e.priceText ?? '').trim())
+                    const ringOn = k !== null && selected === k && !venueFilter
+                    return (
+                      <article
+                        key={`${o.e._id}-${o.occursAt}`}
+                        onMouseEnter={() => k && setHovered(k)}
+                        onMouseLeave={() => setHovered(null)}
+                        className={`relative rounded-r-lg border-l-2 bg-[var(--surface)] px-4 py-3 ring-1 transition-colors ${
+                          ringOn ? 'ring-[var(--accent)]' : 'ring-white/5'
+                        } ${k ? 'cursor-pointer hover:bg-[var(--surface-2)]' : ''}`}
+                        style={{ borderLeftColor: hue }}
+                      >
+                        {/* Stretched button: any click on the card surface pans the
+                            map to this venue. Title + directions links sit above it
+                            at z-10 and keep their own navigation. */}
+                        {k && (
+                          <button
+                            type="button"
+                            aria-label={`show ${v!.name} on the map`}
+                            onClick={() => showOnMap(k)}
+                            className="absolute inset-0 z-0 cursor-pointer rounded-r-lg"
+                          />
                         )}
-                      </div>
-                      <p className="mt-1.5 font-mono text-[13px] tabular-nums text-[var(--ink-dim)]">
-                        {timeFmt.format(new Date(o.occursAt)).toLowerCase()}
-                        {o.e.priceText && (
-                          <>
-                            {' · '}
-                            <span className={isFree ? 'text-[var(--accent)]' : undefined}>
-                              {o.e.priceText.toLowerCase()}
-                            </span>
-                          </>
-                        )}
-                        {o.e.recurrence?.frequency && <> · repeats {o.e.recurrence.frequency}</>}
-                      </p>
-                      <div className="mt-2 flex items-baseline justify-between gap-3">
-                        <p
-                          className="flex min-w-0 items-center gap-1.5 text-[11px] font-medium uppercase tracking-[0.14em]"
-                          style={{ color: v ? hue : 'var(--ink-dim)' }}
-                        >
-                          <PinGlyph />
-                          <span className="truncate">{v?.name ?? 'venue tba'}</span>
-                          {v?.neighborhood && (
-                            <span className="shrink-0 font-normal normal-case tracking-normal text-[var(--ink-dim)]">
-                              · {v.neighborhood.toLowerCase()}
+                        <div className="flex items-baseline justify-between gap-3">
+                          <h3 className="font-semibold leading-snug">
+                            <Link href={`/events/${o.e.slug}`} className="relative z-10 hover:text-[var(--accent)]">
+                              {o.e.title}
+                            </Link>
+                          </h3>
+                          {o.e.category && (
+                            <span className="shrink-0 text-[11px] tracking-[0.14em]" style={{ color: hue }}>
+                              {o.e.category}
                             </span>
                           )}
-                          {v && !k && (
-                            <span className="shrink-0 font-normal normal-case italic tracking-normal text-[var(--ink-dim)]">
-                              · not on the map yet
-                            </span>
+                        </div>
+                        <p className="mt-1.5 font-mono text-[13px] tabular-nums text-[var(--ink-dim)]">
+                          {timeFmt.format(new Date(o.occursAt)).toLowerCase()}
+                          {o.e.priceText && (
+                            <>
+                              {' · '}
+                              <span className={isFree ? 'text-[var(--accent)]' : undefined}>
+                                {o.e.priceText.toLowerCase()}
+                              </span>
+                            </>
                           )}
+                          {o.e.recurrence?.frequency && <> · repeats {o.e.recurrence.frequency}</>}
                         </p>
-                        {v && k && (
-                          <a
-                            href={directionsUrl(v.lat!, v.lng!)}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="link-gold relative z-10 shrink-0 text-xs"
+                        <div className="mt-2 flex items-baseline justify-between gap-3">
+                          <p
+                            className="flex min-w-0 items-center gap-1.5 text-[11px] font-medium uppercase tracking-[0.14em]"
+                            style={{ color: v ? hue : 'var(--ink-dim)' }}
                           >
-                            directions →
-                          </a>
-                        )}
-                      </div>
-                    </article>
-                  )
-                })}
+                            <PinGlyph />
+                            <span className="truncate">{v?.name ?? 'venue tba'}</span>
+                            {v?.neighborhood && (
+                              <span className="shrink-0 font-normal normal-case tracking-normal text-[var(--ink-dim)]">
+                                · {v.neighborhood.toLowerCase()}
+                              </span>
+                            )}
+                            {v && !k && (
+                              <span className="shrink-0 font-normal normal-case italic tracking-normal text-[var(--ink-dim)]">
+                                · not on the map yet
+                              </span>
+                            )}
+                          </p>
+                          {v && k && (
+                            <a
+                              href={directionsUrl(v.lat!, v.lng!)}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="link-gold relative z-10 shrink-0 text-xs"
+                            >
+                              directions →
+                            </a>
+                          )}
+                        </div>
+                      </article>
+                    )
+                  })}
+                </div>
+              </section>
+            ))}
+
+            {listed.length === 0 && (
+              <div className="border-y border-dotted border-[var(--accent)]/40 py-5 font-display italic leading-relaxed text-[var(--ink-dim)]">
+                {venueFilter ? (
+                  <>
+                    nothing at {venueFilter.name.toLowerCase()} in this window.{' '}
+                    <button type="button" onClick={clearVenue} className="link-gold">
+                      see everywhere
+                    </button>
+                  </>
+                ) : range !== 'month' ? (
+                  <>
+                    quiet on that front. the Gump&apos;s not asleep, though.{' '}
+                    <button type="button" onClick={() => setRange('month')} className="link-gold">
+                      try the next 30 days
+                    </button>
+                    .
+                  </>
+                ) : (
+                  <>nothing on the books for the next month. check back Thursday.</>
+                )}
               </div>
-            </section>
-          ))}
+            )}
+          </div>
+        </aside>
 
-          {listed.length === 0 && (
-            <div className="border-y border-dotted border-[var(--accent)]/40 py-5 font-display italic leading-relaxed text-[var(--ink-dim)]">
-              {venueFilter ? (
-                <>
-                  nothing at {venueFilter.name.toLowerCase()} in this window.{' '}
-                  <button type="button" onClick={clearVenue} className="link-gold">
-                    see everywhere
-                  </button>
-                </>
-              ) : range !== 'month' ? (
-                <>
-                  quiet on that front. the Gump&apos;s not asleep, though.{' '}
-                  <button type="button" onClick={() => setRange('month')} className="link-gold">
-                    try the next 30 days
-                  </button>
-                  .
-                </>
-              ) : (
-                <>nothing on the books for the next month. check back Thursday.</>
-              )}
-            </div>
-          )}
+        {/* Map - top on mobile, right on desktop. z-0 keeps leaflet panes under
+            the sticky pill bar. */}
+        <div className="relative z-0 order-1 md:order-2 md:min-w-0 md:flex-1">
+          <MapContainer
+            ref={mapRef}
+            center={[32.3771, -86.3]}
+            zoom={12}
+            className="h-[55vh] w-full rounded-lg md:h-full"
+            scrollWheelZoom
+          >
+            <TileLayer
+              url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+              attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+            />
+            {venues.map(g => {
+              // The popup is the one place venue-grouping is natural: a compact
+              // per-event digest (deduped - a weekly event shows once with its
+              // next date, not four times).
+              const seen = new Map<string, Occ>()
+              for (const o of g.occs) if (!seen.has(o.e._id)) seen.set(o.e._id, o)
+              const digest = [...seen.values()]
+              return (
+                <Marker
+                  key={g.key}
+                  position={[g.lat, g.lng]}
+                  icon={pinFor(g.hue, g.occs.length, pinState(g.key))}
+                  ref={el => {
+                    markerRefs.current[g.key] = el
+                  }}
+                  eventHandlers={{ click: () => filterToVenue(g) }}
+                >
+                  <Popup>
+                    <div className="wg-popup">
+                      <strong>{g.name}</strong>
+                      {g.neighborhood && <span className="wg-popup-hood">{g.neighborhood}</span>}
+                      <ul>
+                        {digest.slice(0, 4).map(o => (
+                          <li key={o.e._id}>
+                            <Link href={`/events/${o.e.slug}`}>{o.e.title}</Link>
+                            <span className="wg-popup-when">
+                              {popupWhenFmt.format(new Date(o.occursAt)).toLowerCase()}
+                              {o.e.recurrence?.frequency && ` · ${o.e.recurrence.frequency}`}
+                            </span>
+                          </li>
+                        ))}
+                      </ul>
+                      {digest.length > 4 && <span className="wg-popup-more">+ {digest.length - 4} more · see the list</span>}
+                      <a href={directionsUrl(g.lat, g.lng)} target="_blank" rel="noopener noreferrer">
+                        directions →
+                      </a>
+                    </div>
+                  </Popup>
+                </Marker>
+              )
+            })}
+          </MapContainer>
         </div>
-      </aside>
-
-      {/* Map - top on mobile, right on desktop. z-0 keeps leaflet panes under
-          the sticky pill bar. */}
-      <div className="relative z-0 order-1 md:order-2 md:min-w-0 md:flex-1">
-        <MapContainer
-          ref={mapRef}
-          center={[32.3771, -86.3]}
-          zoom={12}
-          className="h-[55vh] w-full rounded-lg md:h-full"
-          scrollWheelZoom
-        >
-          <TileLayer
-            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-            attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-          />
-          {venues.map(g => {
-            // The popup is the one place venue-grouping is natural: a compact
-            // per-event digest (deduped - a weekly event shows once with its
-            // next date, not four times).
-            const seen = new Map<string, Occ>()
-            for (const o of g.occs) if (!seen.has(o.e._id)) seen.set(o.e._id, o)
-            const digest = [...seen.values()]
-            return (
-              <Marker
-                key={g.key}
-                position={[g.lat, g.lng]}
-                icon={pinFor(g.hue, g.occs.length, pinState(g.key))}
-                ref={el => {
-                  markerRefs.current[g.key] = el
-                }}
-                eventHandlers={{ click: () => filterToVenue(g) }}
-              >
-                <Popup>
-                  <div className="wg-popup">
-                    <strong>{g.name}</strong>
-                    {g.neighborhood && <span className="wg-popup-hood">{g.neighborhood}</span>}
-                    <ul>
-                      {digest.slice(0, 4).map(o => (
-                        <li key={o.e._id}>
-                          <Link href={`/events/${o.e.slug}`}>{o.e.title}</Link>
-                          <span className="wg-popup-when">
-                            {popupWhenFmt.format(new Date(o.occursAt)).toLowerCase()}
-                            {o.e.recurrence?.frequency && ` · ${o.e.recurrence.frequency}`}
-                          </span>
-                        </li>
-                      ))}
-                    </ul>
-                    {digest.length > 4 && <span className="wg-popup-more">+ {digest.length - 4} more · see the list</span>}
-                    <a href={directionsUrl(g.lat, g.lng)} target="_blank" rel="noopener noreferrer">
-                      directions →
-                    </a>
-                  </div>
-                </Popup>
-              </Marker>
-            )
-          })}
-        </MapContainer>
       </div>
     </div>
   )
