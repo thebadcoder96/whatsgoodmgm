@@ -1,5 +1,6 @@
 import { defineField, defineType } from 'sanity'
 import { CATEGORIES } from '@/lib/events/categories'
+import { INTERESTS } from '@/lib/events/interests'
 
 export { CATEGORIES }
 
@@ -32,7 +33,9 @@ export const event = defineType({
     ]}),
     defineField({ name: 'likelyRecurring', type: 'boolean', initialValue: false, readOnly: true,
       description: 'Set by ingestion when title+venue matches an already-approved event' }),
-    defineField({ name: 'interests', type: 'array', of: [{ type: 'string' }], hidden: true }), // p2
+    defineField({ name: 'interests', type: 'array', of: [{ type: 'string' }],
+      description: 'Cross-cutting tags: who it’s for / what you’re into. Auto-tagged best-effort; refine freely.',
+      options: { list: INTERESTS.map(i => ({ title: i.label, value: i.id })), layout: 'grid' } }),
     defineField({ name: 'ageRange', type: 'string', hidden: true }),                            // p2
     defineField({ name: 'dedupeKey', type: 'string', readOnly: true }),
     defineField({ name: 'curatedBy', type: 'reference', to: [{ type: 'contributor' }] }),

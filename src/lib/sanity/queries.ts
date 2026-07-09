@@ -3,7 +3,7 @@ import { groq } from 'next-sanity'
 const EVENT_FIELDS = groq`
   _id, title, "slug": slug.current, startDateTime, endDateTime, category,
   description, priceText, imageUrl, sourceType, sourceUrl, additionalSourceUrls,
-  featured, recurrence,
+  featured, recurrence, interests,
   venue->{ _id, name, address, neighborhood, lat, lng }
 `
 
@@ -42,5 +42,6 @@ export type EventDoc = {
   category: string; description?: string; priceText?: string; imageUrl?: string
   sourceType?: string; sourceUrl?: string; additionalSourceUrls?: string[]
   featured?: boolean; recurrence?: { frequency?: 'weekly' | 'biweekly' | 'monthly'; note?: string }
+  interests?: string[]
   venue?: VenueDoc
 }

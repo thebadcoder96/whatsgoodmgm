@@ -152,12 +152,14 @@ function PillSelect({ id, label, value, options, onChange }: {
 type Props = {
   q?: string
   category?: string
+  interest?: string
   days?: string
   free?: string
   categories: readonly string[]
+  interests: readonly { id: string; label: string }[]
 }
 
-export default function EventFilters({ q, category, days, free, categories }: Props) {
+export default function EventFilters({ q, category, interest, days, free, categories, interests }: Props) {
   const router = useRouter()
   const pathname = usePathname()
   const [pending, startTransition] = useTransition()
@@ -167,10 +169,11 @@ export default function EventFilters({ q, category, days, free, categories }: Pr
   // Keep the field in sync if the URL changes from elsewhere (e.g. back/forward nav).
   useEffect(() => setSearch(q ?? ''), [q])
 
-  function navigate(next: { q?: string; category?: string; days?: string; free?: boolean }) {
+  function navigate(next: { q?: string; category?: string; interest?: string; days?: string; free?: boolean }) {
     const params = new URLSearchParams()
     if (next.q) params.set('q', next.q)
     if (next.category) params.set('category', next.category)
+    if (next.interest) params.set('interest', next.interest)
     if (next.days && next.days !== '30') params.set('days', next.days)
     if (next.free) params.set('free', '1')
     const qs = params.toString()
@@ -179,10 +182,11 @@ export default function EventFilters({ q, category, days, free, categories }: Pr
     })
   }
 
-  function current(overrides: Partial<{ q: string; category: string; days: string; free: boolean }> = {}) {
+  function current(overrides: Partial<{ q: string; category: string; interest: string; days: string; free: boolean }> = {}) {
     return {
       q: overrides.q ?? search,
       category: overrides.category ?? category ?? '',
+      interest: overrides.interest ?? interest ?? '',
       days: overrides.days ?? days ?? '30',
       free: overrides.free ?? !!free,
     }
@@ -211,6 +215,10 @@ export default function EventFilters({ q, category, days, free, categories }: Pr
   const categoryOptions: Option[] = [
     { value: '', label: 'all categories' },
     ...categories.map(c => ({ value: c, label: c })),
+  ]
+  const interestOptions: Option[] = [
+    { value: '', label: 'all interests' },
+    ...interests.map(i => ({ value: i.id, label: i.label })),
   ]
   const daysOptions: Option[] = [
     { value: '7', label: 'next 7 days' },
@@ -252,6 +260,14 @@ export default function EventFilters({ q, category, days, free, categories }: Pr
       />
 
       <PillSelect
+        id="events-interest"
+        label="interest"
+        value={interest ?? ''}
+        options={interestOptions}
+        onChange={v => navigate(current({ interest: v }))}
+      />
+
+      <PillSelect
         id="events-days"
         label="date range"
         value={days ?? '30'}
@@ -275,6 +291,7 @@ export default function EventFilters({ q, category, days, free, categories }: Pr
           but these hidden inputs keep the active category/days in the URL when
           the search box is submitted natively via Enter. */}
       {category ? <input type="hidden" name="category" value={category} /> : null}
+      {interest ? <input type="hidden" name="interest" value={interest} /> : null}
       {days && days !== '30' ? <input type="hidden" name="days" value={days} /> : null}
 
       <span

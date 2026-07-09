@@ -1,6 +1,7 @@
 import { sanityFetch } from '@/lib/sanity/fetch'
 import { UPCOMING_OR_RECURRING, EVENTS_SEARCH, type EventDoc } from '@/lib/sanity/queries'
 import { CATEGORIES } from '@/lib/events/categories'
+import { INTERESTS } from '@/lib/events/interests'
 import { expandOccurrences } from '@/lib/events/occurrences'
 import { EventCard } from '@/components/EventCard'
 import EventFilters from '@/components/EventFilters'
@@ -9,7 +10,7 @@ export const revalidate = 3600
 export const metadata = { title: 'All events' }
 
 export default async function EventsPage({ searchParams }: { searchParams: Promise<Record<string, string | undefined>> }) {
-  const { category, free, q, days: daysParam } = await searchParams
+  const { category, interest, free, q, days: daysParam } = await searchParams
   const windowDays = Math.min(Math.max(Number(daysParam) || 30, 1), 90)
   const now = new Date()
   const to = new Date(now.getTime() + windowDays * 86_400_000)
@@ -20,6 +21,7 @@ export default async function EventsPage({ searchParams }: { searchParams: Promi
 
   const filtered = events.filter(e =>
     (!category || e.category === category) &&
+    (!interest || e.interests?.includes(interest)) &&
     (!free || /^free/i.test((e.priceText ?? '').trim()))) // free = free general admission, not "$8, kids free"
 
   const occurrences = q
@@ -31,7 +33,7 @@ export default async function EventsPage({ searchParams }: { searchParams: Promi
   return (
     <div>
       <h1 className="font-display text-2xl font-semibold tracking-tight md:text-3xl">all events</h1>
-      <EventFilters q={q} category={category} days={daysParam} free={free} categories={CATEGORIES} />
+      <EventFilters q={q} category={category} interest={interest} days={daysParam} free={free} categories={CATEGORIES} interests={INTERESTS} />
       <div className="mt-6 grid gap-3 md:grid-cols-2">
         {occurrences.map(({ e, occursAt }) => <EventCard key={`${e._id}${occursAt}`} event={e} occursAt={occursAt} />)}
       </div>
