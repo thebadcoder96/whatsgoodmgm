@@ -33,6 +33,11 @@ export default function SiteLayout({ children }: { children: React.ReactNode }) 
         </p>
         <p className="mt-2 font-mono text-xs text-[var(--ink-dim)]">fresh every thursday</p>
         <p className="mt-4 font-mono text-[11px] text-[var(--ink-dim)]">
+          in collaboration with{' '}
+          <a href="https://www.reddit.com/user/More-Ideal5423/" className="link-gold" target="_blank" rel="noopener noreferrer">
+            TNTDIM
+          </a>
+          {' · '}
           <a href="https://www.mmintelligence.ai" className="link-gold" target="_blank" rel="noopener noreferrer">
             built by MM Intelligence
           </a>

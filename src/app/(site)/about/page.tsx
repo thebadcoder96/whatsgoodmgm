@@ -12,8 +12,12 @@ export default function AboutPage() {
           putting it on are the point.
         </p>
         <p className="mt-4 leading-7 text-[var(--ink-dim)]">
-          This started with the weekly what&apos;s-happening threads on r/Montgomery — proof
-          the city wanted this. Those lists deserved a permanent, searchable home instead of
+          This started with the{' '}
+          <a href="https://www.reddit.com/user/More-Ideal5423/" className="link-gold text-[var(--ink)]" target="_blank" rel="noopener noreferrer">
+            &ldquo;There&apos;s Nothing To Do In Montgomery&rdquo;
+          </a>{' '}
+          weekly threads on r/Montgomery — the best events list this city has, posted every week,
+          proof the city wanted this. Those lists deserved a permanent, searchable home instead of
           getting buried in a feed by Monday.
         </p>
       </section>
@@ -32,6 +36,7 @@ export default function AboutPage() {
       <section>
         <h2 className="font-display text-xl font-semibold italic">sources &amp; thanks</h2>
         <p className="mt-3 leading-7 text-[var(--ink-dim)]">
+          the TNTDIM weekly lists,{' '}
           <a href="https://www.reddit.com/r/Montgomery/" className="link-gold text-[var(--ink)]" target="_blank" rel="noopener noreferrer">
             r/Montgomery
           </a>{' '}
