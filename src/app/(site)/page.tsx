@@ -37,7 +37,7 @@ export default async function HomePage() {
         </div>
         {thisWeekend.length === 0 && (
           <p className="mt-4 border-y border-dotted border-[var(--accent)]/40 py-4 font-display italic text-[var(--ink-dim)]">
-            quiet few days. the Gump&apos;s not asleep, though — <Link href="/events" className="link-gold">see everything upcoming</Link>.
+            quiet few days. the Gump&apos;s not asleep, though. <Link href="/events" className="link-gold">see everything upcoming</Link>.
           </p>
         )}
         <Link href="/events" className="link-gold mt-6 inline-block font-medium">

@@ -16,8 +16,8 @@ export default function AboutPage() {
           <a href="https://www.reddit.com/user/More-Ideal5423/" className="link-gold text-[var(--ink)]" target="_blank" rel="noopener noreferrer">
             &ldquo;There&apos;s Nothing To Do In Montgomery&rdquo;
           </a>{' '}
-          weekly threads on r/Montgomery — the best events list this city has, posted every week,
-          proof the city wanted this. Those lists deserved a permanent, searchable home instead of
+          weekly threads on r/Montgomery, the best events list this city has, posted every week.
+          Proof the city wanted this. Those lists deserved a permanent, searchable home instead of
           getting buried in a feed by Monday.
         </p>
       </section>
@@ -28,7 +28,7 @@ export default function AboutPage() {
           <a href="https://www.mmintelligence.ai" className="link-gold text-[var(--ink)]" target="_blank" rel="noopener noreferrer">
             MM Intelligence
           </a>
-          , a Montgomery software studio run by two brothers who build AI for real businesses —
+          , a Montgomery software studio run by two brothers who build AI for real businesses
           and wanted to give something back to the city they build from. Free forever, no ads,
           no selling your data.
         </p>

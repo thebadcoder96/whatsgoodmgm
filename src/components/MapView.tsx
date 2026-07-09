@@ -9,18 +9,18 @@ import { expandOccurrences } from '@/lib/events/occurrences'
 import { categoryHue } from '@/lib/events/categoryHue'
 
 /**
- * List side: one card per event OCCURRENCE, chronological with day headers —
+ * List side: one card per event OCCURRENCE, chronological with day headers -
  * the same expansion the /events page uses, so "trivia every Tuesday" shows
  * up on its actual next Tuesday instead of a stale first date.
  *
  * Map side: one pin per venue (events at the same address would stack
  * invisibly otherwise) with a count badge. Venue-grouping lives ONLY in the
- * pin popup, where it's natural geography — never in the list.
+ * pin popup, where it's natural geography - never in the list.
  *
  * Sync: card click → fly to + open that venue's popup. Pin click → filter
  * the list to that venue (a chronological list scatters one venue's events
  * across day groups, so scrolling could only ever reach the first one);
- * a "showing events at X — clear" chip is the way back.
+ * a "showing events at X · clear" chip is the way back.
  */
 
 type Occ = { e: EventDoc; occursAt: string }
@@ -56,7 +56,7 @@ function rangeWindow(key: RangeKey, now: Date): [Date, Date] {
       return [now, end]
     }
     case 'weekend': {
-      // Fri 00:00 through Sun 23:59 — if the weekend already started, from now.
+      // Fri 00:00 through Sun 23:59 - if the weekend already started, from now.
       const dow = now.getDay() // 0 sun … 6 sat
       const start = new Date(now)
       if (dow >= 1 && dow <= 5) {
@@ -107,7 +107,7 @@ const pinFor = (hue: string, count: number, state: '' | 'on' | 'hover' | 'dim') 
   })
 
 // Small "place" glyph so the venue line can never be mistaken for the title
-// or the date — a pin shape reads as geography before the word is even read.
+// or the date - a pin shape reads as geography before the word is even read.
 function PinGlyph() {
   return (
     <svg aria-hidden="true" width="9" height="12" viewBox="0 0 9 12" fill="currentColor" className="shrink-0">
@@ -125,7 +125,7 @@ export default function MapView({ events }: { events: EventDoc[] }) {
   const mapRef = useRef<LeafletMap | null>(null)
   const markerRefs = useRef<Record<string, LeafletMarker | null>>({})
 
-  // Every occurrence in the window, in date order — recurring events land on
+  // Every occurrence in the window, in date order - recurring events land on
   // their actual next dates instead of appearing once with a stale date.
   const occurrences = useMemo<Occ[]>(() => {
     const [from, to] = rangeWindow(range, now)
@@ -206,9 +206,9 @@ export default function MapView({ events }: { events: EventDoc[] }) {
 
   return (
     <div className="flex flex-col gap-4 md:h-[75vh] md:flex-row">
-      {/* List panel — left on desktop, below the map on mobile. */}
+      {/* List panel - left on desktop, below the map on mobile. */}
       <aside className="order-2 flex flex-col md:order-1 md:min-h-0 md:w-[38%] md:min-w-[300px] md:max-w-[440px]">
-        {/* Date pills + status — sticky above the list on mobile. */}
+        {/* Date pills + status - sticky above the list on mobile. */}
         <div className="sticky top-0 z-20 bg-[var(--bg)] pb-3 pt-1 md:static md:z-auto md:pt-0">
           <div className="flex flex-wrap gap-2" role="group" aria-label="date range">
             {RANGES.map(r => {
@@ -240,7 +240,7 @@ export default function MapView({ events }: { events: EventDoc[] }) {
               onClick={clearVenue}
               className="mt-2 inline-flex items-center gap-1.5 rounded-full border border-dotted border-[var(--accent)]/60 px-3 py-1 text-xs text-[var(--accent)] transition-colors hover:border-[var(--accent)]"
             >
-              showing events at {venueFilter.name.toLowerCase()} — clear
+              showing events at {venueFilter.name.toLowerCase()} · clear
               <span aria-hidden="true">×</span>
             </button>
           )}
@@ -353,7 +353,7 @@ export default function MapView({ events }: { events: EventDoc[] }) {
                 </>
               ) : range !== 'month' ? (
                 <>
-                  quiet on that front. the Gump&apos;s not asleep, though —{' '}
+                  quiet on that front. the Gump&apos;s not asleep, though.{' '}
                   <button type="button" onClick={() => setRange('month')} className="link-gold">
                     try the next 30 days
                   </button>
@@ -367,7 +367,7 @@ export default function MapView({ events }: { events: EventDoc[] }) {
         </div>
       </aside>
 
-      {/* Map — top on mobile, right on desktop. z-0 keeps leaflet panes under
+      {/* Map - top on mobile, right on desktop. z-0 keeps leaflet panes under
           the sticky pill bar. */}
       <div className="relative z-0 order-1 md:order-2 md:min-w-0 md:flex-1">
         <MapContainer
@@ -383,7 +383,7 @@ export default function MapView({ events }: { events: EventDoc[] }) {
           />
           {venues.map(g => {
             // The popup is the one place venue-grouping is natural: a compact
-            // per-event digest (deduped — a weekly event shows once with its
+            // per-event digest (deduped - a weekly event shows once with its
             // next date, not four times).
             const seen = new Map<string, Occ>()
             for (const o of g.occs) if (!seen.has(o.e._id)) seen.set(o.e._id, o)
@@ -413,7 +413,7 @@ export default function MapView({ events }: { events: EventDoc[] }) {
                         </li>
                       ))}
                     </ul>
-                    {digest.length > 4 && <span className="wg-popup-more">+ {digest.length - 4} more — see the list</span>}
+                    {digest.length > 4 && <span className="wg-popup-more">+ {digest.length - 4} more · see the list</span>}
                     <a href={directionsUrl(g.lat, g.lng)} target="_blank" rel="noopener noreferrer">
                       directions →
                     </a>

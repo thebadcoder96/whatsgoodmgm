@@ -7,7 +7,7 @@ const pill = 'rounded-full border border-white/10 bg-[var(--surface-2)] px-3.5 p
 type Option = { value: string; label: string }
 
 /**
- * Custom listbox dropdown so the OPEN state matches the site too — native
+ * Custom listbox dropdown so the OPEN state matches the site too - native
  * <select> popups are OS chrome and can't be themed. Follows the WAI-ARIA
  * "select-only combobox" pattern: focus stays on the pill button and
  * aria-activedescendant tracks the highlighted option.
@@ -223,7 +223,7 @@ export default function EventFilters({ q, category, days, free, categories }: Pr
       className="mt-5 flex flex-wrap items-center gap-2 border-b border-white/5 pb-5 text-sm"
       method="GET"
       onSubmit={e => {
-        // JS is active — we already auto-filter, so a native submit (e.g. a
+        // JS is active - we already auto-filter, so a native submit (e.g. a
         // stray Enter we didn't catch) should still just update the URL
         // rather than doing a full page reload.
         e.preventDefault()

@@ -22,7 +22,7 @@ const plexMono = IBM_Plex_Mono({
 })
 
 export const metadata: Metadata = {
-  title: { default: 'WhatsGoodMGM — Know what\'s good in the Gump', template: '%s · WhatsGoodMGM' },
+  title: { default: 'WhatsGoodMGM · Know what\'s good in the Gump', template: '%s · WhatsGoodMGM' },
   description: 'A free, community-made guide to what\'s good in Montgomery, Alabama. Events, curated weekly.',
 }
 

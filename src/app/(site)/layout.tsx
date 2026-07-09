@@ -29,7 +29,7 @@ export default function SiteLayout({ children }: { children: React.ReactNode }) 
       <main className="mx-auto max-w-5xl px-4 py-10 md:py-12">{children}</main>
       <footer className="mt-8 border-t border-white/10 px-4 py-10 text-center">
         <p className="font-display text-sm italic text-[var(--ink-dim)]">
-          made in Montgomery, for Montgomery. no ads, no algorithm — just what&apos;s good.
+          made in Montgomery, for Montgomery. no ads, no algorithm, just what&apos;s good.
         </p>
         <p className="mt-2 font-mono text-xs text-[var(--ink-dim)]">fresh every thursday</p>
         <p className="mt-5 text-sm text-[var(--ink)]">

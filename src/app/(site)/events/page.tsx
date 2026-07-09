@@ -37,7 +37,7 @@ export default async function EventsPage({ searchParams }: { searchParams: Promi
       </div>
       {occurrences.length === 0 && (
         <p className="mt-8 border-y border-dotted border-[var(--accent)]/40 py-4 font-display italic text-[var(--ink-dim)]">
-          quiet on that front. the Gump&apos;s not asleep, though — try loosening a filter, or{' '}
+          quiet on that front. the Gump&apos;s not asleep, though. try loosening a filter, or{' '}
           <a href="/events" className="link-gold">clear them all</a>.
         </p>
       )}

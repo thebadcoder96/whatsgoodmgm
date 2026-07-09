@@ -9,7 +9,7 @@ export default function SubmitPage() {
   return (
     <div className="mx-auto max-w-xl">
       <h1 className="font-display text-2xl font-semibold tracking-tight md:text-3xl">got something good?</h1>
-      <p className="mt-3 leading-7 text-[var(--ink-dim)]">Tell us about an event, or give us your account to follow — Instagram, TikTok, or Facebook. A human reviews everything before it goes up.</p>
+      <p className="mt-3 leading-7 text-[var(--ink-dim)]">Tell us about an event, or give us your account to follow: Instagram, TikTok, or Facebook. A human reviews everything before it goes up.</p>
       {state && (
         <p className="mt-5 rounded-r-md border-l-2 bg-[var(--surface)] p-3 ring-1 ring-white/5"
           style={{ borderLeftColor: state.ok ? 'var(--hue-kudzu)' : 'var(--hue-brick)' }}>

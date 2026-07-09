@@ -6,7 +6,7 @@
   --surface-2: #242019;
   --ink: #ede8dd;
   --ink-dim: #a49d8f;
-  --accent: #e0b64f;      /* warm gold — "what's good" */
+  --accent: #e0b64f;      /* warm gold - "what's good" */
   --accent-deep: #8a6a24; /* gold at rest: borders, underlines (decorative only) */
   --accent-ink: #12100a;
 
@@ -27,7 +27,7 @@ body {
   font-family: var(--font-sans), "Segoe UI", system-ui, sans-serif;
 }
 
-/* Paper grain — one feTurbulence tile, barely there. Warmth, not noise. */
+/* Paper grain - one feTurbulence tile, barely there. Warmth, not noise. */
 body::after {
   content: "";
   position: fixed;
@@ -39,7 +39,7 @@ body::after {
   mix-blend-mode: overlay;
 }
 
-/* Gold-underline links — the site's entire motion budget. */
+/* Gold-underline links - the site's entire motion budget. */
 .link-gold {
   text-decoration-line: underline;
   text-decoration-color: var(--accent-deep);
@@ -57,7 +57,7 @@ body::after {
   outline-offset: 2px;
 }
 
-/* Form fields: quieter deep-gold edge instead of the full outline — no glow. */
+/* Form fields: quieter deep-gold edge instead of the full outline - no glow. */
 input:focus-visible,
 select:focus-visible,
 textarea:focus-visible {
@@ -77,7 +77,7 @@ textarea:focus-visible {
   filter: invert(1) hue-rotate(200deg) brightness(0.72) contrast(0.9) saturate(0.4) sepia(0.3);
 }
 
-/* Themed scrollbar for the map's list panel — the default OS bar reads as a
+/* Themed scrollbar for the map's list panel - the default OS bar reads as a
    foreign object against the warm-dark surfaces. Thin, quiet, gold on hover. */
 .wg-scroll {
   scrollbar-width: thin;                                  /* Firefox */
@@ -129,7 +129,7 @@ textarea:focus-visible {
 }
 
 /* Event-count badge on a pin: how many occurrences the venue hosts in the
-   current date window. Dark disc + gold mono digit — ticket-window energy. */
+   current date window. Dark disc + gold mono digit - ticket-window energy. */
 .wg-pin-count {
   position: absolute;
   top: -8px;

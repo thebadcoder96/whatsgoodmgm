@@ -24,7 +24,7 @@ export async function submitEvent(_prev: SubmitState, formData: FormData): Promi
   const h = await headers()
   const ip = (h.get('x-forwarded-for') ?? 'unknown').split(',')[0].trim()
   if (!allowRequest(`submit:${ip}`, 5, 60 * 60 * 1000)) {
-    return { ok: false, message: 'Easy there — that\'s a lot of submissions. Try again in a bit.' }
+    return { ok: false, message: 'Easy there, that\'s a lot of submissions. Try again in a bit.' }
   }
 
   await writeClient.create({
@@ -33,5 +33,5 @@ export async function submitEvent(_prev: SubmitState, formData: FormData): Promi
     eventTitle, eventDate: short('eventDate'), eventVenueText: short('eventVenueText'),
     eventUrl: httpUrl('eventUrl'), eventDescription: long('eventDescription'),
   })
-  return { ok: true, message: "Got it — we'll take a look. Thanks for making the Gump better." }
+  return { ok: true, message: "Got it. We'll take a look. Thanks for making the Gump better." }
 }

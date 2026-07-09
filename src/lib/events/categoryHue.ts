@@ -1,5 +1,5 @@
 // Category → hue token mapping. One place, so cards, detail pages, and map
-// pins all agree. Values are CSS custom properties from globals.css — usable
+// pins all agree. Values are CSS custom properties from globals.css - usable
 // in inline styles anywhere in the document.
 const HUES: Record<string, string> = {
   music: 'var(--hue-brick)',
