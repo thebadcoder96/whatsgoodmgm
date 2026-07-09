@@ -102,11 +102,19 @@ textarea:focus-visible {
    selected pin gets a gold halo so it reads as "this one" next to its card.
    --hover mirrors :hover but is driven from the list (card hover → pin);
    --dim quiets every other pin while a venue filter is active. */
+/* Transparent 40px hit box centering the visible dot - a comfortable tap
+   target (Material 48dp / HIG 44pt-adjacent) without altering the pin. */
+.wg-pin-hit {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+}
 .wg-pin {
   position: relative;
   width: 22px;
   height: 22px;
-  margin: 3px;
   border-radius: 50%;
   background: var(--accent);
   border: 3px solid var(--pin-hue, var(--accent));
@@ -166,6 +174,10 @@ textarea:focus-visible {
 }
 .leaflet-container .leaflet-popup a.leaflet-popup-close-button {
   color: var(--ink-dim);
+  width: 28px;
+  height: 28px;
+  padding: 6px 6px 0 0;
+  font-size: 18px;
 }
 .wg-popup strong {
   font-family: var(--font-fraunces), Georgia, serif;

@@ -32,14 +32,45 @@ export function WeeklyPickHero({ pick }: { pick: Pick }) {
             {pick.headline}
           </h1>
           {pick.body && (
-            <div className="font-display mt-5 max-w-prose space-y-3 text-lg leading-8">
-              <PortableText value={pick.body} />
-            </div>
+            <>
+              {/* md+: full body, exactly as before. */}
+              <div className="font-display mt-5 hidden max-w-prose space-y-3 text-lg leading-8 md:block">
+                <PortableText value={pick.body} />
+              </div>
+              {/* below md: first block only, remainder behind a quiet "keep
+                  reading" <details> (no JS). */}
+              <div className="font-display mt-5 max-w-prose space-y-3 text-lg leading-8 md:hidden">
+                <PortableText value={Array.isArray(pick.body) ? pick.body.slice(0, 1) : pick.body} />
+                {Array.isArray(pick.body) && pick.body.length > 1 && (
+                  <details className="group space-y-3">
+                    <summary className="link-gold flex cursor-pointer list-none items-center gap-1.5 text-base font-medium text-[var(--accent)] [&::-webkit-details-marker]:hidden">
+                      keep reading
+                      <svg
+                        aria-hidden="true"
+                        width="12"
+                        height="8"
+                        viewBox="0 0 12 8"
+                        fill="none"
+                        className="transition-transform duration-150 group-open:rotate-180"
+                      >
+                        <path d="M1 1.5 6 6.5l5-5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                      </svg>
+                    </summary>
+                    <PortableText value={pick.body.slice(1)} />
+                  </details>
+                )}
+              </div>
+            </>
           )}
           {pick.author && (
             <p className="mt-5 font-mono text-[13px] text-[var(--ink-dim)]">
               picked by {pick.author.handle ?? pick.author.name}
-              {pick.publishedAt && `, ${formatEventDate(pick.publishedAt).toLowerCase()}`}
+              {pick.publishedAt && (
+                <>
+                  <span className="max-md:hidden">, </span>
+                  <span className="max-md:block">{formatEventDate(pick.publishedAt).toLowerCase()}</span>
+                </>
+              )}
             </p>
           )}
           <Link href="/events" className="link-gold mt-5 inline-block font-medium">

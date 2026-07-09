@@ -2,7 +2,7 @@
 import { useRouter, usePathname } from 'next/navigation'
 import { useEffect, useRef, useState, useTransition, type KeyboardEvent } from 'react'
 
-const pill = 'rounded-full border border-white/10 bg-[var(--surface-2)] px-3.5 py-1.5 text-[var(--ink)] focus:border-[var(--accent-deep)]'
+const pill = 'rounded-full border border-white/10 bg-[var(--surface-2)] px-3.5 py-1.5 text-[var(--ink)] focus:border-[var(--accent-deep)] max-md:py-2.5'
 
 type Option = { value: string; label: string }
 
@@ -131,7 +131,7 @@ function PillSelect({ id, label, value, options, onChange }: {
                 aria-selected={selected}
                 onMouseEnter={() => setActive(i)}
                 onClick={() => choose(i)}
-                className={`flex cursor-pointer items-center gap-2 whitespace-nowrap px-3.5 py-1.5 ${
+                className={`flex cursor-pointer items-center gap-2 whitespace-nowrap px-3.5 py-1.5 max-md:py-3 ${
                   i === active ? 'bg-white/5' : ''
                 } ${selected ? 'text-[var(--accent)]' : 'text-[var(--ink)]'}`}
               >
@@ -228,7 +228,7 @@ export default function EventFilters({ q, category, interest, days, free, catego
 
   return (
     <form
-      className="mt-5 flex flex-wrap items-center gap-2 border-b border-white/5 pb-5 text-sm"
+      className="mt-5 flex flex-wrap items-center gap-2 border-b border-white/5 pb-5 text-sm max-md:sticky max-md:top-0 max-md:z-30 max-md:bg-[var(--bg)]/95 max-md:pt-3 max-md:backdrop-blur"
       method="GET"
       onSubmit={e => {
         // JS is active - we already auto-filter, so a native submit (e.g. a

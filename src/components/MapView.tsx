@@ -98,12 +98,15 @@ const directionsUrl = (lat: number, lng: number) =>
 const pinFor = (hue: string, count: number, state: '' | 'on' | 'hover' | 'dim') =>
   divIcon({
     className: '',
-    html: `<div class="wg-pin${state ? ` wg-pin--${state}` : ''}" style="--pin-hue:${hue}">${
+    // The visible dot sits centered inside a 40px transparent hit box so the
+    // tap target clears the 40px Material/HIG minimum without changing the
+    // dot's look or anchor position.
+    html: `<div class="wg-pin-hit"><div class="wg-pin${state ? ` wg-pin--${state}` : ''}" style="--pin-hue:${hue}">${
       count > 1 ? `<span class="wg-pin-count">${count}</span>` : ''
-    }</div>`,
-    iconSize: [28, 28],
-    iconAnchor: [14, 14],
-    popupAnchor: [0, -14],
+    }</div></div>`,
+    iconSize: [40, 40],
+    iconAnchor: [20, 20],
+    popupAnchor: [0, -16],
   })
 
 // Small "place" glyph so the venue line can never be mistaken for the title
@@ -220,7 +223,7 @@ export default function MapView({ events }: { events: EventDoc[] }) {
                 type="button"
                 aria-pressed={on}
                 onClick={() => setRange(r.key)}
-                className={`rounded-full border px-3 py-1 text-xs transition-colors ${
+                className={`rounded-full border px-3 py-1 text-xs transition-colors max-md:px-4 max-md:py-2.5 ${
                   on
                     ? 'border-[var(--accent-deep)] text-[var(--accent)]'
                     : 'border-white/10 text-[var(--ink-dim)] hover:border-white/20 hover:text-[var(--ink)]'
@@ -335,7 +338,7 @@ export default function MapView({ events }: { events: EventDoc[] }) {
                               href={directionsUrl(v.lat!, v.lng!)}
                               target="_blank"
                               rel="noopener noreferrer"
-                              className="link-gold relative z-10 shrink-0 text-xs"
+                              className="link-gold relative z-10 shrink-0 text-xs max-md:inline-block max-md:py-1.5"
                             >
                               directions →
                             </a>

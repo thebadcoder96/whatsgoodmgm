@@ -23,7 +23,7 @@ export function EventCard({ event, occursAt }: { event: EventDoc; occursAt?: str
         )}
       </p>
       {(event.venue || event.recurrence?.frequency) && (
-        <p className="mt-1 text-xs uppercase tracking-[0.08em] text-[var(--ink-dim)]">
+        <p className="mt-1 text-xs uppercase tracking-[0.08em] text-[var(--ink-dim)] max-md:truncate">
           {event.venue?.name}
           {event.venue?.neighborhood && ` · ${event.venue.neighborhood}`}
           {event.recurrence?.frequency && `${event.venue ? ' · ' : ''}repeats ${event.recurrence.frequency}`}
