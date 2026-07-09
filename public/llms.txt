@@ -1,0 +1,30 @@
+# WhatsGoodMGM
+
+> A free, community-made guide to what's good in Montgomery, Alabama. We track
+> local events - music, art, food, markets, nightlife, family, community - and
+> curate them into a simple weekly list so anyone can find something to do in
+> the Gump. No ads, no algorithm, no paywall.
+
+## Key pages
+
+- [/events](/events): every upcoming event, with filters for category, interest, price (free), and date window. The best single place to see what's happening.
+- [/map](/map): the same upcoming events plotted on a map of Montgomery by venue.
+- [/archive](/archive): past events and past weekly picks, for reference and history.
+- [/submit](/submit): organizers and locals can submit an event for review.
+- [/about](/about): who makes this, why, and how it works.
+
+## Data provenance
+
+- Curated by locals, by hand. Events are reviewed before they publish.
+- Sourced primarily from the r/Montgomery weekly "Things To Do In Montgomery" (TNTDIM) lists and directly from venues and organizers.
+- Every event page links back to its original source so you can verify details and get tickets.
+
+## Update cadence
+
+- The weekly pick and event lists refresh every Thursday.
+- Times are Central Time (America/Chicago).
+
+## Structured data
+
+- Each event detail page (`/events/{slug}`) carries schema.org Event JSON-LD (name, startDate, location, offers, organizer, geo) so machines can read event details directly.
+- The home page carries schema.org WebSite JSON-LD with a search action.

@@ -1,3 +1,4 @@
+import type { Metadata } from 'next'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import { groq } from 'next-sanity'
@@ -6,10 +7,46 @@ import { EVENT_BY_SLUG, type EventDoc } from '@/lib/sanity/queries'
 import { formatEventDateTime } from '@/lib/events/format'
 import { categoryHue } from '@/lib/events/categoryHue'
 import { expandOccurrences } from '@/lib/events/occurrences'
+import { buildEventJsonLd, jsonLdScript } from '@/lib/seo/jsonLd'
+import { SITE_URL } from '@/lib/siteUrl'
 import { EventCard } from '@/components/EventCard'
 import VenueMiniMapLoader from '@/components/VenueMiniMapLoader'
 
 export const revalidate = 3600
+
+// Meta description: the event's own copy trimmed to ~155 chars, or a generated
+// fallback when it has none.
+function truncate(s: string, max = 155): string {
+  const t = s.trim().replace(/\s+/g, ' ')
+  if (t.length <= max) return t
+  const cut = t.slice(0, max - 1)
+  const lastSpace = cut.lastIndexOf(' ')
+  return `${(lastSpace > 40 ? cut.slice(0, lastSpace) : cut).trimEnd()}…`
+}
+
+function metaDescription(event: EventDoc): string {
+  if (event.description?.trim()) return truncate(event.description)
+  const at = event.venue?.name ? ` at ${event.venue.name}` : ''
+  return `${event.title}${at}, ${formatEventDateTime(event.startDateTime)}, Montgomery AL`
+}
+
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
+  const { slug } = await params
+  const event = await sanityFetch<EventDoc | null>(EVENT_BY_SLUG, { slug })
+  if (!event) return {}
+
+  const url = `${SITE_URL}/events/${slug}`
+  const description = metaDescription(event)
+  const images = event.imageUrl ? [event.imageUrl] : undefined
+
+  return {
+    title: event.title,
+    description,
+    alternates: { canonical: url },
+    openGraph: { title: event.title, description, url, ...(images ? { images } : {}) },
+    twitter: { card: 'summary_large_image', title: event.title, description, ...(images ? { images } : {}) },
+  }
+}
 
 // Other approved events at the same venue: upcoming or recurring, never this
 // same event. Defined inline (queries.ts is owned by another change) but
@@ -60,6 +97,7 @@ export default async function EventPage({ params }: { params: Promise<{ slug: st
   const venue = event.venue
   const hasCoords = venue?.lat != null && venue?.lng != null
   const isFree = /^free/i.test((event.priceText ?? '').trim())
+  const eventJsonLd = buildEventJsonLd(event, `${SITE_URL}/events/${slug}`)
 
   // Recurring events get real upcoming dates rather than a single stale one.
   const now = new Date()
@@ -79,6 +117,10 @@ export default async function EventPage({ params }: { params: Promise<{ slug: st
 
   return (
     <article className="mx-auto max-w-2xl">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: jsonLdScript(eventJsonLd) }}
+      />
       {event.imageUrl && (
         <img
           src={event.imageUrl}

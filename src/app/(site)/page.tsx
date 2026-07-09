@@ -2,6 +2,7 @@ import Link from 'next/link'
 import { sanityFetch } from '@/lib/sanity/fetch'
 import { LATEST_WEEKLY_PICK, UPCOMING_OR_RECURRING, type EventDoc } from '@/lib/sanity/queries'
 import { expandOccurrences } from '@/lib/events/occurrences'
+import { buildWebsiteJsonLd, jsonLdScript } from '@/lib/seo/jsonLd'
 import { EventCard } from '@/components/EventCard'
 import { WeeklyPickHero } from '@/components/WeeklyPickHero'
 
@@ -22,6 +23,10 @@ export default async function HomePage() {
 
   return (
     <div className="space-y-10">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: jsonLdScript(buildWebsiteJsonLd()) }}
+      />
       {pick ? <WeeklyPickHero pick={pick} /> : (
         <section className="border-y border-[var(--accent-deep)]">
           <div className="my-1 border-y border-dotted border-[var(--accent)]/40 px-4 py-12 text-center">
