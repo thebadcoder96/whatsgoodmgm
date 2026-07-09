@@ -41,10 +41,10 @@ export const event = defineType({
     defineField({ name: 'curatedBy', type: 'reference', to: [{ type: 'contributor' }] }),
   ],
   preview: {
-    select: { title: 'title', subtitle: 'startDateTime', status: 'status' },
-    prepare: ({ title, subtitle, status }) => ({
-      title: `${status === 'pending' ? '⏳ ' : status === 'rejected' ? '🚫 ' : ''}${title}`,
-      subtitle: subtitle?.slice(0, 16).replace('T', ' '),
+    select: { title: 'title', date: 'startDateTime', status: 'status' },
+    prepare: ({ title, date, status }) => ({
+      title,
+      subtitle: `${status !== 'approved' ? `${status.toUpperCase()} · ` : ''}${date?.slice(0, 16).replace('T', ' ') ?? ''}`,
     }),
   },
 })
