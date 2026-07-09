@@ -41,9 +41,7 @@ export default function SiteLayout({ children }: { children: React.ReactNode }) 
           <a href="https://www.mmintelligence.ai" className="link-gold font-medium" target="_blank" rel="noopener noreferrer">
             MM Intelligence
           </a>
-        </p>
-        <p className="mt-3 font-mono text-[11px] text-[var(--ink-dim)]">
-          © 2026{' · '}
+          {' '}&middot; © 2026 &middot;{' '}
           <Link href="/privacy" className="link-gold">privacy</Link>
         </p>
       </footer>
