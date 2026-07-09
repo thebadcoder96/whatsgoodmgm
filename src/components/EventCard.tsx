@@ -8,7 +8,7 @@ export function EventCard({ event, occursAt }: { event: EventDoc; occursAt?: str
   const isFree = /^free/i.test((event.priceText ?? '').trim())
   return (
     <Link href={`/events/${event.slug}`}
-      className="block rounded-r-lg border-l-2 border-dotted bg-[var(--surface)] px-4 py-3 ring-1 ring-white/5 transition-colors hover:bg-[var(--surface-2)]"
+      className="block min-w-0 rounded-r-lg border-l-2 border-dotted bg-[var(--surface)] px-4 py-3 ring-1 ring-white/5 transition-colors hover:bg-[var(--surface-2)]"
       style={{ borderLeftColor: hue }}>
       <div className="flex items-baseline justify-between gap-3">
         <h3 className="font-semibold leading-snug">{event.title}</h3>
