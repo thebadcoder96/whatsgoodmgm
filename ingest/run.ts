@@ -20,8 +20,15 @@ type SourceResult = { name: string; platform: string; fetched: number; created: 
 
 async function main() {
   const all = process.argv.includes('--all')
-  const platform = process.argv.includes('--platform')
-    ? process.argv[process.argv.indexOf('--platform') + 1] : all ? null : 'simpleview'
+  let platform: string | null = all ? null : 'simpleview'
+  if (process.argv.includes('--platform')) {
+    const value = process.argv[process.argv.indexOf('--platform') + 1]
+    if (!value || value.startsWith('--') || !(value in FETCHERS)) {
+      console.error(`--platform requires one of: ${Object.keys(FETCHERS).join(', ')}`)
+      process.exit(1)
+    }
+    platform = value
+  }
   const dryRun = process.argv.includes('--dry-run')
 
   const client = makeIngestClient()
