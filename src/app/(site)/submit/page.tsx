@@ -41,6 +41,10 @@ export default function SubmitPage() {
           {pending ? 'sending…' : 'send it'}
         </button>
       </form>
+      <p className="mt-6 text-sm text-[var(--ink-dim)]">
+        forms not your thing? email us:{' '}
+        <a href="mailto:info@mmintelligence.ai" className="link-gold text-[var(--ink)]">info@mmintelligence.ai</a>
+      </p>
     </div>
   )
 }

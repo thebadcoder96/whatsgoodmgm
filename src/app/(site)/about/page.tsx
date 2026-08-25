@@ -43,6 +43,10 @@ export default function AboutPage() {
           and its city wiki, local venues, Eventbrite organizers, and everyone who submits.
           Want in? <a href="/submit" className="link-gold text-[var(--ink)]">submit here</a>.
         </p>
+        <p className="mt-3 leading-7 text-[var(--ink-dim)]">
+          something wrong or missing? holler:{' '}
+          <a href="mailto:info@mmintelligence.ai" className="link-gold text-[var(--ink)]">info@mmintelligence.ai</a>.
+        </p>
       </section>
     </div>
   )

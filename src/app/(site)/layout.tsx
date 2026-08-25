@@ -47,6 +47,7 @@ export default function SiteLayout({ children }: { children: React.ReactNode }) 
           {' '}&middot; © 2026 &middot;{' '}
           <Link href="/privacy" className="link-gold">privacy</Link>
           {' '}&middot; <Link href="/guide" className="link-gold">guide</Link>
+          {' '}&middot; <a href="mailto:info@mmintelligence.ai" className="link-gold">email us</a>
         </p>
         <div className="mt-5 flex flex-col items-center gap-1 text-sm text-[var(--ink)] md:hidden">
           <span>
@@ -63,7 +64,8 @@ export default function SiteLayout({ children }: { children: React.ReactNode }) 
           </span>
           <span>
             © 2026 &middot; <Link href="/privacy" className="link-gold">privacy</Link> &middot;{' '}
-            <Link href="/guide" className="link-gold">guide</Link>
+            <Link href="/guide" className="link-gold">guide</Link> &middot;{' '}
+            <a href="mailto:info@mmintelligence.ai" className="link-gold">email us</a>
           </span>
         </div>
       </footer>
