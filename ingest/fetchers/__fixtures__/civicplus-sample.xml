@@ -1,0 +1,40 @@
+<?xml version="1.0"?><rss version="2.0" xmlns:calendarEvent="https://www.wetumpkaal.gov/Calendar.aspx"><channel>
+	<title>Wetumpka, AL - Calendar</title>
+	<link>https://www.wetumpkaal.gov/Calendar.aspx</link>
+	<lastBuildDate>Tue, 25 Aug 2026 16:35:55 -0600</lastBuildDate>
+	<description>Wetumpka, AL - Get the latest events</description>
+	<language>en-us</language>
+	<item>
+		<title>Preschool Storytime</title>
+		<link>https://www.wetumpkaal.gov/Calendar.aspx?EID=1143</link>
+		<pubDate>Fri, 17 Jul 2026 14:38:52 -0600</pubDate>
+		<description>&lt;strong&gt;Event date:&lt;/strong&gt; August 28, 2026 &lt;br&gt;&lt;strong&gt;Event Time: &lt;/strong&gt;10:00 AM - 11:00 AM&lt;br&gt;&lt;strong&gt;Location:&lt;/strong&gt; &lt;br&gt;212 South Main Street&lt;br&gt;Wetumpka, AL 36092&lt;br&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;10:00 AM Theme Dogs</description>
+		<calendarEvent:EventDates> August 28, 2026 </calendarEvent:EventDates>
+		<calendarEvent:EventTimes>10:00 AM - 11:00 AM</calendarEvent:EventTimes>
+		<calendarEvent:Location>212 South Main StreetWetumpka, AL 36092</calendarEvent:Location>
+		
+		<guid isPermaLink="false">https://www.wetumpkaal.gov/Calendar.aspx?EID=1143/639198995320000000</guid>
+	</item>
+	<item>
+		<title>Book Bites Book Club</title>
+		<link>https://www.wetumpkaal.gov/Calendar.aspx?EID=1048</link>
+		<pubDate>Fri, 06 Mar 2026 14:59:29 -0600</pubDate>
+		<description>&lt;strong&gt;Event date:&lt;/strong&gt; September 1, 2026 &lt;br&gt;&lt;strong&gt;Event Time: &lt;/strong&gt;10:00 AM - 11:00 AM&lt;br&gt;&lt;strong&gt;Location:&lt;/strong&gt; &lt;br&gt;212 South Main Street&lt;br&gt;Wetumpka, AL 36092&lt;br&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;10:00 AM &quot;The Silent Patient&quot; by Alex Michaelides</description>
+		<calendarEvent:EventDates> September 1, 2026 </calendarEvent:EventDates>
+		<calendarEvent:EventTimes>10:00 AM - 11:00 AM</calendarEvent:EventTimes>
+		<calendarEvent:Location>212 South Main StreetWetumpka, AL 36092</calendarEvent:Location>
+		
+		<guid isPermaLink="false">https://www.wetumpkaal.gov/Calendar.aspx?EID=1048/639084059690000000</guid>
+	</item>
+	<item>
+		<title>Preachool Storytime</title>
+		<link>https://www.wetumpkaal.gov/Calendar.aspx?EID=1148</link>
+		<pubDate>Fri, 17 Jul 2026 15:59:21 -0600</pubDate>
+		<description>&lt;strong&gt;Event date:&lt;/strong&gt; September 4, 2026 &lt;br&gt;&lt;strong&gt;Event Time: &lt;/strong&gt;10:00 AM - 11:00 PM&lt;br&gt;&lt;strong&gt;Location:&lt;/strong&gt; &lt;br&gt;212 South Main Street&lt;br&gt;Wetumpka, AL 36092&lt;br&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;10:00 AM Theme Camping</description>
+		<calendarEvent:EventDates> September 4, 2026 </calendarEvent:EventDates>
+		<calendarEvent:EventTimes>10:00 AM - 11:00 PM</calendarEvent:EventTimes>
+		<calendarEvent:Location>212 South Main StreetWetumpka, AL 36092</calendarEvent:Location>
+		
+		<guid isPermaLink="false">https://www.wetumpkaal.gov/Calendar.aspx?EID=1148/639199043610000000</guid>
+	</item>
+</channel></rss>
