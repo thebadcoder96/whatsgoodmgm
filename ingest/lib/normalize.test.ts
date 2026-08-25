@@ -35,4 +35,16 @@ describe('chicagoToUtc', () => {
   it('handles date-only input as local midnight', () => {
     expect(chicagoToUtc('2026-09-03')).toBe('2026-09-03T05:00:00.000Z')
   })
+  it('handles the spring-forward transition morning', () => {
+    expect(chicagoToUtc('2026-03-08 03:00:00')).toBe('2026-03-08T08:00:00.000Z')
+  })
+  it('handles the fall-back transition morning', () => {
+    expect(chicagoToUtc('2026-11-01 03:00:00')).toBe('2026-11-01T09:00:00.000Z')
+  })
+  it('accepts HH:mm without seconds', () => {
+    expect(chicagoToUtc('2026-09-03 10:00')).toBe('2026-09-03T15:00:00.000Z')
+  })
+  it('throws with the offending input on garbage', () => {
+    expect(() => chicagoToUtc('garbage')).toThrow('garbage')
+  })
 })

@@ -23,9 +23,16 @@ export function makeSlug(title: string, startIso: string): string {
 export function chicagoToUtc(local: string): string {
   const [d, t = '00:00:00'] = local.trim().split(/[ T]/)
   const naive = new Date(`${d}T${t.length === 5 ? t + ':00' : t}Z`)
-  const tzPart = new Intl.DateTimeFormat('en-US', { timeZone: TZ, timeZoneName: 'shortOffset' })
-    .formatToParts(naive).find(p => p.type === 'timeZoneName')!.value // "GMT-5" / "GMT-6"
-  const m = tzPart.match(/GMT([+-]\d+)(?::(\d+))?/)
-  const offMin = m ? parseInt(m[1], 10) * 60 + (m[2] ? Math.sign(parseInt(m[1], 10)) * parseInt(m[2], 10) : 0) : -360
-  return new Date(naive.getTime() - offMin * 60_000).toISOString()
+  if (Number.isNaN(naive.getTime())) throw new Error(`Invalid local datetime: "${local}"`)
+  const offsetAt = (instant: Date): number => {
+    const tzPart = new Intl.DateTimeFormat('en-US', { timeZone: TZ, timeZoneName: 'shortOffset' })
+      .formatToParts(instant).find(p => p.type === 'timeZoneName')!.value // "GMT-5" / "GMT-6"
+    const m = tzPart.match(/GMT([+-]\d+)(?::(\d+))?/)
+    return m ? parseInt(m[1], 10) * 60 + (m[2] ? Math.sign(parseInt(m[1], 10)) * parseInt(m[2], 10) : 0) : -360
+  }
+  // The offset at the naive instant can sit on the wrong side of a DST switch;
+  // re-deriving it from the provisional UTC instant converges. The ambiguous
+  // fall-back hour resolves to its earlier (daylight-time) occurrence.
+  const provisional = new Date(naive.getTime() - offsetAt(naive) * 60_000)
+  return new Date(naive.getTime() - offsetAt(provisional) * 60_000).toISOString()
 }
