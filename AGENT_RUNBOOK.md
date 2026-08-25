@@ -7,7 +7,7 @@ REDDIT_CLIENT_ID, REDDIT_CLIENT_SECRET.
 
 ## 1. Tier-1 structured sources (plain code)
 Run: `npm ci && npm run ingest -- --all`
-Capture the `DIGEST_JSON` line from stdout. If a source errored, note it for the digest — retry once at most; never attempt to fix code.
+Capture the `DIGEST_JSON` line from stdout. If a source errored, note it for the digest — retry once at most if the error happened during fetch; if the error indicates a Sanity write failure (thrown from inside writeEvents), stop and report per the hard rules instead of retrying. Never attempt to fix code.
 
 ## 2. TNTDIM reddit post
 Run: `npx tsx scripts/fetch-tntdim.ts`
@@ -55,7 +55,7 @@ End your run with a short digest:
   `*[_type == "submission"] | order(_createdAt desc)` and `*[_type == "event" && status == "pending"]`
 
 ## Hard rules
-- NEVER edit code, schemas, or site content during a run — you ingest data and report; that is all
+- NEVER edit code, schemas, or site content during a run — the one exception is step 5's interest tagging, which is pre-approved automation that only fills a currently-empty interests field. Beyond that, you ingest data and report; that is all
 - NEVER delete or overwrite existing events; the writer merges duplicates itself
 - Every event MUST have a real `sourceUrl` — no source, no event
 - If Sanity writes fail, stop and report; do not retry into a half-written state
