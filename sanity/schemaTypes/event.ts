@@ -20,7 +20,7 @@ export const event = defineType({
     defineField({ name: 'priceText', type: 'string', description: 'e.g. "Free", "$10", "$15-25"' }),
     defineField({ name: 'imageUrl', type: 'url', description: 'Flyer / promo image' }),
     defineField({ name: 'sourceType', type: 'string', initialValue: 'manual',
-      options: { list: ['facebook','eventbrite','manual','reddit','submission','ics'] } }),
+      options: { list: ['facebook','eventbrite','manual','reddit','submission','ics','simpleview','tribe','statsapi','civicplus','website'] } }),
     defineField({ name: 'sourceUrl', type: 'url', description: 'Deep link back to origin — always credit the source' }),
     defineField({ name: 'additionalSourceUrls', type: 'array', of: [{ type: 'url' }] }),
     defineField({ name: 'status', type: 'string', initialValue: 'approved',
