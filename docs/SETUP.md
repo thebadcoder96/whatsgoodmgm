@@ -18,3 +18,4 @@
    Prompt: "Follow AGENT_RUNBOOK.md at the repo root, start to finish, and end with the digest."
    First run: temporarily add "run everything in dry-run mode (add --dry-run to the ingest and
    write-extracted commands, skip tag-interests)" to the prompt, review the digest, then remove it.
+   (Skipping tag-interests matters: that script has no dry-run mode and always writes.)
