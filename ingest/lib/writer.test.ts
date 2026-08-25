@@ -51,4 +51,14 @@ describe('writeEvents in-batch dedup', () => {
     expect(captured[0]).toBe('venue-caf-louise')
     expect(captured[0]).toMatch(/^[a-z0-9-]+$/)
   })
+  it('creates events as approved when autoApprove is set', async () => {
+    const { client, calls } = stubClient()
+    await writeEvents(client, [ev({})], false, { autoApprove: true })
+    expect(calls.created[0].status).toBe('approved')
+  })
+  it('defaults to pending without autoApprove', async () => {
+    const { client, calls } = stubClient()
+    await writeEvents(client, [ev({})], false)
+    expect(calls.created[0].status).toBe('pending')
+  })
 })

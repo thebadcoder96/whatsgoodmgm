@@ -30,7 +30,8 @@ async function upsertVenue(client: SanityClient, v: NonNullable<NormalizedEvent[
   return id
 }
 
-export async function writeEvents(client: SanityClient, incoming: NormalizedEvent[], dryRun: boolean):
+export async function writeEvents(client: SanityClient, incoming: NormalizedEvent[], dryRun: boolean,
+  opts: { autoApprove?: boolean } = {}):
   Promise<{ created: number; merged: number; skipped: number }> {
   const existing = await loadExisting(client)
   const approved = existing.filter(e => e.status === 'approved')
@@ -58,9 +59,9 @@ export async function writeEvents(client: SanityClient, incoming: NormalizedEven
     if (!dryRun) {
       const venueId = ev.venue ? await upsertVenue(client, ev.venue, dryRun) : undefined
       const createdDoc = await client.create({
-        _type: 'event', status: 'pending', featured: false, likelyRecurring,
+        _type: 'event', status: opts.autoApprove ? 'approved' : 'pending', featured: false, likelyRecurring,
         title: ev.title, startDateTime: ev.startDateTime, endDateTime: ev.endDateTime,
-        description: ev.description, priceText: ev.priceText, imageUrl: ev.imageUrl,
+        description: ev.description, category: ev.category, priceText: ev.priceText, imageUrl: ev.imageUrl,
         sourceType: ev.sourceType, sourceUrl: ev.sourceUrl,
         slug: { current: makeSlug(ev.title, ev.startDateTime) },
         dedupeKey: makeDedupeKey(ev.title, ev.venue?.name ?? '', ev.startDateTime),
@@ -68,7 +69,7 @@ export async function writeEvents(client: SanityClient, incoming: NormalizedEven
       })
       newId = createdDoc._id
     }
-    existing.push({ ...comparable, _id: newId, status: 'pending', sourceUrl: ev.sourceUrl }) // in-batch dedup
+    existing.push({ ...comparable, _id: newId, status: opts.autoApprove ? 'approved' : 'pending', sourceUrl: ev.sourceUrl }) // in-batch dedup
     created += 1
   }
   return { created, merged, skipped }
