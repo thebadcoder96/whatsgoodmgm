@@ -1,5 +1,5 @@
 import type { Fetcher, NormalizedEvent, SourceDoc } from './types'
-import { chicagoToUtc } from '../lib/normalize'
+import { chicagoToUtc, localDay } from '../lib/normalize'
 
 const MONTHS: Record<string, string> = {
   january: '01', february: '02', march: '03', april: '04', may: '05', june: '06',
@@ -61,12 +61,33 @@ function extractDescriptionBody(lines: string[]): string | undefined {
 
 const toHour24 = (h: string, ampm: string): number => (parseInt(h, 10) % 12) + (ampm.toUpperCase() === 'PM' ? 12 : 0)
 
+// Range with the start date FIRST: "August 28, 2026 - August 30, 2026", or the shorthand forms
+// "August 28 - August 30, 2026" / "August 28 - 30, 2026" where the start day's year (and the end
+// day's month) only appear on the trailing date and must be borrowed. An unanchored single-date
+// regex mis-parses the year-on-trailing-date shorthand: the start date has no year of its own, so
+// the first match lands on the END date and the event publishes under the wrong day.
+const RANGE_RE = new RegExp(
+  `^\\s*${MONTH_RE}\\s+(\\d{1,2}),?\\s*(\\d{4})?\\s*[-\\u2013]\\s*(?:${MONTH_RE}\\s+)?(\\d{1,2}),?\\s*(\\d{4})`, 'i')
+// Anchored to the start of the date text so a later date in it can never win — fail closed.
+const SINGLE_RE = new RegExp(`^\\s*${MONTH_RE}\\s+(\\d{1,2}),?\\s+(\\d{4})`, 'i')
+
+/** Start day (YYYY-MM-DD) of a CivicPlus date text; single-start model — a range's end is ignored. */
+function parseStartDay(text: string): string | null {
+  const r = text.match(RANGE_RE)
+  if (r) return `${r[3] ?? r[6]}-${MONTHS[r[1].toLowerCase()]}-${r[2].padStart(2, '0')}`
+  const m = text.match(SINGLE_RE)
+  return m ? `${m[3]}-${MONTHS[m[1].toLowerCase()]}-${m[2].padStart(2, '0')}` : null
+}
+
 export function parseCivicplusRss(xml: string): NormalizedEvent[] {
   const out: NormalizedEvent[] = []
   for (const item of xml.match(/<item>[\s\S]*?<\/item>/gi) ?? []) {
     try {
       const title = tag(item, 'title') ? decodeEntities(tag(item, 'title')!) : undefined
-      const link = tag(item, 'link')
+      // Links need decoding too: RSS-compliant feeds escape & as &amp;, so a two-param
+      // link would otherwise surface as a broken ...?EID=1&amp;o=2 sourceUrl.
+      const rawLink = tag(item, 'link')
+      const link = rawLink ? decodeEntities(rawLink) : undefined
       if (!title || !link) {
         console.warn(`  SKIP civicplus item: missing title or link`)
         continue
@@ -84,12 +105,11 @@ export function parseCivicplusRss(xml: string): NormalizedEvent[] {
       // competing date like a "Register by:" deadline. No label -> no date -> drop, never guess.
       const dateField = tag(item, 'calendarEvent:EventDates')
       const dateSource = dateField ?? labeledText(lines, /event dates?\s*:/i)
-      const dm = dateSource?.match(new RegExp(`${MONTH_RE}\\s+(\\d{1,2}),?\\s+(\\d{4})`, 'i'))
-      if (!dm) {
+      const day = dateSource ? parseStartDay(dateSource) : null
+      if (!day) {
         console.warn(`  SKIP civicplus item (no parseable date): ${title}`)
         continue
       }
-      const day = `${dm[3]}-${MONTHS[dm[1].toLowerCase()]}-${dm[2].padStart(2, '0')}`
 
       const timeField = tag(item, 'calendarEvent:EventTimes')
       const timeSource = timeField ?? labeledText(lines, /event times?\s*:/i) ?? ''
@@ -124,9 +144,11 @@ export const civicplusFetcher: Fetcher = {
   async fetchUpcoming(source: SourceDoc, windowDays: number): Promise<NormalizedEvent[]> {
     const res = await fetch(source.identifier)
     if (!res.ok) throw new Error(`civicplus: HTTP ${res.status}`)
-    const now = Date.now()
-    const end = now + windowDays * 86_400_000
+    // Montgomery-local days, not UTC slices — after ~6pm local the UTC date is already tomorrow,
+    // and a naive "now - 24h" lower bound would keep yesterday-local events (see tribe/statsapi).
+    const todayLocal = localDay(new Date().toISOString())
+    const endLocal = localDay(new Date(Date.now() + windowDays * 86_400_000).toISOString())
     return parseCivicplusRss(await res.text())
-      .filter(e => { const t = new Date(e.startDateTime).getTime(); return t >= now - 86_400_000 && t <= end })
+      .filter(e => { const d = localDay(e.startDateTime); return d >= todayLocal && d <= endLocal })
   },
 }

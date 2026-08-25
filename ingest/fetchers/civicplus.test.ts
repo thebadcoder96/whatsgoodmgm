@@ -86,6 +86,52 @@ describe('parseCivicplusRss', () => {
     warn.mockRestore()
   })
 
+  const itemWithDates = (dates: string) => '<rss><channel><item>'
+    + '<title>Range Event</title><link>https://x.example/range</link>'
+    + '<description>details</description>'
+    + `<calendarEvent:EventDates>${dates}</calendarEvent:EventDates>`
+    + '</item></channel></rss>'
+
+  it('uses the START date of a full "Month D, YYYY - Month D, YYYY" range', () => {
+    const events = parseCivicplusRss(itemWithDates(' August 28, 2026 - August 30, 2026 '))
+    expect(events).toHaveLength(1)
+    // No times: date-only start; midnight CDT (UTC-5) -> 05:00Z.
+    expect(events[0].startDateTime).toBe('2026-08-28T05:00:00.000Z')
+  })
+
+  it('uses the START date of a shorthand range whose year appears only on the trailing date', () => {
+    // "August 28 - August 30, 2026": the start date has no year of its own and must borrow the
+    // trailing year — the old single-date regex skipped it and published under the END date.
+    const events = parseCivicplusRss(itemWithDates(' August 28 - August 30, 2026 '))
+    expect(events).toHaveLength(1)
+    expect(events[0].startDateTime).toBe('2026-08-28T05:00:00.000Z')
+  })
+
+  it('uses the FIRST date of a comma-separated date list', () => {
+    const events = parseCivicplusRss(itemWithDates(' August 28, 2026, September 4, 2026 '))
+    expect(events).toHaveLength(1)
+    expect(events[0].startDateTime).toBe('2026-08-28T05:00:00.000Z')
+  })
+
+  it('drops an item whose date text does not START with a date (fail closed, never a later date)', () => {
+    const warn = vi.spyOn(console, 'warn').mockImplementation(() => {})
+    expect(parseCivicplusRss(itemWithDates('See details for August 28, 2026'))).toHaveLength(0)
+    expect(warn).toHaveBeenCalledWith(expect.stringContaining('Range Event'))
+    warn.mockRestore()
+  })
+
+  it('entity-decodes the link so multi-param query strings survive', () => {
+    // RSS-spec-compliant feeds escape & as &amp; inside <link>.
+    const item = '<rss><channel><item>'
+      + '<title>Two Param Event</title><link>https://x.example/page?EID=1&amp;o=2</link>'
+      + '<description>x</description>'
+      + '<calendarEvent:EventDates> August 28, 2026 </calendarEvent:EventDates>'
+      + '</item></channel></rss>'
+    const events = parseCivicplusRss(item)
+    expect(events).toHaveLength(1)
+    expect(events[0].sourceUrl).toBe('https://x.example/page?EID=1&o=2')
+  })
+
   it('does not use pubDate as the event date', () => {
     // "Preschool Storytime" pubDate is "Fri, 17 Jul 2026" but its event date is August 28, 2026.
     const events = parseCivicplusRss(xml)
@@ -116,6 +162,23 @@ describe('civicplusFetcher.fetchUpcoming', () => {
     expect(evs.some(e => e.title === 'Bad Date Event')).toBe(false)
     expect(warn).toHaveBeenCalled()
     warn.mockRestore()
+  })
+
+  it('drops yesterday-local events even when they started less than 24h ago in UTC', async () => {
+    // 2026-08-29T13:00:00Z is Aug 29, 8:00 AM CDT in Montgomery. "Preschool Storytime" started
+    // 2026-08-28T15:00:00Z — only 22h earlier in UTC, but on YESTERDAY's local calendar day, so a
+    // Montgomery-local today boundary (like tribe/statsapi use) must exclude it. The naive
+    // "now - 24h" bound would have kept it.
+    vi.useFakeTimers()
+    vi.setSystemTime(new Date('2026-08-29T13:00:00Z'))
+    try {
+      vi.stubGlobal('fetch', vi.fn(async () => ({ ok: true, text: async () => xml })))
+      const evs = await civicplusFetcher.fetchUpcoming(
+        { _id: 'x', name: 'wetumpka', platform: 'civicplus', identifier: 'https://wetumpkaal.gov/RSSFeed.aspx?ModID=58&CID=All-calendar.xml' }, 60)
+      expect(evs.map(e => e.title)).toEqual(['Book Bites Book Club', 'Preachool Storytime'])
+    } finally {
+      vi.useRealTimers()
+    }
   })
 
   it('throws on a non-OK response', async () => {
