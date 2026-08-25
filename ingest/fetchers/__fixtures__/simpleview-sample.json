@@ -1,0 +1,293 @@
+{
+  "docs": [
+    {
+      "_id": "6a80a5d85a5278718feb0c37",
+      "date": "2026-09-03T04:59:59.000Z",
+      "recid": "2661",
+      "_media": [
+        {
+          "mediafile": "Friends.n.Kin_Game_Night_flyer_18307E1E-E57D-5509-579E27341F760C68.jpg",
+          "mediaurl": "https://assets.simpleviewinc.com/simpleview/image/upload/crm/montgomery/Friends.n.Kin_Game_Night_flyer_18307E1E-E57D-5509-579E27341F760C68_1927fd2a-c729-5cda-9a93ce20bf60d5f8.jpg",
+          "sortorder": 1
+        }
+      ],
+      "accountId": 7179,
+      "active": true,
+      "address1": "432 S. Goldthwaite Street",
+      "admission": "Free, donations appreciated!",
+      "calendarid": "1",
+      "categories": [
+        {
+          "catName": "Family",
+          "catId": "29"
+        },
+        {
+          "catName": "Free",
+          "catId": "38"
+        }
+      ],
+      "city": "Montgomery",
+      "cms_title": "Friends n Kin Board Game Night (2661)",
+      "cms_title_sort": "friends n kin board game night (2661)",
+      "contact": "Mack Reynolds",
+      "dates": {
+        "eventDate": "2026-09-03T04:59:59.000Z"
+      },
+      "day": 0,
+      "dayMask": 0,
+      "description": "<p>Bring your authentic self for an inclusive night of board gaming -- solo, coupled, or with kids, we'll have a game for everyone... classics, Eurogames, cards, co-ops, legacy, and party games.<br><br>Free event, snacks for sale, BYOB -- and donations much appreciated!<br><br>Kids' games &amp; movie available -- family-friendly atmosphere no matter what shape your family takes... you are welcome here!<br><br>This event graciously supported by the Unitarian Universalist Fellowship of Montgomery: uumontgomery.org<br><br>Find us on Facebook &amp; Instagram @friends.n.kin</p>",
+      "email": "Friends.n.Kin@gmail.com",
+      "endDate": "2028-05-04T04:59:59.000Z",
+      "endTime": "22:00:00",
+      "endType": 3,
+      "eventTypeId": 2,
+      "expired": false,
+      "featured": false,
+      "filter_tags": [
+        "site_primary"
+      ],
+      "hostname": "Friends 'n' Kin Board Game Group",
+      "interval": 1,
+      "linkUrl": "https://linktr.ee/friends.n.kin1",
+      "listing_id": 1113,
+      "loc": {
+        "type": "Point",
+        "coordinates": [
+          -86.3155251,
+          32.3722613
+        ]
+      },
+      "location": "The Sanctuary (Jubilee Community Center)",
+      "media_raw": [
+        {
+          "mediaurl": "https://assets.simpleviewinc.com/simpleview/image/upload/crm/montgomery/Friends.n.Kin_Game_Night_flyer_18307E1E-E57D-5509-579E27341F760C68_1927fd2a-c729-5cda-9a93ce20bf60d5f8.jpg",
+          "sortorder": 1,
+          "mediatype": "Image"
+        }
+      ],
+      "month": 0,
+      "never_expire": false,
+      "nextDate": "2026-09-03T04:59:59.000Z",
+      "occurrences": 0,
+      "past": false,
+      "phone": "(334) 600-1974",
+      "primary_site": "primary",
+      "primarycatid": "38",
+      "rank": 2,
+      "recId": "2661",
+      "recurType": 5,
+      "recurrence": "Recurring monthly on the 1st Wednesday",
+      "sites": [
+        "primary"
+      ],
+      "startDate": "2026-05-06T05:00:00.000Z",
+      "startTime": "17:00:00",
+      "state": "AL",
+      "title": "Friends n Kin Board Game Night",
+      "title_sort": "friends n kin board game night",
+      "typeName": "Silver",
+      "updated": "2026-08-15T17:45:58.995Z",
+      "week": 1,
+      "weekday": 4,
+      "zip": "36104",
+      "id": "6a80a5d85a5278718feb0c37",
+      "slug": "friends-n-kin-board-game-night",
+      "url": "/event/friends-n-kin-board-game-night/2661/",
+      "genericUrl": "/event/friends-n-kin-board-game-night/2661/",
+      "absoluteUrl": "https://experiencemontgomeryal.org/event/friends-n-kin-board-game-night/2661/",
+      "absolute_primary_url": "https://experiencemontgomeryal.org/event/friends-n-kin-board-game-night/2661/",
+      "teaser": "<p>Bring your authentic self for an inclusive night of board gaming -- solo, coupled, or with kids, we&apos;ll have a game for everyone... classics, Eurogames, cards, co-ops, legacy, and party games.<br><br>Free</p>",
+      "longitude": -86.3155251,
+      "latitude": 32.3722613
+    },
+    {
+      "_id": "6a8187195a5278718f13a5d6",
+      "recid": "2890",
+      "date": "2026-09-12T04:59:59.000Z",
+      "_media": [
+        {
+          "mediafile": "are-you-ready-live-tour_962E8712-9A63-EF8C-1C540142068FD7EA.jpg",
+          "mediaurl": "https://assets.simpleviewinc.com/simpleview/image/upload/crm/montgomery/are-you-ready-live-tour_962E8712-9A63-EF8C-1C540142068FD7EA_96364190-a497-2713-5d45a5c2fb422ed7.jpg",
+          "sortorder": 1
+        }
+      ],
+      "accountId": 3515,
+      "active": true,
+      "address1": "201 Tallapoosa Street",
+      "admission": "$69 - $99",
+      "calendarid": "1",
+      "categories": [
+        {
+          "catName": "Performing Arts",
+          "catId": "40"
+        },
+        {
+          "catName": "Downtown",
+          "catId": "42"
+        }
+      ],
+      "city": "Montgomery",
+      "cms_title": "The Rick Burgess Show Are You Ready Live Tour (2890)",
+      "cms_title_sort": "the rick burgess show are you ready live tour (2890)",
+      "dates": {
+        "eventDate": "2026-09-12T04:59:59.000Z"
+      },
+      "day": 0,
+      "dayMask": 0,
+      "description": "<p><span class=\"event-name\">The Rick Burgess Show</span><span class=\"event-name presents up\">Are You Ready Live Tour</span></p>\r\n<div class=\"entry-content\">\r\n<p><strong><em>The Are You Ready Tour</em> </strong>isn’t just another show; it’s a live celebration of everything you love about<strong> The Rick Burgess Show.</strong></p>\r\n<p><strong><em>The Are You Ready Tour</em> </strong>brings<strong> The Rick Burgess Show </strong>live to the stage for an interactive, high-energy experience you won’t hear on the radio. From stand-up comedy and live audience interaction to contests, prizes, and a no-holds-barred Q&amp;A, every stop on the tour is packed with surprises.</p>\r\n<p>And if you think you know the music, think again! Get ready to rock with <strong>Mr. Lucky, </strong>famously known among fans as the <strong>“World’s Greatest Garage Band.”</strong> This legendary Alabama group—formed by Rick and longtime friends back in the ’90s—helped define the show’s signature sound and earned that fan-given title with performances and memories that still get talked about today. For the first time since 2003, Mr. Lucky is back on stage, making this a truly once-in-a-generation moment for longtime listeners.</p>\r\n</div>",
+      "endDate": "2026-09-12T04:59:59.000Z",
+      "endType": 0,
+      "eventTypeId": 2,
+      "expired": false,
+      "featured": false,
+      "filter_tags": [
+        "site_primary"
+      ],
+      "interval": 0,
+      "linkUrl": "https://mpaconline.org/the-rick-burgess-show/",
+      "listing_id": 696,
+      "loc": {
+        "type": "Point",
+        "coordinates": [
+          -86.3126368,
+          32.3784922
+        ]
+      },
+      "location": "Montgomery Performing Arts Centre",
+      "media_raw": [
+        {
+          "mediaurl": "https://assets.simpleviewinc.com/simpleview/image/upload/crm/montgomery/are-you-ready-live-tour_962E8712-9A63-EF8C-1C540142068FD7EA_96364190-a497-2713-5d45a5c2fb422ed7.jpg",
+          "sortorder": 1,
+          "mediatype": "Image"
+        }
+      ],
+      "month": 0,
+      "never_expire": false,
+      "nextDate": "2026-09-12T04:59:59.000Z",
+      "occurrences": 0,
+      "past": false,
+      "primary_site": "primary",
+      "primarycatid": "40",
+      "rank": 2,
+      "recId": "2890",
+      "recurType": 0,
+      "sites": [
+        "primary"
+      ],
+      "startDate": "2026-09-11T05:00:00.000Z",
+      "startTime": "19:00:00",
+      "state": "AL",
+      "times": "Starting: 7:00 PM",
+      "title": "The Rick Burgess Show Are You Ready Live Tour",
+      "title_sort": "the rick burgess show are you ready live tour",
+      "typeName": "Silver",
+      "updated": "2026-08-16T09:47:03.995Z",
+      "week": 0,
+      "weekday": 0,
+      "zip": "36104",
+      "id": "6a8187195a5278718f13a5d6",
+      "slug": "the-rick-burgess-show-are-you-ready-live-tour",
+      "url": "/event/the-rick-burgess-show-are-you-ready-live-tour/2890/",
+      "genericUrl": "/event/the-rick-burgess-show-are-you-ready-live-tour/2890/",
+      "absoluteUrl": "https://experiencemontgomeryal.org/event/the-rick-burgess-show-are-you-ready-live-tour/2890/",
+      "absolute_primary_url": "https://experiencemontgomeryal.org/event/the-rick-burgess-show-are-you-ready-live-tour/2890/",
+      "teaser": "<p><span class=\"event-name\">The Rick Burgess Show</span><span class=\"event-name presents up\">Are You Ready Live Tour</span></p> <div class=\"entry-content\"> <p><strong><em>The Are You Ready Tour</em> </strong>isn&#x2019;t just another show; it&#x2019;s a live celebration of everything you love about<strong> The Rick Burgess Show.</strong></p> <p><strong><em>The Are You Ready Tour</em> </strong>brings<strong></strong></p></div>",
+      "longitude": -86.3126368,
+      "latitude": 32.3784922
+    },
+    {
+      "_id": "6a81cd335a5278718f1eb765",
+      "recid": "2343",
+      "date": "2026-08-26T04:59:59.000Z",
+      "_media": [
+        {
+          "mediafile": "Image-for-Sip-and-Socials-Coffee-Ladies_C84FD6CD-C688-C3E2-B85437165A703B20.jpg",
+          "mediaurl": "https://assets.simpleviewinc.com/simpleview/image/upload/crm/montgomery/Image-for-Sip-and-Socials-Coffee-Ladies_C84FD6CD-C688-C3E2-B85437165A703B20_c8922e7d-bb78-f68e-3826f99e8369d392.jpg",
+          "sortorder": 1
+        }
+      ],
+      "accountId": 7105,
+      "active": true,
+      "address1": "P. O. Box 241946",
+      "admission": "Free",
+      "calendarid": "1",
+      "categories": [
+        {
+          "catName": "Free",
+          "catId": "38"
+        }
+      ],
+      "city": "Montgomery",
+      "cms_title": "Newcomers Club Get Acquaited Coffee (2343)",
+      "cms_title_sort": "newcomers club get acquaited coffee (2343)",
+      "contact": "Kathy Weimar",
+      "dates": {
+        "eventDate": "2026-08-26T04:59:59.000Z"
+      },
+      "day": 0,
+      "dayMask": 0,
+      "description": "<p>Ladies! New to Montgomery, Retired, or just ready to Meet New Friends? <br>You don't have to be \"new\" to be a Newcomer!<br>Join us for our FREE \"Get Acquainted Coffee\" to meet members and hear about our fun activities. We have Book Club, Mah Jongg, Arts &amp; Crafts, Movie Mavens, Cooking Club and more!<br>This is a relaxed, come-as-you-are gathering where you can learn about our 12 activity groups, year-round social events, and monthly luncheons at Arrowhead Country Club.<br>Annual dues is just $25 if you decide to join.<br>Drop in at 10am, or feel free to RSVP or ask questions at newcomersmontgomery@gmail.com We’d love to meet you!</p>",
+      "email": "newcomersmontgomery@gmail.com",
+      "endTime": "11:30:00",
+      "endType": 1,
+      "eventTypeId": 2,
+      "expired": false,
+      "featured": false,
+      "filter_tags": [
+        "site_primary"
+      ],
+      "hostname": "Newcomers Club of Montgomery",
+      "interval": 0,
+      "linkUrl": "https://newcomersofmontgomery.com/special-events",
+      "listing_id": 1038,
+      "loc": {
+        "type": "Point",
+        "coordinates": [
+          -86.3077368,
+          32.3792233
+        ]
+      },
+      "location": "Prevail Union Coffee Shop 39 Dexter Avenue, Montgomery, AL",
+      "media_raw": [
+        {
+          "mediaurl": "https://assets.simpleviewinc.com/simpleview/image/upload/crm/montgomery/Image-for-Sip-and-Socials-Coffee-Ladies_C84FD6CD-C688-C3E2-B85437165A703B20_c8922e7d-bb78-f68e-3826f99e8369d392.jpg",
+          "sortorder": 1,
+          "mediatype": "Image"
+        }
+      ],
+      "month": 0,
+      "never_expire": false,
+      "nextDate": "2026-08-18T04:59:59.000Z",
+      "occurrences": 0,
+      "past": false,
+      "primary_site": "primary",
+      "primarycatid": "38",
+      "rank": 2,
+      "recId": "2343",
+      "recurType": 2,
+      "recurrence": "Recurring every week day",
+      "sites": [
+        "primary"
+      ],
+      "startDate": "2026-01-12T06:00:00.000Z",
+      "startTime": "10:00:00",
+      "state": "AL",
+      "title": "Newcomers Club Get Acquaited Coffee",
+      "title_sort": "newcomers club get acquaited coffee",
+      "typeName": "Silver",
+      "updated": "2026-08-16T14:46:09.292Z",
+      "week": 0,
+      "weekday": 0,
+      "zip": "36124",
+      "id": "6a81cd335a5278718f1eb765",
+      "slug": "newcomers-club-get-acquaited-coffee",
+      "url": "/event/newcomers-club-get-acquaited-coffee/2343/",
+      "genericUrl": "/event/newcomers-club-get-acquaited-coffee/2343/",
+      "absoluteUrl": "https://experiencemontgomeryal.org/event/newcomers-club-get-acquaited-coffee/2343/",
+      "absolute_primary_url": "https://experiencemontgomeryal.org/event/newcomers-club-get-acquaited-coffee/2343/",
+      "teaser": "<p>Ladies! New to Montgomery, Retired, or just ready to Meet New Friends? <br>You don&apos;t have to be &quot;new&quot; to be a Newcomer!<br>Join us for our FREE &quot;Get Acquainted Coffee&quot; to meet members and hear about our fun</p>",
+      "longitude": -86.3077368,
+      "latitude": 32.3792233
+    }
+  ]
+}
