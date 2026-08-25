@@ -18,3 +18,14 @@ export function makeSlug(title: string, startIso: string): string {
   const base = title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '')
   return `${base || 'event'}-${localDay(startIso)}`
 }
+
+/** "YYYY-MM-DD HH:mm[:ss]" (or date-only) in Montgomery local time → UTC ISO. */
+export function chicagoToUtc(local: string): string {
+  const [d, t = '00:00:00'] = local.trim().split(/[ T]/)
+  const naive = new Date(`${d}T${t.length === 5 ? t + ':00' : t}Z`)
+  const tzPart = new Intl.DateTimeFormat('en-US', { timeZone: TZ, timeZoneName: 'shortOffset' })
+    .formatToParts(naive).find(p => p.type === 'timeZoneName')!.value // "GMT-5" / "GMT-6"
+  const m = tzPart.match(/GMT([+-]\d+)(?::(\d+))?/)
+  const offMin = m ? parseInt(m[1], 10) * 60 + (m[2] ? Math.sign(parseInt(m[1], 10)) * parseInt(m[2], 10) : 0) : -360
+  return new Date(naive.getTime() - offMin * 60_000).toISOString()
+}

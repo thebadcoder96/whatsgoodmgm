@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { normalizeText, makeDedupeKey, makeSlug } from './normalize'
+import { normalizeText, makeDedupeKey, makeSlug, chicagoToUtc } from './normalize'
 
 describe('normalizeText', () => {
   it('lowercases, strips punctuation, collapses whitespace', () => {
@@ -23,5 +23,16 @@ describe('makeSlug', () => {
   })
   it('falls back to "event" for titles with no ascii alphanumerics', () => {
     expect(makeSlug('!!!', '2026-07-10T23:00:00Z')).toBe('event-2026-07-10')
+  })
+})
+describe('chicagoToUtc', () => {
+  it('converts CDT (summer) local time to UTC', () => {
+    expect(chicagoToUtc('2026-09-03 10:00:00')).toBe('2026-09-03T15:00:00.000Z') // UTC-5
+  })
+  it('converts CST (winter) local time to UTC', () => {
+    expect(chicagoToUtc('2026-12-04 19:00:00')).toBe('2026-12-05T01:00:00.000Z') // UTC-6
+  })
+  it('handles date-only input as local midnight', () => {
+    expect(chicagoToUtc('2026-09-03')).toBe('2026-09-03T05:00:00.000Z')
   })
 })
