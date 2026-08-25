@@ -59,6 +59,33 @@ describe('parseCivicplusRss', () => {
     expect(ev.endDateTime).toBe('2026-09-05T04:00:00.000Z')
   })
 
+  it('anchors the description fallback to the "Event date:" label, not the first date mentioned', () => {
+    // No structured calendarEvent tags: a competing labeled date ("Register by:") appears BEFORE
+    // the real event date. The fallback must pick August 28, not the July 1 registration deadline.
+    const item = '<rss><channel><item>'
+      + '<title>Fall Festival</title><link>https://x.example/fall</link>'
+      + '<description>&lt;strong&gt;Register by:&lt;/strong&gt; July 1, 2026 &lt;br&gt;'
+      + '&lt;strong&gt;Event date:&lt;/strong&gt; August 28, 2026 &lt;br&gt;'
+      + '&lt;strong&gt;Event Time: &lt;/strong&gt;10:00 AM - 11:00 AM</description>'
+      + '</item></channel></rss>'
+    const events = parseCivicplusRss(item)
+    expect(events).toHaveLength(1)
+    expect(events[0].startDateTime).toBe('2026-08-28T15:00:00.000Z')
+    expect(events[0].endDateTime).toBe('2026-08-28T16:00:00.000Z')
+  })
+
+  it('drops an item with no structured tags and no "Event date:" label, even if a stray date appears', () => {
+    // A date mention not labeled as the event date must never be guessed at (drop, never guess).
+    const item = '<rss><channel><item>'
+      + '<title>New Exhibit</title><link>https://x.example/exhibit</link>'
+      + '<description>Come celebrate! Doors opened June 5, 2026 for our new exhibit.</description>'
+      + '</item></channel></rss>'
+    const warn = vi.spyOn(console, 'warn').mockImplementation(() => {})
+    expect(parseCivicplusRss(item)).toHaveLength(0)
+    expect(warn).toHaveBeenCalledWith(expect.stringContaining('New Exhibit'))
+    warn.mockRestore()
+  })
+
   it('does not use pubDate as the event date', () => {
     // "Preschool Storytime" pubDate is "Fri, 17 Jul 2026" but its event date is August 28, 2026.
     const events = parseCivicplusRss(xml)

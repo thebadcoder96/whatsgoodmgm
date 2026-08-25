@@ -42,6 +42,17 @@ function extractAddress(lines: string[]): string | undefined {
   return addrLines.length ? addrLines.join(', ') : undefined
 }
 
+// Text following a specific label on its description line (e.g. "Event date: August 28, 2026" ->
+// "August 28, 2026", scoped to that line). Anchoring to the label matters: descriptions can carry
+// competing dates ("Register by: July 1, 2026") that must never be mistaken for the event date.
+function labeledText(lines: string[], label: RegExp): string | undefined {
+  for (const l of lines) {
+    const m = l.match(label)
+    if (m) return l.slice(m.index! + m[0].length).trim() || undefined
+  }
+  return undefined
+}
+
 function extractDescriptionBody(lines: string[]): string | undefined {
   const descIdx = lines.findIndex(l => /^Description:?$/i.test(l))
   if (descIdx === -1) return undefined
@@ -67,11 +78,13 @@ export function parseCivicplusRss(xml: string): NormalizedEvent[] {
       // <calendarEvent:EventDates>/<EventTimes> are structured fields CivicPlus emits alongside
       // the HTML description. NOT <pubDate> — verified in the live fixture that pubDate is the
       // publish/edit timestamp (e.g. "Fri, 17 Jul 2026") while the actual event date is months
-      // later ("August 28, 2026"), so pubDate must never be used as the event date. Fall back to
-      // scanning the description lines when the structured tag is absent.
+      // later ("August 28, 2026"), so pubDate must never be used as the event date. When the
+      // structured tag is absent, the fallback is anchored to the description's "Event date:" /
+      // "Event Time:" labels — never a free scan of the whole text, which could latch onto a
+      // competing date like a "Register by:" deadline. No label -> no date -> drop, never guess.
       const dateField = tag(item, 'calendarEvent:EventDates')
-      const dateSource = dateField ?? lines.join(' ')
-      const dm = dateSource.match(new RegExp(`${MONTH_RE}\\s+(\\d{1,2}),?\\s+(\\d{4})`, 'i'))
+      const dateSource = dateField ?? labeledText(lines, /event dates?\s*:/i)
+      const dm = dateSource?.match(new RegExp(`${MONTH_RE}\\s+(\\d{1,2}),?\\s+(\\d{4})`, 'i'))
       if (!dm) {
         console.warn(`  SKIP civicplus item (no parseable date): ${title}`)
         continue
@@ -79,7 +92,7 @@ export function parseCivicplusRss(xml: string): NormalizedEvent[] {
       const day = `${dm[3]}-${MONTHS[dm[1].toLowerCase()]}-${dm[2].padStart(2, '0')}`
 
       const timeField = tag(item, 'calendarEvent:EventTimes')
-      const timeSource = timeField ?? lines.join(' ')
+      const timeSource = timeField ?? labeledText(lines, /event times?\s*:/i) ?? ''
       const times = [...timeSource.matchAll(/(\d{1,2}):(\d{2})\s*(AM|PM)/gi)]
       const start = times[0]
         ? `${day} ${String(toHour24(times[0][1], times[0][3])).padStart(2, '0')}:${times[0][2]}:00`
