@@ -44,3 +44,6 @@ backup/
 .env*.local
 
 .vercel
+
+# weekly ingest scratch output (never commit extracted events)
+extracted-events.json
