@@ -8,7 +8,7 @@ const decodeEntities = (s: string): string =>
 
 // Tag-stripped remains of Tribe's schedule/subscribe-widget blocks ("@ Add to calendar Google
 // Calendar iCalendar ..."); mccpl descriptions are nothing but this chrome and must map to undefined.
-const WIDGET_CHROME = /@?\s*Add to calendar(?:\s+(?:Google Calendar|iCalendar|Outlook 365|Outlook Live))*\s*/gi
+const WIDGET_CHROME = /@?\s*Add to calendar(?:\s+(?:Google Calendar|iCalendar|Outlook 365|Outlook Live))+\s*/gi
 
 const stripHtml = (s?: string): string | undefined => {
   if (!s) return undefined

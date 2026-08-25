@@ -44,6 +44,14 @@ describe('mapTribeEvent', () => {
     expect(ev.description).toBe('Overview Kids’ art & crafts.')
   })
 
+  it('keeps a bare "Add to calendar" mention in prose (chrome always carries provider labels)', () => {
+    const ev = mapTribeEvent({
+      ...events[0],
+      description: '<p>Click the Add to calendar button to save this event.</p>',
+    })!
+    expect(ev.description).toBe('Click the Add to calendar button to save this event.')
+  })
+
   it('drops the schedule-widget leading "@" separator when prose follows (seen live on mccpl)', () => {
     const ev = mapTribeEvent({
       ...events[0],
