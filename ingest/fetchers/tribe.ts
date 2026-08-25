@@ -6,8 +6,16 @@ const decodeEntities = (s: string): string =>
     .replace(/&#8220;/g, '“').replace(/&#8221;/g, '”')
     .replace(/&nbsp;/g, ' ').replace(/&amp;/g, '&')
 
-const stripHtml = (s?: string): string | undefined =>
-  s ? decodeEntities(s.replace(/<[^>]+>/g, ' ')).replace(/\s+/g, ' ').trim() || undefined : undefined
+// Tag-stripped remains of Tribe's schedule/subscribe-widget blocks ("@ Add to calendar Google
+// Calendar iCalendar ..."); mccpl descriptions are nothing but this chrome and must map to undefined.
+const WIDGET_CHROME = /@?\s*Add to calendar(?:\s+(?:Google Calendar|iCalendar|Outlook 365|Outlook Live))*\s*/gi
+
+const stripHtml = (s?: string): string | undefined => {
+  if (!s) return undefined
+  const text = decodeEntities(s.replace(/<[^>]+>/g, ' ')).replace(/\s+/g, ' ').trim()
+  return text.replace(WIDGET_CHROME, ' ').replace(/\s+/g, ' ').trim()
+    .replace(/^@\s+/, '') || undefined // schedule block's lone "@" separator
+}
 
 export function mapTribeEvent(e: any): NormalizedEvent | null {
   if (!e?.title || !e?.start_date || !e?.url) return null

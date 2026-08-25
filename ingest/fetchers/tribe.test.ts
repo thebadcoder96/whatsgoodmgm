@@ -25,12 +25,31 @@ describe('mapTribeEvent', () => {
     expect(ev.title).not.toContain('&#8217;')
   })
 
-  it('strips HTML tags and decodes entities from the description', () => {
-    // The fixture's description bodies are entirely widget/image markup with no prose text
-    // nodes, so stripping tags collapses to the surviving "Add to calendar" widget labels.
-    const ev = mapTribeEvent(events[1])!
+  it('drops a description that is only calendar-widget chrome', () => {
+    // The mccpl fixture description bodies are entirely widget/image markup with no prose —
+    // stripping tags leaves only "@ Add to calendar ..." chrome, which must not surface as copy.
+    for (const raw of events) {
+      expect(mapTribeEvent(raw)!.description).toBeUndefined()
+    }
+  })
+
+  it('strips tags, decodes entities, and removes widget chrome while keeping real prose', () => {
+    const ev = mapTribeEvent({
+      ...events[0],
+      description: '<h3>Overview</h3><p>Kids&#8217; art &amp; crafts.</p>'
+        + '<div class="tribe-block tribe-block__events-link">Add to calendar Google Calendar iCalendar Outlook 365 Outlook Live</div>',
+    })!
     expect(ev.description).not.toMatch(/<[^>]+>/)
-    expect(ev.description).toBe('@ Add to calendar Google Calendar iCalendar Outlook 365 Outlook Live')
+    expect(ev.description).not.toMatch(/Add to calendar/i)
+    expect(ev.description).toBe('Overview Kids’ art & crafts.')
+  })
+
+  it('drops the schedule-widget leading "@" separator when prose follows (seen live on mccpl)', () => {
+    const ev = mapTribeEvent({
+      ...events[0],
+      description: '<div class="tribe-events-schedule"><span> @ </span></div><p>September Programs are located on slide 2.</p>',
+    })!
+    expect(ev.description).toBe('September Programs are located on slide 2.')
   })
 
   it('handles missing venue/image without throwing', () => {
