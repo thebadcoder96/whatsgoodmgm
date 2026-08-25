@@ -40,6 +40,16 @@ describe('mapBiscuitsGames', () => {
     expect(events).toHaveLength(0)
   })
 
+  it('disambiguates doubleheader titles so downstream dedupe cannot merge game 2 away', () => {
+    // Fixture window has no doubleheader; API marks them doubleHeader 'Y'/'S' with gameNumber 1 and 2.
+    const game1 = { ...homeGame, doubleHeader: 'Y', gameNumber: 1 }
+    const game2 = { ...homeGame, doubleHeader: 'Y', gameNumber: 2, gameDate: '2026-08-26T00:05:00Z' }
+    const events = mapBiscuitsGames({ dates: [{ games: [game1, game2] }] })
+    expect(events).toHaveLength(2)
+    expect(events[0].title).toBe('Biscuits vs Pensacola Blue Wahoos')
+    expect(events[1].title).toBe('Biscuits vs Pensacola Blue Wahoos (Game 2)')
+  })
+
   it('still emits a home game missing venue, with venue left undefined', () => {
     const events = mapBiscuitsGames({ dates: [{ games: [{ ...homeGame, venue: undefined }] }] })
     expect(events).toHaveLength(1)

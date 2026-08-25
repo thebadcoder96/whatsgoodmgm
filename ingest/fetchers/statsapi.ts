@@ -9,6 +9,8 @@ export function mapBiscuitsGames(data: any): NormalizedEvent[] {
   for (const day of data.dates ?? []) {
     for (const g of day.games ?? []) {
       try {
+        // Biscuits-specific filter: a second statsapi source would need this home-team id
+        // parameterized off source.identifier, else it silently returns zero events.
         if (g?.teams?.home?.team?.id !== 421) continue // home games only
         if (EXCLUDED_STATES.includes(g.status?.detailedState)) continue
         const awayName = g.teams?.away?.team?.name
@@ -17,13 +19,16 @@ export function mapBiscuitsGames(data: any): NormalizedEvent[] {
           continue
         }
         const venueName = g.venue?.name
+        // Doubleheaders share day + opponent + venue; without a suffix, downstream fuzzy dedupe merges game 2 away.
+        const gameSuffix = g.gameNumber > 1 ? ` (Game ${g.gameNumber})` : ''
         out.push({
-          title: `Biscuits vs ${awayName}`,
+          title: `Biscuits vs ${awayName}${gameSuffix}`,
           startDateTime: new Date(g.gameDate).toISOString(), // gameDate is already a UTC instant
           description: 'Montgomery Biscuits home game.',
           category: 'sports',
           sourceType: 'statsapi',
           sourceUrl: SCHEDULE_URL,
+          // Venue name is dynamic from the API, but the street address assumes the Biscuits' home park.
           ...(venueName ? { venue: { name: venueName, address: '200 Coosa St, Montgomery, AL' } } : {}),
         })
       } catch (err) {
