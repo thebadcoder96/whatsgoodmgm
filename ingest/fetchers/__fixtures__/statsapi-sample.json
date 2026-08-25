@@ -1,0 +1,177 @@
+{
+  "copyright": "Copyright 2026 MLB Advanced Media, L.P.  Use of any content on this page acknowledges agreement to the terms posted here http://gdx.mlb.com/components/copyright.txt",
+  "totalItems": 2,
+  "totalEvents": 0,
+  "totalGames": 2,
+  "totalGamesInProgress": 0,
+  "dates": [
+    {
+      "date": "2026-08-25",
+      "totalItems": 1,
+      "totalEvents": 0,
+      "totalGames": 1,
+      "totalGamesInProgress": 0,
+      "games": [
+        {
+          "gamePk": 817817,
+          "gameGuid": "5b486f7f-cb39-454a-9741-4c12f2a35be6",
+          "link": "/api/v1.1/game/817817/feed/live",
+          "gameType": "R",
+          "season": "2026",
+          "gameDate": "2026-08-25T23:35:00Z",
+          "officialDate": "2026-08-25",
+          "status": {
+            "abstractGameState": "Preview",
+            "codedGameState": "S",
+            "detailedState": "Scheduled",
+            "statusCode": "S",
+            "startTimeTBD": false,
+            "abstractGameCode": "P"
+          },
+          "teams": {
+            "away": {
+              "team": {
+                "id": 4124,
+                "name": "Pensacola Blue Wahoos",
+                "link": "/api/v1/teams/4124"
+              },
+              "leagueRecord": {
+                "wins": 69,
+                "losses": 50,
+                "ties": 0,
+                "pct": ".580"
+              },
+              "splitSquad": false,
+              "seriesNumber": 22
+            },
+            "home": {
+              "team": {
+                "id": 421,
+                "name": "Montgomery Biscuits",
+                "link": "/api/v1/teams/421"
+              },
+              "leagueRecord": {
+                "wins": 62,
+                "losses": 58,
+                "ties": 0,
+                "pct": ".517"
+              },
+              "splitSquad": false,
+              "seriesNumber": 22
+            }
+          },
+          "venue": {
+            "id": 2814,
+            "name": "DABOS Park",
+            "link": "/api/v1/venues/2814"
+          },
+          "content": {
+            "link": "/api/v1/game/817817/content"
+          },
+          "gameNumber": 1,
+          "publicFacing": true,
+          "doubleHeader": "N",
+          "gamedayType": "Y",
+          "tiebreaker": "N",
+          "calendarEventID": "44-817817-2026-08-25",
+          "seasonDisplay": "2026",
+          "dayNight": "night",
+          "scheduledInnings": 9,
+          "reverseHomeAwayStatus": false,
+          "inningBreakLength": 120,
+          "gamesInSeries": 6,
+          "seriesGameNumber": 1,
+          "seriesDescription": "Regular Season",
+          "recordSource": "S",
+          "ifNecessary": "N",
+          "ifNecessaryDescription": "Normal Game"
+        }
+      ],
+      "events": []
+    },
+    {
+      "date": "2026-09-01",
+      "totalItems": 1,
+      "totalEvents": 0,
+      "totalGames": 1,
+      "totalGamesInProgress": 0,
+      "games": [
+        {
+          "gamePk": 817672,
+          "gameGuid": "a062e212-3f89-4258-a496-1c73e398c020",
+          "link": "/api/v1.1/game/817672/feed/live",
+          "gameType": "R",
+          "season": "2026",
+          "gameDate": "2026-09-01T23:35:00Z",
+          "officialDate": "2026-09-01",
+          "status": {
+            "abstractGameState": "Preview",
+            "codedGameState": "S",
+            "detailedState": "Scheduled",
+            "statusCode": "S",
+            "startTimeTBD": false,
+            "abstractGameCode": "P"
+          },
+          "teams": {
+            "away": {
+              "team": {
+                "id": 421,
+                "name": "Montgomery Biscuits",
+                "link": "/api/v1/teams/421"
+              },
+              "leagueRecord": {
+                "wins": 62,
+                "losses": 58,
+                "ties": 0,
+                "pct": ".517"
+              },
+              "splitSquad": false,
+              "seriesNumber": 23
+            },
+            "home": {
+              "team": {
+                "id": 559,
+                "name": "Rocket City Trash Pandas",
+                "link": "/api/v1/teams/559"
+              },
+              "leagueRecord": {
+                "wins": 62,
+                "losses": 57,
+                "ties": 0,
+                "pct": ".521"
+              },
+              "splitSquad": false,
+              "seriesNumber": 23
+            }
+          },
+          "venue": {
+            "id": 5455,
+            "name": "Toyota Field",
+            "link": "/api/v1/venues/5455"
+          },
+          "content": {
+            "link": "/api/v1/game/817672/content"
+          },
+          "gameNumber": 1,
+          "publicFacing": true,
+          "doubleHeader": "N",
+          "gamedayType": "Y",
+          "tiebreaker": "N",
+          "calendarEventID": "44-817672-2026-09-01",
+          "seasonDisplay": "2026",
+          "dayNight": "night",
+          "scheduledInnings": 9,
+          "reverseHomeAwayStatus": false,
+          "inningBreakLength": 120,
+          "gamesInSeries": 6,
+          "seriesGameNumber": 1,
+          "seriesDescription": "Regular Season",
+          "recordSource": "S",
+          "ifNecessary": "N",
+          "ifNecessaryDescription": "Normal Game"
+        }
+      ],
+      "events": []
+    }
+  ]
+}
