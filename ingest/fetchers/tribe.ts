@@ -1,5 +1,5 @@
 import type { Fetcher, NormalizedEvent, SourceDoc } from './types'
-import { chicagoToUtc } from '../lib/normalize'
+import { chicagoToUtc, localDay } from '../lib/normalize'
 
 const decodeEntities = (s: string): string =>
   s.replace(/&#8217;/g, '’').replace(/&#8216;/g, '‘')
@@ -41,8 +41,9 @@ export const tribeFetcher: Fetcher = {
   platform: 'tribe',
   async fetchUpcoming(source: SourceDoc, windowDays: number): Promise<NormalizedEvent[]> {
     const base = source.identifier.replace(/\/$/, '')
-    const end = new Date(Date.now() + windowDays * 86_400_000).toISOString().slice(0, 10)
-    const today = new Date().toISOString().slice(0, 10)
+    // Montgomery-local days, not UTC slices — after ~6pm local the UTC date is already tomorrow.
+    const end = localDay(new Date(Date.now() + windowDays * 86_400_000).toISOString())
+    const today = localDay(new Date().toISOString())
     const out: NormalizedEvent[] = []
     let url: string | null =
       `${base}/wp-json/tribe/events/v1/events?per_page=50&start_date=${today}&end_date=${end}`
