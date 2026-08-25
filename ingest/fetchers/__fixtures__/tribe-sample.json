@@ -1,0 +1,239 @@
+{
+  "events": [
+    {
+      "id": 23084,
+      "global_id": "mccpl.lib.al.us?id=23084",
+      "global_id_lineage": [
+        "mccpl.lib.al.us?id=23084"
+      ],
+      "author": "8",
+      "status": "publish",
+      "date": "2026-08-03 16:18:32",
+      "date_utc": "2026-08-03 21:18:32",
+      "modified": "2026-08-07 14:17:32",
+      "modified_utc": "2026-08-07 19:17:32",
+      "url": "https://mccpl.lib.al.us/event/game-gathering-morgan-childerns-dept-4/",
+      "rest_url": "https://mccpl.lib.al.us/wp-json/tribe/events/v1/events/23084",
+      "title": "Game Gathering @ Morgan Children&#8217;s Dept.",
+      "description": "<div  class=\"tribe-events-schedule tribe-clearfix\" >\n\t<p class=\"tribe-events-schedule__datetime\">\n\t\t<span class=\"tribe-events-schedule__date tribe-events-schedule__date--start\">\n\t\t\t\t\t</span>\n\n\t\t\t\t\t<span class=\"tribe-events-schedule__separator tribe-events-schedule__separator--date\">\n\t\t\t\t @ \t\t\t</span>\n\t\t\t<span class=\"tribe-events-schedule__time tribe-events-schedule__time--start\">\n\t\t\t\t\t\t\t</span>\n\t\t\n\t\t\t</p>\n</div>\n\n\n\n<figure class=\"wp-block-image size-large\"><img loading=\"lazy\" decoding=\"async\" width=\"1200\" height=\"1553\" src=\"https://mccpl.lib.al.us/wp-content/uploads/august-childrens-flyers-2026-1-3-1200x1553.png\" alt=\"august children's flyers 2026 (1)\" class=\"wp-image-23085\" srcset=\"https://mccpl.lib.al.us/wp-content/uploads/august-childrens-flyers-2026-1-3-1200x1553.png 1200w, https://mccpl.lib.al.us/wp-content/uploads/august-childrens-flyers-2026-1-3-600x776.png 600w, https://mccpl.lib.al.us/wp-content/uploads/august-childrens-flyers-2026-1-3-768x994.png 768w, https://mccpl.lib.al.us/wp-content/uploads/august-childrens-flyers-2026-1-3-1187x1536.png 1187w, https://mccpl.lib.al.us/wp-content/uploads/august-childrens-flyers-2026-1-3-250x323.png 250w, https://mccpl.lib.al.us/wp-content/uploads/august-childrens-flyers-2026-1-3-400x518.png 400w, https://mccpl.lib.al.us/wp-content/uploads/august-childrens-flyers-2026-1-3.png 1545w\" sizes=\"auto, (max-width: 1200px) 100vw, 1200px\" /></figure>\n\n\n<div  class=\"tribe-block tribe-block__event-price\" >\n\t\t</div>\n\n\n\n\n<div  class=\"tribe-block tribe-block__venue tribe-clearfix\" >\n\t\n\t\t\n\t</div>\n\n\n\n\n\t<div  class=\"tribe-block tribe-block__events-link\" >\n\t\t<div class=\"tribe-events tribe-common\">\n\t\t\t<div class=\"tribe-events-c-subscribe-dropdown__container\">\n\t\t\t\t<div class=\"tribe-events-c-subscribe-dropdown\">\n\t\t\t\t\t<div class=\"tribe-common-c-btn-border tribe-events-c-subscribe-dropdown__button\">\n\t\t\t\t\t\t<svg\n\t class=\"tribe-common-c-svgicon tribe-common-c-svgicon--cal-export tribe-events-c-subscribe-dropdown__export-icon\" \taria-hidden=\"true\"\n\tviewBox=\"0 0 23 17\"\n\txmlns=\"http://www.w3.org/2000/svg\"\n>\n\t<path fill-rule=\"evenodd\" clip-rule=\"evenodd\" d=\"M.128.896V16.13c0 .211.145.383.323.383h15.354c.179 0 .323-.172.323-.383V.896c0-.212-.144-.383-.323-.383H.451C.273.513.128.684.128.896Zm16 6.742h-.901V4.679H1.009v10.729h14.218v-3.336h.901V7.638ZM1.01 1.614h14.218v2.058H1.009V1.614Z\" />\n\t<path d=\"M20.5 9.846H8.312M18.524 6.953l2.89 2.909-2.855 2.855\" stroke-width=\"1.2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>\n</svg>\n\t\t\t\t\t\t<button\n\t\t\t\t\t\t\tclass=\"tribe-events-c-subscribe-dropdown__button-text\"\n\t\t\t\t\t\t\taria-expanded=\"false\"\n\t\t\t\t\t\t\taria-controls=\"tribe-events-subscribe-dropdown-content\"\n\t\t\t\t\t\t\taria-label=\"View links to add events to your calendar\"\n\t\t\t\t\t\t>\n\t\t\t\t\t\t\tAdd to calendar\t\t\t\t\t\t</button>\n\t\t\t\t\t\t<svg\n\t class=\"tribe-common-c-svgicon tribe-common-c-svgicon--caret-down tribe-events-c-subscribe-dropdown__button-icon\" \taria-hidden=\"true\"\n\tviewBox=\"0 0 10 7\"\n\txmlns=\"http://www.w3.org/2000/svg\"\n>\n\t<path fill-rule=\"evenodd\" clip-rule=\"evenodd\" d=\"M1.008.609L5 4.6 8.992.61l.958.958L5 6.517.05 1.566l.958-.958z\" class=\"tribe-common-c-svgicon__svg-fill\"/>\n</svg>\n\t\t\t\t\t</div>\n\t\t\t\t\t<div id=\"tribe-events-subscribe-dropdown-content\" class=\"tribe-events-c-subscribe-dropdown__content\">\n\t\t\t\t\t\t<ul class=\"tribe-events-c-subscribe-dropdown__list\">\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t<li class=\"tribe-events-c-subscribe-dropdown__list-item tribe-events-c-subscribe-dropdown__list-item--gcal\">\n\t\t\t\t\t\t\t\t\t<a\n\t\t\t\t\t\t\t\t\t\thref=\"\"\n\t\t\t\t\t\t\t\t\t\tclass=\"tribe-events-c-subscribe-dropdown__list-item-link\"\n\t\t\t\t\t\t\t\t\t\ttarget=\"_blank\"\n\t\t\t\t\t\t\t\t\t\trel=\"noopener noreferrer nofollow noindex\"\n\t\t\t\t\t\t\t\t\t>\n\t\t\t\t\t\t\t\t\t\tGoogle Calendar\t\t\t\t\t\t\t\t\t</a>\n\t\t\t\t\t\t\t\t</li>\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t<li class=\"tribe-events-c-subscribe-dropdown__list-item tribe-events-c-subscribe-dropdown__list-item--ical\">\n\t\t\t\t\t\t\t\t\t<a\n\t\t\t\t\t\t\t\t\t\thref=\"\"\n\t\t\t\t\t\t\t\t\t\tclass=\"tribe-events-c-subscribe-dropdown__list-item-link\"\n\t\t\t\t\t\t\t\t\t\ttarget=\"_blank\"\n\t\t\t\t\t\t\t\t\t\trel=\"noopener noreferrer nofollow noindex\"\n\t\t\t\t\t\t\t\t\t>\n\t\t\t\t\t\t\t\t\t\tiCalendar\t\t\t\t\t\t\t\t\t</a>\n\t\t\t\t\t\t\t\t</li>\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t<li class=\"tribe-events-c-subscribe-dropdown__list-item tribe-events-c-subscribe-dropdown__list-item--outlook-365\">\n\t\t\t\t\t\t\t\t\t<a\n\t\t\t\t\t\t\t\t\t\thref=\"\"\n\t\t\t\t\t\t\t\t\t\tclass=\"tribe-events-c-subscribe-dropdown__list-item-link\"\n\t\t\t\t\t\t\t\t\t\ttarget=\"_blank\"\n\t\t\t\t\t\t\t\t\t\trel=\"noopener noreferrer nofollow noindex\"\n\t\t\t\t\t\t\t\t\t>\n\t\t\t\t\t\t\t\t\t\tOutlook 365\t\t\t\t\t\t\t\t\t</a>\n\t\t\t\t\t\t\t\t</li>\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t<li class=\"tribe-events-c-subscribe-dropdown__list-item tribe-events-c-subscribe-dropdown__list-item--outlook-live\">\n\t\t\t\t\t\t\t\t\t<a\n\t\t\t\t\t\t\t\t\t\thref=\"\"\n\t\t\t\t\t\t\t\t\t\tclass=\"tribe-events-c-subscribe-dropdown__list-item-link\"\n\t\t\t\t\t\t\t\t\t\ttarget=\"_blank\"\n\t\t\t\t\t\t\t\t\t\trel=\"noopener noreferrer nofollow noindex\"\n\t\t\t\t\t\t\t\t\t>\n\t\t\t\t\t\t\t\t\t\tOutlook Live\t\t\t\t\t\t\t\t\t</a>\n\t\t\t\t\t\t\t\t</li>\n\t\t\t\t\t\t\t\t\t\t\t\t\t</ul>\n\t\t\t\t\t</div>\n\t\t\t\t</div>\n\t\t\t</div>\n\t\t</div>\n\t</div>",
+      "excerpt": "",
+      "slug": "game-gathering-morgan-childerns-dept-4",
+      "image": false,
+      "all_day": false,
+      "start_date": "2026-08-24 15:00:00",
+      "start_date_details": {
+        "year": "2026",
+        "month": "08",
+        "day": "24",
+        "hour": "15",
+        "minutes": "00",
+        "seconds": "00"
+      },
+      "end_date": "2026-08-24 17:00:00",
+      "end_date_details": {
+        "year": "2026",
+        "month": "08",
+        "day": "24",
+        "hour": "17",
+        "minutes": "00",
+        "seconds": "00"
+      },
+      "utc_start_date": "2026-08-24 20:00:00",
+      "utc_start_date_details": {
+        "year": "2026",
+        "month": "08",
+        "day": "24",
+        "hour": "20",
+        "minutes": "00",
+        "seconds": "00"
+      },
+      "utc_end_date": "2026-08-24 22:00:00",
+      "utc_end_date_details": {
+        "year": "2026",
+        "month": "08",
+        "day": "24",
+        "hour": "22",
+        "minutes": "00",
+        "seconds": "00"
+      },
+      "timezone": "America/Chicago",
+      "timezone_abbr": "",
+      "cost": "",
+      "cost_details": {
+        "currency_symbol": "$",
+        "currency_code": "USD",
+        "currency_position": "prefix",
+        "values": []
+      },
+      "website": "",
+      "show_map": false,
+      "show_map_link": false,
+      "hide_from_listings": false,
+      "sticky": false,
+      "featured": false,
+      "categories": [],
+      "tags": [],
+      "venue": [],
+      "organizer": [],
+      "custom_fields": []
+    },
+    {
+      "id": 23164,
+      "global_id": "mccpl.lib.al.us?id=23164",
+      "global_id_lineage": [
+        "mccpl.lib.al.us?id=23164"
+      ],
+      "author": "8",
+      "status": "publish",
+      "date": "2026-08-04 10:22:25",
+      "date_utc": "2026-08-04 15:22:25",
+      "modified": "2026-08-04 10:22:26",
+      "modified_utc": "2026-08-04 15:22:26",
+      "url": "https://mccpl.lib.al.us/event/breathe-morgan-young-adult-dept-6/",
+      "rest_url": "https://mccpl.lib.al.us/wp-json/tribe/events/v1/events/23164",
+      "title": "Breathe @ Morgan Young Adult Dept.",
+      "description": "<div  class=\"tribe-events-schedule tribe-clearfix\" >\n\t<p class=\"tribe-events-schedule__datetime\">\n\t\t<span class=\"tribe-events-schedule__date tribe-events-schedule__date--start\">\n\t\t\t\t\t</span>\n\n\t\t\t\t\t<span class=\"tribe-events-schedule__separator tribe-events-schedule__separator--date\">\n\t\t\t\t @ \t\t\t</span>\n\t\t\t<span class=\"tribe-events-schedule__time tribe-events-schedule__time--start\">\n\t\t\t\t\t\t\t</span>\n\t\t\n\t\t\t</p>\n</div>\n\n\n\n<figure class=\"wp-block-image size-large\"><img loading=\"lazy\" decoding=\"async\" width=\"1200\" height=\"1553\" src=\"https://mccpl.lib.al.us/wp-content/uploads/august-ya-programs-morgan-2026-5-6-1200x1553.png\" alt=\"august ya programs morgan 2026 (5)\" class=\"wp-image-23165\" srcset=\"https://mccpl.lib.al.us/wp-content/uploads/august-ya-programs-morgan-2026-5-6-1200x1553.png 1200w, https://mccpl.lib.al.us/wp-content/uploads/august-ya-programs-morgan-2026-5-6-600x776.png 600w, https://mccpl.lib.al.us/wp-content/uploads/august-ya-programs-morgan-2026-5-6-768x994.png 768w, https://mccpl.lib.al.us/wp-content/uploads/august-ya-programs-morgan-2026-5-6-1187x1536.png 1187w, https://mccpl.lib.al.us/wp-content/uploads/august-ya-programs-morgan-2026-5-6-250x323.png 250w, https://mccpl.lib.al.us/wp-content/uploads/august-ya-programs-morgan-2026-5-6-400x518.png 400w, https://mccpl.lib.al.us/wp-content/uploads/august-ya-programs-morgan-2026-5-6.png 1545w\" sizes=\"auto, (max-width: 1200px) 100vw, 1200px\" /></figure>\n\n\n<div  class=\"tribe-block tribe-block__event-price\" >\n\t\t</div>\n\n\n\n\n<div  class=\"tribe-block tribe-block__venue tribe-clearfix\" >\n\t\n\t\t\n\t</div>\n\n\n\n\n\t<div  class=\"tribe-block tribe-block__events-link\" >\n\t\t<div class=\"tribe-events tribe-common\">\n\t\t\t<div class=\"tribe-events-c-subscribe-dropdown__container\">\n\t\t\t\t<div class=\"tribe-events-c-subscribe-dropdown\">\n\t\t\t\t\t<div class=\"tribe-common-c-btn-border tribe-events-c-subscribe-dropdown__button\">\n\t\t\t\t\t\t<svg\n\t class=\"tribe-common-c-svgicon tribe-common-c-svgicon--cal-export tribe-events-c-subscribe-dropdown__export-icon\" \taria-hidden=\"true\"\n\tviewBox=\"0 0 23 17\"\n\txmlns=\"http://www.w3.org/2000/svg\"\n>\n\t<path fill-rule=\"evenodd\" clip-rule=\"evenodd\" d=\"M.128.896V16.13c0 .211.145.383.323.383h15.354c.179 0 .323-.172.323-.383V.896c0-.212-.144-.383-.323-.383H.451C.273.513.128.684.128.896Zm16 6.742h-.901V4.679H1.009v10.729h14.218v-3.336h.901V7.638ZM1.01 1.614h14.218v2.058H1.009V1.614Z\" />\n\t<path d=\"M20.5 9.846H8.312M18.524 6.953l2.89 2.909-2.855 2.855\" stroke-width=\"1.2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>\n</svg>\n\t\t\t\t\t\t<button\n\t\t\t\t\t\t\tclass=\"tribe-events-c-subscribe-dropdown__button-text\"\n\t\t\t\t\t\t\taria-expanded=\"false\"\n\t\t\t\t\t\t\taria-controls=\"tribe-events-subscribe-dropdown-content\"\n\t\t\t\t\t\t\taria-label=\"View links to add events to your calendar\"\n\t\t\t\t\t\t>\n\t\t\t\t\t\t\tAdd to calendar\t\t\t\t\t\t</button>\n\t\t\t\t\t\t<svg\n\t class=\"tribe-common-c-svgicon tribe-common-c-svgicon--caret-down tribe-events-c-subscribe-dropdown__button-icon\" \taria-hidden=\"true\"\n\tviewBox=\"0 0 10 7\"\n\txmlns=\"http://www.w3.org/2000/svg\"\n>\n\t<path fill-rule=\"evenodd\" clip-rule=\"evenodd\" d=\"M1.008.609L5 4.6 8.992.61l.958.958L5 6.517.05 1.566l.958-.958z\" class=\"tribe-common-c-svgicon__svg-fill\"/>\n</svg>\n\t\t\t\t\t</div>\n\t\t\t\t\t<div id=\"tribe-events-subscribe-dropdown-content\" class=\"tribe-events-c-subscribe-dropdown__content\">\n\t\t\t\t\t\t<ul class=\"tribe-events-c-subscribe-dropdown__list\">\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t<li class=\"tribe-events-c-subscribe-dropdown__list-item tribe-events-c-subscribe-dropdown__list-item--gcal\">\n\t\t\t\t\t\t\t\t\t<a\n\t\t\t\t\t\t\t\t\t\thref=\"\"\n\t\t\t\t\t\t\t\t\t\tclass=\"tribe-events-c-subscribe-dropdown__list-item-link\"\n\t\t\t\t\t\t\t\t\t\ttarget=\"_blank\"\n\t\t\t\t\t\t\t\t\t\trel=\"noopener noreferrer nofollow noindex\"\n\t\t\t\t\t\t\t\t\t>\n\t\t\t\t\t\t\t\t\t\tGoogle Calendar\t\t\t\t\t\t\t\t\t</a>\n\t\t\t\t\t\t\t\t</li>\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t<li class=\"tribe-events-c-subscribe-dropdown__list-item tribe-events-c-subscribe-dropdown__list-item--ical\">\n\t\t\t\t\t\t\t\t\t<a\n\t\t\t\t\t\t\t\t\t\thref=\"\"\n\t\t\t\t\t\t\t\t\t\tclass=\"tribe-events-c-subscribe-dropdown__list-item-link\"\n\t\t\t\t\t\t\t\t\t\ttarget=\"_blank\"\n\t\t\t\t\t\t\t\t\t\trel=\"noopener noreferrer nofollow noindex\"\n\t\t\t\t\t\t\t\t\t>\n\t\t\t\t\t\t\t\t\t\tiCalendar\t\t\t\t\t\t\t\t\t</a>\n\t\t\t\t\t\t\t\t</li>\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t<li class=\"tribe-events-c-subscribe-dropdown__list-item tribe-events-c-subscribe-dropdown__list-item--outlook-365\">\n\t\t\t\t\t\t\t\t\t<a\n\t\t\t\t\t\t\t\t\t\thref=\"\"\n\t\t\t\t\t\t\t\t\t\tclass=\"tribe-events-c-subscribe-dropdown__list-item-link\"\n\t\t\t\t\t\t\t\t\t\ttarget=\"_blank\"\n\t\t\t\t\t\t\t\t\t\trel=\"noopener noreferrer nofollow noindex\"\n\t\t\t\t\t\t\t\t\t>\n\t\t\t\t\t\t\t\t\t\tOutlook 365\t\t\t\t\t\t\t\t\t</a>\n\t\t\t\t\t\t\t\t</li>\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t<li class=\"tribe-events-c-subscribe-dropdown__list-item tribe-events-c-subscribe-dropdown__list-item--outlook-live\">\n\t\t\t\t\t\t\t\t\t<a\n\t\t\t\t\t\t\t\t\t\thref=\"\"\n\t\t\t\t\t\t\t\t\t\tclass=\"tribe-events-c-subscribe-dropdown__list-item-link\"\n\t\t\t\t\t\t\t\t\t\ttarget=\"_blank\"\n\t\t\t\t\t\t\t\t\t\trel=\"noopener noreferrer nofollow noindex\"\n\t\t\t\t\t\t\t\t\t>\n\t\t\t\t\t\t\t\t\t\tOutlook Live\t\t\t\t\t\t\t\t\t</a>\n\t\t\t\t\t\t\t\t</li>\n\t\t\t\t\t\t\t\t\t\t\t\t\t</ul>\n\t\t\t\t\t</div>\n\t\t\t\t</div>\n\t\t\t</div>\n\t\t</div>\n\t</div>",
+      "excerpt": "",
+      "slug": "breathe-morgan-young-adult-dept-6",
+      "image": false,
+      "all_day": false,
+      "start_date": "2026-08-25 03:30:00",
+      "start_date_details": {
+        "year": "2026",
+        "month": "08",
+        "day": "25",
+        "hour": "03",
+        "minutes": "30",
+        "seconds": "00"
+      },
+      "end_date": "2026-08-25 16:00:00",
+      "end_date_details": {
+        "year": "2026",
+        "month": "08",
+        "day": "25",
+        "hour": "16",
+        "minutes": "00",
+        "seconds": "00"
+      },
+      "utc_start_date": "2026-08-25 08:30:00",
+      "utc_start_date_details": {
+        "year": "2026",
+        "month": "08",
+        "day": "25",
+        "hour": "08",
+        "minutes": "30",
+        "seconds": "00"
+      },
+      "utc_end_date": "2026-08-25 21:00:00",
+      "utc_end_date_details": {
+        "year": "2026",
+        "month": "08",
+        "day": "25",
+        "hour": "21",
+        "minutes": "00",
+        "seconds": "00"
+      },
+      "timezone": "America/Chicago",
+      "timezone_abbr": "",
+      "cost": "",
+      "cost_details": {
+        "currency_symbol": "$",
+        "currency_code": "USD",
+        "currency_position": "prefix",
+        "values": []
+      },
+      "website": "",
+      "show_map": false,
+      "show_map_link": false,
+      "hide_from_listings": false,
+      "sticky": false,
+      "featured": false,
+      "categories": [],
+      "tags": [],
+      "venue": [],
+      "organizer": [],
+      "custom_fields": []
+    },
+    {
+      "id": 22987,
+      "global_id": "mccpl.lib.al.us?id=22987",
+      "global_id_lineage": [
+        "mccpl.lib.al.us?id=22987"
+      ],
+      "author": "8",
+      "status": "publish",
+      "date": "2026-07-21 15:29:13",
+      "date_utc": "2026-07-21 20:29:13",
+      "modified": "2026-07-21 15:29:14",
+      "modified_utc": "2026-07-21 20:29:14",
+      "url": "https://mccpl.lib.al.us/event/events-ramer-library-2/",
+      "rest_url": "https://mccpl.lib.al.us/wp-json/tribe/events/v1/events/22987",
+      "title": "Events @ Ramer Library",
+      "description": "<div  class=\"tribe-events-schedule tribe-clearfix\" >\n\t<p class=\"tribe-events-schedule__datetime\">\n\t\t<span class=\"tribe-events-schedule__date tribe-events-schedule__date--start\">\n\t\t\t\t\t</span>\n\n\t\t\t\t\t<span class=\"tribe-events-schedule__separator tribe-events-schedule__separator--date\">\n\t\t\t\t @ \t\t\t</span>\n\t\t\t<span class=\"tribe-events-schedule__time tribe-events-schedule__time--start\">\n\t\t\t\t\t\t\t</span>\n\t\t\n\t\t\t</p>\n</div>\n\n\n\n<div style=\"position: relative; width: 100%; height: 0; padding-top: 129.4118%;\n padding-bottom: 0; box-shadow: 0 2px 8px 0 rgba(63,69,81,0.16); margin-top: 1.6em; margin-bottom: 0.9em; overflow: hidden;\n border-radius: 8px; will-change: transform;\">\n  <iframe loading=\"lazy\" style=\"position: absolute; width: 100%; height: 100%; top: 0; left: 0; border: none; padding: 0;margin: 0;\"\n    src=\"https://www.canva.com/design/DAHO5_Ibq1c/M1BYEbU76Yg20ALtqgQxMA/view?embed\" allowfullscreen=\"allowfullscreen\" allow=\"fullscreen\">\n  </iframe>\n</div>\n\n\n\n<div  class=\"tribe-block tribe-block__event-price\" >\n\t\t</div>\n\n\n\n\n<div  class=\"tribe-block tribe-block__venue tribe-clearfix\" >\n\t\n\t\t\n\t</div>\n\n\n\n\n\t<div  class=\"tribe-block tribe-block__events-link\" >\n\t\t<div class=\"tribe-events tribe-common\">\n\t\t\t<div class=\"tribe-events-c-subscribe-dropdown__container\">\n\t\t\t\t<div class=\"tribe-events-c-subscribe-dropdown\">\n\t\t\t\t\t<div class=\"tribe-common-c-btn-border tribe-events-c-subscribe-dropdown__button\">\n\t\t\t\t\t\t<svg\n\t class=\"tribe-common-c-svgicon tribe-common-c-svgicon--cal-export tribe-events-c-subscribe-dropdown__export-icon\" \taria-hidden=\"true\"\n\tviewBox=\"0 0 23 17\"\n\txmlns=\"http://www.w3.org/2000/svg\"\n>\n\t<path fill-rule=\"evenodd\" clip-rule=\"evenodd\" d=\"M.128.896V16.13c0 .211.145.383.323.383h15.354c.179 0 .323-.172.323-.383V.896c0-.212-.144-.383-.323-.383H.451C.273.513.128.684.128.896Zm16 6.742h-.901V4.679H1.009v10.729h14.218v-3.336h.901V7.638ZM1.01 1.614h14.218v2.058H1.009V1.614Z\" />\n\t<path d=\"M20.5 9.846H8.312M18.524 6.953l2.89 2.909-2.855 2.855\" stroke-width=\"1.2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>\n</svg>\n\t\t\t\t\t\t<button\n\t\t\t\t\t\t\tclass=\"tribe-events-c-subscribe-dropdown__button-text\"\n\t\t\t\t\t\t\taria-expanded=\"false\"\n\t\t\t\t\t\t\taria-controls=\"tribe-events-subscribe-dropdown-content\"\n\t\t\t\t\t\t\taria-label=\"View links to add events to your calendar\"\n\t\t\t\t\t\t>\n\t\t\t\t\t\t\tAdd to calendar\t\t\t\t\t\t</button>\n\t\t\t\t\t\t<svg\n\t class=\"tribe-common-c-svgicon tribe-common-c-svgicon--caret-down tribe-events-c-subscribe-dropdown__button-icon\" \taria-hidden=\"true\"\n\tviewBox=\"0 0 10 7\"\n\txmlns=\"http://www.w3.org/2000/svg\"\n>\n\t<path fill-rule=\"evenodd\" clip-rule=\"evenodd\" d=\"M1.008.609L5 4.6 8.992.61l.958.958L5 6.517.05 1.566l.958-.958z\" class=\"tribe-common-c-svgicon__svg-fill\"/>\n</svg>\n\t\t\t\t\t</div>\n\t\t\t\t\t<div id=\"tribe-events-subscribe-dropdown-content\" class=\"tribe-events-c-subscribe-dropdown__content\">\n\t\t\t\t\t\t<ul class=\"tribe-events-c-subscribe-dropdown__list\">\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t<li class=\"tribe-events-c-subscribe-dropdown__list-item tribe-events-c-subscribe-dropdown__list-item--gcal\">\n\t\t\t\t\t\t\t\t\t<a\n\t\t\t\t\t\t\t\t\t\thref=\"\"\n\t\t\t\t\t\t\t\t\t\tclass=\"tribe-events-c-subscribe-dropdown__list-item-link\"\n\t\t\t\t\t\t\t\t\t\ttarget=\"_blank\"\n\t\t\t\t\t\t\t\t\t\trel=\"noopener noreferrer nofollow noindex\"\n\t\t\t\t\t\t\t\t\t>\n\t\t\t\t\t\t\t\t\t\tGoogle Calendar\t\t\t\t\t\t\t\t\t</a>\n\t\t\t\t\t\t\t\t</li>\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t<li class=\"tribe-events-c-subscribe-dropdown__list-item tribe-events-c-subscribe-dropdown__list-item--ical\">\n\t\t\t\t\t\t\t\t\t<a\n\t\t\t\t\t\t\t\t\t\thref=\"\"\n\t\t\t\t\t\t\t\t\t\tclass=\"tribe-events-c-subscribe-dropdown__list-item-link\"\n\t\t\t\t\t\t\t\t\t\ttarget=\"_blank\"\n\t\t\t\t\t\t\t\t\t\trel=\"noopener noreferrer nofollow noindex\"\n\t\t\t\t\t\t\t\t\t>\n\t\t\t\t\t\t\t\t\t\tiCalendar\t\t\t\t\t\t\t\t\t</a>\n\t\t\t\t\t\t\t\t</li>\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t<li class=\"tribe-events-c-subscribe-dropdown__list-item tribe-events-c-subscribe-dropdown__list-item--outlook-365\">\n\t\t\t\t\t\t\t\t\t<a\n\t\t\t\t\t\t\t\t\t\thref=\"\"\n\t\t\t\t\t\t\t\t\t\tclass=\"tribe-events-c-subscribe-dropdown__list-item-link\"\n\t\t\t\t\t\t\t\t\t\ttarget=\"_blank\"\n\t\t\t\t\t\t\t\t\t\trel=\"noopener noreferrer nofollow noindex\"\n\t\t\t\t\t\t\t\t\t>\n\t\t\t\t\t\t\t\t\t\tOutlook 365\t\t\t\t\t\t\t\t\t</a>\n\t\t\t\t\t\t\t\t</li>\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t<li class=\"tribe-events-c-subscribe-dropdown__list-item tribe-events-c-subscribe-dropdown__list-item--outlook-live\">\n\t\t\t\t\t\t\t\t\t<a\n\t\t\t\t\t\t\t\t\t\thref=\"\"\n\t\t\t\t\t\t\t\t\t\tclass=\"tribe-events-c-subscribe-dropdown__list-item-link\"\n\t\t\t\t\t\t\t\t\t\ttarget=\"_blank\"\n\t\t\t\t\t\t\t\t\t\trel=\"noopener noreferrer nofollow noindex\"\n\t\t\t\t\t\t\t\t\t>\n\t\t\t\t\t\t\t\t\t\tOutlook Live\t\t\t\t\t\t\t\t\t</a>\n\t\t\t\t\t\t\t\t</li>\n\t\t\t\t\t\t\t\t\t\t\t\t\t</ul>\n\t\t\t\t\t</div>\n\t\t\t\t</div>\n\t\t\t</div>\n\t\t</div>\n\t</div>",
+      "excerpt": "",
+      "slug": "events-ramer-library-2",
+      "image": false,
+      "all_day": false,
+      "start_date": "2026-08-25 11:00:00",
+      "start_date_details": {
+        "year": "2026",
+        "month": "08",
+        "day": "25",
+        "hour": "11",
+        "minutes": "00",
+        "seconds": "00"
+      },
+      "end_date": "2026-08-25 17:00:00",
+      "end_date_details": {
+        "year": "2026",
+        "month": "08",
+        "day": "25",
+        "hour": "17",
+        "minutes": "00",
+        "seconds": "00"
+      },
+      "utc_start_date": "2026-08-25 16:00:00",
+      "utc_start_date_details": {
+        "year": "2026",
+        "month": "08",
+        "day": "25",
+        "hour": "16",
+        "minutes": "00",
+        "seconds": "00"
+      },
+      "utc_end_date": "2026-08-25 22:00:00",
+      "utc_end_date_details": {
+        "year": "2026",
+        "month": "08",
+        "day": "25",
+        "hour": "22",
+        "minutes": "00",
+        "seconds": "00"
+      },
+      "timezone": "America/Chicago",
+      "timezone_abbr": "",
+      "cost": "",
+      "cost_details": {
+        "currency_symbol": "$",
+        "currency_code": "USD",
+        "currency_position": "prefix",
+        "values": []
+      },
+      "website": "",
+      "show_map": false,
+      "show_map_link": false,
+      "hide_from_listings": false,
+      "sticky": false,
+      "featured": false,
+      "categories": [],
+      "tags": [],
+      "venue": [],
+      "organizer": [],
+      "custom_fields": []
+    }
+  ],
+  "rest_url": "https://mccpl.lib.al.us/wp-json/tribe/events/v1/events/?page=1&per_page=5&start_date=2026-08-24 00:00:00&end_date=2028-08-25 23:59:59&status=publish",
+  "next_rest_url": "https://mccpl.lib.al.us/wp-json/tribe/events/v1/events/?per_page=5&start_date=2026-08-24+00%3A00%3A00&end_date=2028-08-25+23%3A59%3A59&status=publish&page=2",
+  "total": 50,
+  "total_pages": 10
+}
