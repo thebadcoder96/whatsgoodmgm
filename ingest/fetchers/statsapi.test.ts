@@ -40,6 +40,13 @@ describe('mapBiscuitsGames', () => {
     expect(events).toHaveLength(0)
   })
 
+  it('still emits a home game missing venue, with venue left undefined', () => {
+    const events = mapBiscuitsGames({ dates: [{ games: [{ ...homeGame, venue: undefined }] }] })
+    expect(events).toHaveLength(1)
+    expect(events[0].title).toBe('Biscuits vs Pensacola Blue Wahoos')
+    expect(events[0].venue).toBeUndefined()
+  })
+
   it('skips a malformed game without killing the batch', () => {
     const malformed = { teams: { home: { team: { id: 421 } } } } // missing gameDate, away team name
     const warn = vi.spyOn(console, 'warn').mockImplementation(() => {})
