@@ -47,3 +47,6 @@ backup/
 
 # weekly ingest scratch output (never commit extracted events)
 extracted-events.json
+
+# brainstorm visual companion sessions
+.superpowers/
