@@ -42,7 +42,12 @@ JSON shape per event (only title, startDateTime, sourceType, sourceUrl required)
 ## 4. Interest tags
 Run: `npx tsx scripts/tag-interests.ts` (best-effort tagging of new events; non-fatal if it errors). This script has no dry-run mode — it always commits any patches it makes — but it only ever touches events that don't already have an `interests` field, so it is safe to run every week.
 
-## 5. Digest (final report — this is what the human reads)
+## 5. Refresh the live site (optional, skip in dry runs)
+If REVALIDATE_SECRET is set in the environment, run:
+`curl -s -X POST -o /dev/null -w "%{http_code}" "https://whatsgoodmgm.com/api/revalidate?secret=$REVALIDATE_SECRET"`
+Expect 200; if not, note it in the digest and move on (the site self-refreshes within an hour regardless). Never print the secret.
+
+## 6. Digest (final report — this is what the human reads)
 End your run with a short digest:
 - Events published / merged / skipped per source (from the DIGEST_JSON lines)
 - Count of validation-rejected + judgment-skipped items with one-line reasons
