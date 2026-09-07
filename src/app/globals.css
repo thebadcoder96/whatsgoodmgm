@@ -1,14 +1,38 @@
 @import "tailwindcss";
 
 :root {
+  /* warm cream - aged paper */
+  --bg: #f6efe3;
+  --surface: #fdf8ee;
+  --surface-2: #efe5d2;
+  --ink: #3a2c22;
+  --ink-dim: #7c6a56;
+  --accent: #bc5117;      /* burnt orange - "what's good" in daylight */
+  --accent-deep: #94400f; /* orange at rest: borders, underlines */
+  --accent-ink: #fdf8ee;
+  --line: rgba(58, 44, 34, 0.16);
+  --line-soft: rgba(58, 44, 34, 0.08);
+  --wash: rgba(58, 44, 34, 0.05);
+  --shadow: rgba(58, 44, 34, 0.2);
+
+  --hue-kudzu: #55703d;
+  --hue-brick: #a3552a;
+  --hue-river: #3d6b89;
+}
+
+[data-theme='dark'] {
   --bg: #12100d;
   --surface: #1b1813;
   --surface-2: #242019;
   --ink: #ede8dd;
   --ink-dim: #a49d8f;
-  --accent: #e0b64f;      /* warm gold - "what's good" */
-  --accent-deep: #8a6a24; /* gold at rest: borders, underlines (decorative only) */
+  --accent: #e0b64f;      /* warm gold */
+  --accent-deep: #8a6a24;
   --accent-ink: #12100a;
+  --line: rgba(255, 255, 255, 0.1);
+  --line-soft: rgba(255, 255, 255, 0.05);
+  --wash: rgba(255, 255, 255, 0.05);
+  --shadow: rgba(0, 0, 0, 0.4);
 
   --hue-kudzu: #9ab87f;
   --hue-brick: #d08862;
@@ -67,13 +91,13 @@ textarea:focus-visible {
 }
 
 ::selection {
-  background: var(--accent-deep);
-  color: var(--ink);
+  background: var(--accent);
+  color: var(--accent-ink);
 }
 
-/* Warm-dark map tiles, CSS-only: invert stock OSM and pull it toward brown.
-   Scoped under the pane to out-rank leaflet.css's `.leaflet-tile{filter:inherit}`. */
-.leaflet-tile-pane .leaflet-tile {
+/* Dark mode only: invert stock OSM and pull it toward brown. Light mode uses
+   the tiles as-is. Scoped under the pane to out-rank leaflet.css. */
+[data-theme='dark'] .leaflet-tile-pane .leaflet-tile {
   filter: invert(1) hue-rotate(200deg) brightness(0.72) contrast(0.9) saturate(0.4) sepia(0.3);
 }
 
@@ -118,7 +142,7 @@ textarea:focus-visible {
   border-radius: 50%;
   background: var(--accent);
   border: 3px solid var(--pin-hue, var(--accent));
-  box-shadow: 0 0 0 1px var(--accent-ink), 0 1px 4px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 0 0 1px var(--accent-ink), 0 1px 4px var(--shadow);
   transition: transform 150ms ease, box-shadow 150ms ease, opacity 150ms ease;
 }
 .wg-pin:hover,
@@ -164,7 +188,7 @@ textarea:focus-visible {
 .leaflet-container .leaflet-popup-content-wrapper {
   background: var(--surface);
   color: var(--ink);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid var(--line);
 }
 .leaflet-container .leaflet-popup-tip {
   background: var(--surface);

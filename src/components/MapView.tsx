@@ -226,7 +226,7 @@ export default function MapView({ events }: { events: EventDoc[] }) {
                 className={`rounded-full border px-3 py-1 text-xs transition-colors max-md:px-4 max-md:py-2.5 ${
                   on
                     ? 'border-[var(--accent-deep)] text-[var(--accent)]'
-                    : 'border-white/10 text-[var(--ink-dim)] hover:border-white/20 hover:text-[var(--ink)]'
+                    : 'border-[var(--line)] text-[var(--ink-dim)] hover:border-white/20 hover:text-[var(--ink)]'
                 }`}
               >
                 {r.label}
@@ -276,7 +276,7 @@ export default function MapView({ events }: { events: EventDoc[] }) {
                         onMouseEnter={() => k && setHovered(k)}
                         onMouseLeave={() => setHovered(null)}
                         className={`relative rounded-r-lg border-l-2 bg-[var(--surface)] px-4 py-3 ring-1 transition-colors ${
-                          ringOn ? 'ring-[var(--accent)]' : 'ring-white/5'
+                          ringOn ? 'ring-[var(--accent)]' : 'ring-[var(--line-soft)]'
                         } ${k ? 'cursor-pointer hover:bg-[var(--surface-2)]' : ''}`}
                         style={{ borderLeftColor: hue }}
                       >

@@ -36,7 +36,7 @@ export default function VenueMiniMap({
     <MapContainer
       center={[lat, lng]}
       zoom={15}
-      className="h-48 w-full rounded-lg ring-1 ring-white/5"
+      className="h-48 w-full rounded-lg ring-1 ring-[var(--line-soft)]"
       dragging={false}
       scrollWheelZoom={false}
       doubleClickZoom={false}

@@ -125,7 +125,7 @@ export default async function EventPage({ params }: { params: Promise<{ slug: st
         <img
           src={event.imageUrl}
           alt={`Flyer for ${event.title}`}
-          className="mb-8 w-full rounded-lg object-cover ring-1 ring-white/5"
+          className="mb-8 w-full rounded-lg object-cover ring-1 ring-[var(--line-soft)]"
         />
       )}
 
@@ -143,7 +143,7 @@ export default async function EventPage({ params }: { params: Promise<{ slug: st
       {/* When & where - the ticket stub. Dotted category-hue left edge echoes
           the event cards; mono for the timetable texture. */}
       <div
-        className="mt-6 overflow-hidden rounded-r-lg border-l-2 border-dotted bg-[var(--surface)] ring-1 ring-white/5"
+        className="mt-6 overflow-hidden rounded-r-lg border-l-2 border-dotted bg-[var(--surface)] ring-1 ring-[var(--line-soft)]"
         style={{ borderLeftColor: hue }}
       >
         <div className="space-y-5 px-5 py-5">
@@ -209,7 +209,7 @@ export default async function EventPage({ params }: { params: Promise<{ slug: st
         </div>
 
         {hasCoords && (
-          <div className="border-t border-white/5">
+          <div className="border-t border-[var(--line-soft)]">
             <VenueMiniMapLoader lat={venue!.lat!} lng={venue!.lng!} hue={hue} name={venue!.name} />
           </div>
         )}
@@ -228,7 +228,7 @@ export default async function EventPage({ params }: { params: Promise<{ slug: st
             {nextDates.map(iso => (
               <span
                 key={iso}
-                className="rounded-full bg-[var(--surface-2)] px-3 py-1 font-mono text-[13px] tabular-nums text-[var(--ink-dim)] ring-1 ring-white/5"
+                className="rounded-full bg-[var(--surface-2)] px-3 py-1 font-mono text-[13px] tabular-nums text-[var(--ink-dim)] ring-1 ring-[var(--line-soft)]"
               >
                 {chipFmt.format(new Date(iso)).replace(',', '').toLowerCase()}
               </span>

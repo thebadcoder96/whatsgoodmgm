@@ -19,7 +19,7 @@ export default async function ArchivePage() {
         <p className="mt-2 font-display italic text-[var(--ink-dim)]">every Thursday since day one. the receipts.</p>
         <div className="mt-6 space-y-4">
           {picks.map(p => (
-            <div key={p._id} className="rounded-r-lg border-l-2 border-dotted border-[var(--accent-deep)] bg-[var(--surface)] p-5 ring-1 ring-white/5">
+            <div key={p._id} className="rounded-r-lg border-l-2 border-dotted border-[var(--accent-deep)] bg-[var(--surface)] p-5 ring-1 ring-[var(--line-soft)]">
               <p className="font-mono text-xs text-[var(--ink-dim)]">week of {formatWeekOf(p.weekOf).toLowerCase()}</p>
               <h2 className="mt-1.5 font-semibold leading-snug">{p.headline}</h2>
               {p.body && <div className="mt-2 space-y-2 text-sm leading-relaxed text-[var(--ink-dim)]"><PortableText value={p.body} /></div>}

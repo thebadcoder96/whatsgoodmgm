@@ -25,7 +25,7 @@ const plexMono = IBM_Plex_Mono({
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: { default: 'WhatsGoodMGM · Know what\'s good in the Gump', template: '%s · WhatsGoodMGM' },
-  description: 'A free, community-made guide to what\'s good in Montgomery, Alabama. Events, curated weekly.',
+  description: 'a free, community-made guide to what\'s good in Montgomery, Alabama. events, maps, and a calendar you can subscribe to.',
   openGraph: {
     siteName: 'WhatsGoodMGM',
     type: 'website',
@@ -38,8 +38,15 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${fraunces.variable} ${epilogue.variable} ${plexMono.variable}`}>
+    <html lang="en" data-theme="light" className={`${fraunces.variable} ${epilogue.variable} ${plexMono.variable}`}>
       <body className="min-h-screen antialiased">
+        {/* runs before paint so a stored dark preference never flashes cream */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html:
+              "try{if(localStorage.getItem('wg-theme')==='dark')document.documentElement.setAttribute('data-theme','dark')}catch(e){}",
+          }}
+        />
         {children}
       </body>
     </html>

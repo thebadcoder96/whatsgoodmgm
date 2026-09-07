@@ -12,7 +12,7 @@ const nav = [
 export default function SiteLayout({ children }: { children: React.ReactNode }) {
   return (
     <>
-      <header className="border-b border-white/10">
+      <header className="border-b border-[var(--line)]">
         <div className="mx-auto flex max-w-5xl flex-wrap items-baseline justify-between gap-x-6 gap-y-1 px-4 py-4">
           <Link href="/" className="font-display text-xl font-semibold tracking-tight md:text-2xl">
             What&apos;s Good<span className="text-[var(--accent)]">.</span>MGM
@@ -28,7 +28,7 @@ export default function SiteLayout({ children }: { children: React.ReactNode }) 
         </div>
       </header>
       <main className="mx-auto max-w-5xl px-4 pb-24 pt-10 md:py-12 md:pb-12">{children}</main>
-      <footer className="mt-8 border-t border-white/10 px-4 pb-24 pt-10 text-center md:pb-10">
+      <footer className="mt-8 border-t border-[var(--line)] px-4 pb-24 pt-10 text-center md:pb-10">
         <p className="font-display text-sm italic text-[var(--ink-dim)]">
           made in Montgomery, for Montgomery. no ads, no algorithm, just what&apos;s good.
         </p>

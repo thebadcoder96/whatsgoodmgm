@@ -2,7 +2,7 @@
 import { useActionState } from 'react'
 import { submitEvent, type SubmitState } from './actions'
 
-const field = 'w-full rounded-md border border-white/10 bg-[var(--surface-2)] px-3 py-2 placeholder:text-[var(--ink-dim)]/70'
+const field = 'w-full rounded-md border border-[var(--line)] bg-[var(--surface-2)] px-3 py-2 placeholder:text-[var(--ink-dim)]/70'
 
 export default function SubmitPage() {
   const [state, action, pending] = useActionState<SubmitState, FormData>(submitEvent, null)
@@ -11,7 +11,7 @@ export default function SubmitPage() {
       <h1 className="font-display text-2xl font-semibold tracking-tight md:text-3xl">got something good?</h1>
       <p className="mt-3 leading-7 text-[var(--ink-dim)]">Tell us about an event, or give us your account to follow: Instagram, TikTok, or Facebook. A human reviews everything before it goes up.</p>
       {state && (
-        <p className="mt-5 rounded-r-md border-l-2 bg-[var(--surface)] p-3 ring-1 ring-white/5"
+        <p className="mt-5 rounded-r-md border-l-2 bg-[var(--surface)] p-3 ring-1 ring-[var(--line-soft)]"
           style={{ borderLeftColor: state.ok ? 'var(--hue-kudzu)' : 'var(--hue-brick)' }}>
           {state.message}
         </p>

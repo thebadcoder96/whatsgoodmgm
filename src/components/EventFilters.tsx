@@ -2,7 +2,7 @@
 import { useRouter, usePathname } from 'next/navigation'
 import { useEffect, useRef, useState, useTransition, type KeyboardEvent } from 'react'
 
-const pill = 'rounded-full border border-white/10 bg-[var(--surface-2)] px-3.5 py-1.5 text-[var(--ink)] focus:border-[var(--accent-deep)] max-md:py-2.5'
+const pill = 'rounded-full border border-[var(--line)] bg-[var(--surface-2)] px-3.5 py-1.5 text-[var(--ink)] focus:border-[var(--accent-deep)] max-md:py-2.5'
 
 type Option = { value: string; label: string }
 
@@ -119,7 +119,7 @@ function PillSelect({ id, label, value, options, onChange }: {
           id={`${id}-listbox`}
           role="listbox"
           aria-label={label}
-          className="absolute left-0 top-full z-20 mt-2 max-h-64 min-w-full max-w-[calc(100vw-2rem)] overflow-y-auto rounded-xl border border-white/10 bg-[var(--surface-2)] py-1.5 shadow-lg shadow-black/40"
+          className="absolute left-0 top-full z-20 mt-2 max-h-64 min-w-full max-w-[calc(100vw-2rem)] overflow-y-auto rounded-xl border border-[var(--line)] bg-[var(--surface-2)] py-1.5 shadow-lg shadow-[color:var(--shadow)]"
         >
           {options.map((o, i) => {
             const selected = i === selectedIndex
@@ -132,7 +132,7 @@ function PillSelect({ id, label, value, options, onChange }: {
                 onMouseEnter={() => setActive(i)}
                 onClick={() => choose(i)}
                 className={`flex cursor-pointer items-center gap-2 whitespace-nowrap px-3.5 py-1.5 max-md:py-3 ${
-                  i === active ? 'bg-white/5' : ''
+                  i === active ? 'bg-[var(--wash)]' : ''
                 } ${selected ? 'text-[var(--accent)]' : 'text-[var(--ink)]'}`}
               >
                 <span
@@ -228,7 +228,7 @@ export default function EventFilters({ q, category, interest, days, free, catego
 
   return (
     <form
-      className="mt-5 flex flex-wrap items-center gap-2 border-b border-white/5 pb-5 text-sm max-md:sticky max-md:top-0 max-md:z-30 max-md:bg-[var(--bg)]/95 max-md:pt-3 max-md:backdrop-blur"
+      className="mt-5 flex flex-wrap items-center gap-2 border-b border-[var(--line-soft)] pb-5 text-sm max-md:sticky max-md:top-0 max-md:z-30 max-md:bg-[var(--bg)]/95 max-md:pt-3 max-md:backdrop-blur"
       method="GET"
       onSubmit={e => {
         // JS is active - we already auto-filter, so a native submit (e.g. a
