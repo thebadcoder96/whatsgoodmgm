@@ -1,6 +1,11 @@
+import { sanityFetch } from '@/lib/sanity/fetch'
+import { PUBLIC_SOURCES, type PublicSource } from '@/lib/sanity/queries'
+
+export const revalidate = 3600
 export const metadata = { title: 'About' }
 
-export default function AboutPage() {
+export default async function AboutPage() {
+  const sources = await sanityFetch<PublicSource[]>(PUBLIC_SOURCES)
   return (
     <div className="mx-auto max-w-2xl space-y-10">
       <section>
@@ -16,6 +21,30 @@ export default function AboutPage() {
           Know about something we don&apos;t?{' '}
           <a href="/submit" className="link-gold text-[var(--ink)]">submit it</a>. That&apos;s the
           whole deal.
+        </p>
+      </section>
+      <section>
+        <h2 className="font-display text-xl font-semibold italic">where the events come from</h2>
+        <p className="mt-3 leading-7 text-[var(--ink-dim)]">
+          These calendars feed the site automatically, checked weekly:
+        </p>
+        <ul className="mt-3 space-y-1.5">
+          {sources.map(s => (
+            <li key={s.name} className="leading-7 text-[var(--ink-dim)]">
+              {s.homepage ? (
+                <a href={s.homepage} className="link-gold text-[var(--ink)]" target="_blank" rel="noopener noreferrer">
+                  {s.name.toLowerCase()}
+                </a>
+              ) : (
+                <span className="text-[var(--ink)]">{s.name.toLowerCase()}</span>
+              )}
+            </li>
+          ))}
+        </ul>
+        <p className="mt-3 leading-7 text-[var(--ink-dim)]">
+          On top of those, we read venue and ticketing pages around the river region by hand
+          and pull in what&apos;s real. Run a venue, a market, or a series and want your events
+          in here every week? <a href="/submit" className="link-gold text-[var(--ink)]">tell us</a>.
         </p>
       </section>
       <section>

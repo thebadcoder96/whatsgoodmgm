@@ -25,6 +25,12 @@ export const PAST_EVENTS = groq`
 
 export const CONTRIBUTORS = groq`*[_type == "contributor"]{ name, handle, role, bio, avatarUrl }`
 
+// Public "where the events come from" list on /about
+export const PUBLIC_SOURCES = groq`
+  *[_type == "source" && active == true] | order(name asc){ name, homepage, lastPulled }`
+
+export type PublicSource = { name: string; homepage?: string; lastPulled?: string }
+
 export type VenueDoc = { _id: string; name: string; address?: string; neighborhood?: string; lat?: number; lng?: number }
 export type EventDoc = {
   _id: string; title: string; slug: string; startDateTime: string; endDateTime?: string
