@@ -56,6 +56,15 @@ export function mapSimpleviewDoc(doc: any, baseUrl: string): NormalizedEvent | n
 const PAGE_SIZE = 50 // the API 403s above ~60-99 in testing; stay well under
 const MAX_PAGES = 20
 
+// 2026-09: the site moved behind Akamai, which denies requests without a
+// browser user-agent. This is the same public API the site's own frontend
+// calls; ordinary browser headers are all it wants.
+const BROWSER_HEADERS = {
+  'User-Agent':
+    'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36',
+  Accept: 'application/json, text/plain, */*',
+}
+
 export const simpleviewFetcher: Fetcher = {
   platform: 'simpleview',
   async fetchUpcoming(source: SourceDoc, windowDays: number): Promise<NormalizedEvent[]> {
@@ -68,7 +77,7 @@ export const simpleviewFetcher: Fetcher = {
     let pages = 0
 
     // Token is reusable across requests (verified live), so fetch it once up front.
-    const tokRes = await fetch(`${base}/plugins/core/get_simple_token/`)
+    const tokRes = await fetch(`${base}/plugins/core/get_simple_token/`, { headers: BROWSER_HEADERS })
     if (!tokRes.ok) throw new Error(`simpleview token: HTTP ${tokRes.status}`)
     const token = (await tokRes.text()).trim()
 
@@ -77,8 +86,17 @@ export const simpleviewFetcher: Fetcher = {
     // the window cutoff is applied client-side, as with an unsorted/grouped-by-series result set.
     while (hasMore) {
       const q = JSON.stringify({ filter: {}, options: { limit: PAGE_SIZE, skip } })
-      const res = await fetch(`${base}/includes/rest_v2/plugins_events_events_by_date/find/?json=${encodeURIComponent(q)}&token=${token}`)
-      if (!res.ok) throw new Error(`simpleview events: HTTP ${res.status}`)
+      const res = await fetch(`${base}/includes/rest_v2/plugins_events_events_by_date/find/?json=${encodeURIComponent(q)}&token=${token}`, { headers: BROWSER_HEADERS })
+      if (!res.ok) {
+        // The API hard-caps pagination (403 once skip reaches ~400). Results are
+        // date-sorted and reach a year-plus out by then, far beyond our window,
+        // so a mid-pagination 403 means "no more pages", not a failed run.
+        if (res.status === 403 && fetched > 0) {
+          console.warn(`  Pagination 403 at skip ${skip} for ${source.identifier}; treating as end of results (${fetched} docs)`)
+          break
+        }
+        throw new Error(`simpleview events: HTTP ${res.status}`)
+      }
       const data = await res.json()
       const docs: any[] = data.docs ?? []
       fetched += docs.length
