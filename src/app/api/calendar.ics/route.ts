@@ -26,8 +26,13 @@ export async function GET(request: Request) {
   if (slug) {
     const event = await sanityFetch<EventDoc | null>(EVENT_BY_SLUG, { slug })
     if (!event) return new Response('not found', { status: 404 })
+    // recurring events get their next upcoming date, not the original stale one
+    const occursAt = event.recurrence?.frequency
+      ? expandOccurrences(event, now.toISOString(),
+          new Date(now.getTime() + 60 * 86_400_000).toISOString())[0] ?? event.startDateTime
+      : event.startDateTime
     return icsResponse(
-      buildCalendar([{ e: event, occursAt: event.startDateTime }], SITE_URL, now),
+      buildCalendar([{ e: event, occursAt }], SITE_URL, now),
       `${slug}.ics`)
   }
 

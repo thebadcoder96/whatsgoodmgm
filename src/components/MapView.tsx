@@ -226,7 +226,7 @@ export default function MapView({ events }: { events: EventDoc[] }) {
                 className={`rounded-full border px-3 py-1 text-xs transition-colors max-md:px-4 max-md:py-2.5 ${
                   on
                     ? 'border-[var(--accent-deep)] text-[var(--accent)]'
-                    : 'border-[var(--line)] text-[var(--ink-dim)] hover:border-white/20 hover:text-[var(--ink)]'
+                    : 'border-[var(--line)] text-[var(--ink-dim)] hover:border-[var(--accent-deep)] hover:text-[var(--ink)]'
                 }`}
               >
                 {r.label}
@@ -369,7 +369,7 @@ export default function MapView({ events }: { events: EventDoc[] }) {
                     .
                   </>
                 ) : (
-                  <>nothing on the books for the next month. check back Thursday.</>
+                  <>nothing on the books for the next month. check back soon.</>
                 )}
               </div>
             )}

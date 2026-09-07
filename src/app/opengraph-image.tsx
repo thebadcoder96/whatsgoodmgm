@@ -5,7 +5,8 @@ export const size = { width: 1200, height: 630 }
 export const contentType = 'image/png'
 
 // Sitewide default og:image (file convention). Brand-true and deliberately
-// simple: warm dark ground, gold accent, big serif wordmark.
+// simple: warm cream ground (the site's default light theme), burnt-orange
+// accent, big serif wordmark.
 export default function OpenGraphImage() {
   return new ImageResponse(
     (
@@ -17,7 +18,7 @@ export default function OpenGraphImage() {
           flexDirection: 'column',
           justifyContent: 'center',
           alignItems: 'flex-start',
-          background: '#12100d',
+          background: '#f6efe3',
           padding: '96px',
         }}
       >
@@ -28,12 +29,12 @@ export default function OpenGraphImage() {
             fontSize: 128,
             fontWeight: 700,
             lineHeight: 1,
-            color: '#f5efe2',
+            color: '#3a2c22',
             letterSpacing: '-0.03em',
           }}
         >
           What&apos;s Good
-          <span style={{ color: '#e0b64f' }}>.</span>
+          <span style={{ color: '#bc5117' }}>.</span>
           MGM
         </div>
         <div
@@ -42,7 +43,7 @@ export default function OpenGraphImage() {
             fontFamily: 'serif',
             fontStyle: 'italic',
             fontSize: 46,
-            color: '#e0b64f',
+            color: '#bc5117',
           }}
         >
           know what&apos;s good in the Gump
@@ -53,7 +54,7 @@ export default function OpenGraphImage() {
             fontSize: 28,
             letterSpacing: '0.2em',
             textTransform: 'uppercase',
-            color: '#9a9082',
+            color: '#7c6a56',
           }}
         >
           montgomery, alabama
