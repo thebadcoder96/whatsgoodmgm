@@ -2,23 +2,22 @@
 import Link from 'next/link'
 import { useState } from 'react'
 import type { DayGroup, MonthCell } from '@/lib/events/grouping'
-import { todayKey } from '@/lib/events/grouping'
 import { formatDayHeading, formatEventTime } from '@/lib/events/format'
 import { EventRow } from '@/components/events/EventRow'
 
 const WEEKDAYS = ['sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat']
 const MAX_LINES = 3
 
-export function MonthView({ weeks, groups, monthLabel, prevHref, nextHref, todayHref }: {
+export function MonthView({ weeks, groups, monthLabel, today, prevHref, nextHref, todayHref }: {
   weeks: MonthCell[][]
   groups: DayGroup[]
   monthLabel: string
+  today: string
   prevHref: string
   nextHref: string
   todayHref: string
 }) {
   const byDay = new Map(groups.map(g => [g.day, g.items]))
-  const today = todayKey()
   const [selected, setSelected] = useState<string | null>(null)
   const selectedItems = selected ? (byDay.get(selected) ?? []) : []
 
@@ -93,10 +92,12 @@ export function MonthView({ weeks, groups, monthLabel, prevHref, nextHref, today
                 onClick={() => setSelected(isSelected ? null : cell.day)}
                 aria-pressed={isSelected}
                 className={`flex aspect-square flex-col items-center justify-center rounded-md font-mono text-xs ${
-                  cell.inMonth ? 'bg-[var(--surface)] text-[var(--ink)]' : 'bg-transparent text-[var(--ink-dim)]'
-                } ${cell.day === today ? 'ring-1 ring-[var(--accent)]' : ''} ${
-                  isSelected ? 'bg-[var(--accent)] text-[var(--accent-ink)]' : ''
-                }`}
+                  isSelected
+                    ? 'bg-[var(--accent)] text-[var(--accent-ink)]'
+                    : cell.inMonth
+                      ? 'bg-[var(--surface)] text-[var(--ink)]'
+                      : 'bg-transparent text-[var(--ink-dim)]'
+                } ${cell.day === today ? 'ring-1 ring-[var(--accent)]' : ''}`}
               >
                 {Number(cell.day.slice(8, 10))}
                 <span
