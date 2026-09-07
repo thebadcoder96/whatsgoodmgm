@@ -24,7 +24,7 @@ export function MonthView({ weeks, groups, monthLabel, today, prevHref, nextHref
   const nav = (
     <div className="flex items-center justify-between">
       <p className="font-display text-lg font-semibold">{monthLabel}</p>
-      <div className="flex items-center gap-1 font-mono text-sm">
+      <div className="flex items-center gap-1 text-sm">
         <Link href={prevHref} aria-label="previous month" className="px-2 py-1 text-[var(--ink-dim)] hover:text-[var(--ink)]">‹</Link>
         <Link href={todayHref} className="px-2 py-1 text-[var(--ink-dim)] hover:text-[var(--ink)]">today</Link>
         <Link href={nextHref} aria-label="next month" className="px-2 py-1 text-[var(--ink-dim)] hover:text-[var(--ink)]">›</Link>
@@ -40,7 +40,7 @@ export function MonthView({ weeks, groups, monthLabel, today, prevHref, nextHref
       <div className="hidden overflow-hidden rounded-lg border border-[var(--line)] md:block">
         <div className="grid grid-cols-7 border-b border-[var(--line)] bg-[var(--surface-2)]">
           {WEEKDAYS.map(d => (
-            <div key={d} className="px-2 py-1.5 text-center font-mono text-[11px] uppercase tracking-widest text-[var(--ink-dim)]">{d}</div>
+            <div key={d} className="px-2 py-1.5 text-center text-[11px] uppercase tracking-widest text-[var(--ink-dim)]">{d}</div>
           ))}
         </div>
         {weeks.map((week, wi) => (
@@ -54,7 +54,7 @@ export function MonthView({ weeks, groups, monthLabel, today, prevHref, nextHref
                     cell.inMonth ? 'bg-[var(--surface)]' : 'bg-[var(--surface-2)]/50'
                   } ${cell.day === today ? 'ring-1 ring-inset ring-[var(--accent)]' : ''}`}
                 >
-                  <p className={`font-mono text-xs ${cell.inMonth ? 'text-[var(--ink)]' : 'text-[var(--ink-dim)]'}`}>
+                  <p className={`text-xs tabular-nums ${cell.inMonth ? 'text-[var(--ink)]' : 'text-[var(--ink-dim)]'}`}>
                     {Number(cell.day.slice(8, 10))}
                   </p>
                   <ul className="mt-1 space-y-0.5">
@@ -80,7 +80,7 @@ export function MonthView({ weeks, groups, monthLabel, today, prevHref, nextHref
       <div className="md:hidden">
         <div className="grid grid-cols-7 gap-1">
           {WEEKDAYS.map(d => (
-            <div key={d} className="text-center font-mono text-[10px] uppercase text-[var(--ink-dim)]">{d}</div>
+            <div key={d} className="text-center text-[10px] uppercase text-[var(--ink-dim)]">{d}</div>
           ))}
           {weeks.flat().map(cell => {
             const count = byDay.get(cell.day)?.length ?? 0
@@ -91,7 +91,7 @@ export function MonthView({ weeks, groups, monthLabel, today, prevHref, nextHref
                 type="button"
                 onClick={() => setSelected(isSelected ? null : cell.day)}
                 aria-pressed={isSelected}
-                className={`flex aspect-square flex-col items-center justify-center rounded-md font-mono text-xs ${
+                className={`flex aspect-square flex-col items-center justify-center rounded-md text-xs tabular-nums ${
                   isSelected
                     ? 'bg-[var(--accent)] text-[var(--accent-ink)]'
                     : cell.inMonth
@@ -110,7 +110,7 @@ export function MonthView({ weeks, groups, monthLabel, today, prevHref, nextHref
         </div>
         {selected && (
           <div className="mt-4">
-            <h3 className="font-mono text-[11px] uppercase tracking-[0.18em] text-[var(--accent)]">
+            <h3 className="font-display text-lg italic text-[var(--accent)]">
               {formatDayHeading(selected)}
             </h3>
             {selectedItems.length === 0 ? (

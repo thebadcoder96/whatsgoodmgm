@@ -41,7 +41,7 @@ export function SubscribeMenu({ siteUrl, feedQuery, filtered }: {
       {open && (
         <div
           role="menu"
-          className="absolute right-0 top-full z-20 mt-2 w-48 rounded-xl border border-[var(--line)] bg-[var(--surface-2)] py-1.5 shadow-lg shadow-[color:var(--shadow)]"
+          className="absolute right-0 top-full z-40 mt-2 w-48 rounded-xl border border-[var(--line)] bg-[var(--surface-2)] py-1.5 shadow-lg shadow-[color:var(--shadow)]"
         >
           {items.map(i => (
             <a
@@ -56,7 +56,7 @@ export function SubscribeMenu({ siteUrl, feedQuery, filtered }: {
               {i.label}
             </a>
           ))}
-          <p className="border-t border-[var(--line-soft)] px-3.5 pb-1 pt-2 font-mono text-[11px] text-[var(--ink-dim)]">
+          <p className="border-t border-[var(--line-soft)] px-3.5 pb-1 pt-2 text-[11px] text-[var(--ink-dim)]">
             {filtered ? 'subscribes to your current filters' : 'auto-updates as events land'}
           </p>
         </div>

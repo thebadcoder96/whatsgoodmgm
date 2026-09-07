@@ -21,7 +21,7 @@ export function WeekView({ anchor, groups, prevHref, nextHref, todayHref }: {
         <p className="font-display text-lg font-semibold">
           week of {formatDayHeading(days[0]).replace(' ·', '')}
         </p>
-        <div className="flex items-center gap-1 font-mono text-sm">
+        <div className="flex items-center gap-1 text-sm">
           <Link href={prevHref} aria-label="previous week" className="px-2 py-1 text-[var(--ink-dim)] hover:text-[var(--ink)]">‹</Link>
           <Link href={todayHref} className="px-2 py-1 text-[var(--ink-dim)] hover:text-[var(--ink)]">today</Link>
           <Link href={nextHref} aria-label="next week" className="px-2 py-1 text-[var(--ink-dim)] hover:text-[var(--ink)]">›</Link>
@@ -34,7 +34,7 @@ export function WeekView({ anchor, groups, prevHref, nextHref, todayHref }: {
           return (
             <section key={day} className="overflow-hidden rounded-lg border border-[var(--line-soft)]">
               <h3
-                className={`px-2 py-1.5 text-center font-mono text-[11px] uppercase tracking-wide ${
+                className={`px-2 py-1.5 text-center text-[11px] uppercase tracking-wide ${
                   day === today
                     ? 'bg-[var(--accent)] text-[var(--accent-ink)]'
                     : 'bg-[var(--surface-2)] text-[var(--ink-dim)]'
@@ -50,7 +50,7 @@ export function WeekView({ anchor, groups, prevHref, nextHref, todayHref }: {
                     className="block rounded-md border-l-2 bg-[var(--wash)] px-2 py-1.5 text-xs leading-snug transition-colors hover:bg-[var(--surface-2)]"
                     style={{ borderLeftColor: categoryHue(e.category) }}
                   >
-                    <span className="font-mono text-[var(--ink-dim)]">{formatEventTime(occursAt)}</span>
+                    <span className="tabular-nums text-[var(--ink-dim)]">{formatEventTime(occursAt)}</span>
                     <span className="mt-0.5 block font-medium">{e.title.toLowerCase()}</span>
                   </Link>
                 ))}

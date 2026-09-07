@@ -96,6 +96,13 @@ export default async function EventPage({ params }: { params: Promise<{ slug: st
   const hue = categoryHue(event.category)
   const venue = event.venue
   const hasCoords = venue?.lat != null && venue?.lng != null
+  // Directions work without coordinates too: fall back to a maps search on
+  // the venue name + address so the button never just disappears.
+  const directionsUrl = hasCoords
+    ? `https://www.google.com/maps/dir/?api=1&destination=${venue!.lat},${venue!.lng}`
+    : venue?.address || venue?.name
+      ? `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent([venue?.name, venue?.address].filter(Boolean).join(', '))}`
+      : null
   const isFree = /^free/i.test((event.priceText ?? '').trim())
   const eventJsonLd = buildEventJsonLd(event, `${SITE_URL}/events/${slug}`)
 
@@ -187,14 +194,24 @@ export default async function EventPage({ params }: { params: Promise<{ slug: st
               a quieter secondary link. Both survive the no-coords case (the
               button just doesn't render). */}
           <div className="flex flex-wrap items-center gap-x-5 gap-y-3 pt-1">
-            {hasCoords && (
+            {directionsUrl && (
               <a
-                href={`https://www.google.com/maps/dir/?api=1&destination=${venue!.lat},${venue!.lng}`}
+                href={directionsUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center rounded-full bg-[var(--accent)] px-4 py-2 text-sm font-medium text-[var(--accent-ink)] transition-opacity hover:opacity-90"
               >
                 directions →
+              </a>
+            )}
+            {event.sourceUrl && (
+              <a
+                href={event.sourceUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="link-gold text-sm font-medium"
+              >
+                website →
               </a>
             )}
             <a
@@ -251,16 +268,6 @@ export default async function EventPage({ params }: { params: Promise<{ slug: st
         </section>
       )}
 
-      {event.sourceUrl && (
-        <a
-          href={event.sourceUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="link-gold mt-10 inline-block font-medium"
-        >
-          event details at the source →
-        </a>
-      )}
     </article>
   )
 }

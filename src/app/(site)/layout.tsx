@@ -18,14 +18,16 @@ export default function SiteLayout({ children }: { children: React.ReactNode }) 
             What&apos;s Good<span className="text-[var(--accent)]">.</span>MGM
           </Link>
           <div className="flex items-center gap-4">
-            <nav className="flex flex-wrap items-baseline gap-x-4 gap-y-1 text-sm text-[var(--ink-dim)] max-md:gap-x-5">
+            {/* mobile gets the bottom tab bar; up top only "about" (not a tab) + theme */}
+            <nav className="hidden items-baseline gap-x-4 text-sm text-[var(--ink-dim)] md:flex">
               {nav.map(n => (
                 <Link key={n.href} href={n.href}
-                  className="underline-offset-4 transition-colors hover:text-[var(--ink)] hover:underline hover:decoration-[var(--accent)] hover:decoration-2 max-md:py-2">
+                  className="underline-offset-4 transition-colors hover:text-[var(--ink)] hover:underline hover:decoration-[var(--accent)] hover:decoration-2">
                   {n.label}
                 </Link>
               ))}
             </nav>
+            <Link href="/about" className="py-2 text-sm text-[var(--ink-dim)] md:hidden">about</Link>
             <ThemeToggle />
           </div>
         </div>

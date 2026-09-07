@@ -20,7 +20,7 @@ export function EventList({ groups }: { groups: DayGroup[] }) {
         const withImages = g.items.filter(i => i.e.imageUrl)
         return (
           <section key={g.day}>
-            <h2 className="border-b border-[var(--accent-deep)]/40 pb-1.5 font-mono text-[11px] uppercase tracking-[0.18em] text-[var(--accent)]">
+            <h2 className="border-b border-[var(--accent-deep)]/40 pb-1 font-display text-lg italic text-[var(--accent)]">
               {g.day === today && 'today · '}
               {formatDayHeading(g.day)}
             </h2>

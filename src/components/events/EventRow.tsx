@@ -20,12 +20,12 @@ export function EventRow({ event, occursAt }: { event: EventDoc; occursAt: strin
         <span className="flex items-baseline gap-2">
           <span className="truncate font-semibold leading-snug">{event.title}</span>
           {event.priceText && (
-            <span className={`shrink-0 font-mono text-xs ${isFree ? 'text-[var(--accent)]' : 'text-[var(--ink-dim)]'}`}>
+            <span className={`shrink-0 text-xs ${isFree ? 'text-[var(--accent)]' : 'text-[var(--ink-dim)]'}`}>
               {event.priceText.toLowerCase()}
             </span>
           )}
         </span>
-        <span className="mt-0.5 block truncate font-mono text-[13px] tabular-nums text-[var(--ink-dim)]">
+        <span className="mt-0.5 block truncate text-[13px] tabular-nums text-[var(--ink-dim)]">
           {formatEventTime(occursAt)}
           {event.venue?.name && ` · ${event.venue.name.toLowerCase()}`}
           {event.venue?.neighborhood && ` · ${event.venue.neighborhood.toLowerCase()}`}
