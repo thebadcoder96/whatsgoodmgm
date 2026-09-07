@@ -16,14 +16,14 @@ Fetch each page; extract upcoming events (next 60 days) into the JSON shape belo
 - https://www.bandsintown.com/c/montgomery-al  (JSON-LD MusicEvents; venue names matter — this page has returned HTTP 403 to automated fetches before; if that happens, note it as a failed source in the digest and move on, don't retry with workarounds)
 - https://mpaconline.org/events/
 - https://capritheatre.org/  (film screenings: one event at the run's start date of each film's range)
-- https://asf.net/whats-on/  (Alabama Shakespeare Festival: one event at each production's opening date, note the run range in the description)
-- https://www.montgomeryzoo.com/  (special events only — skip daily admission/hours)
+- https://asf.net/season-55/  (Alabama Shakespeare Festival: one event at each production's opening date, run range in the description. The season page moves each year — if it 404s, find the current season page from asf.net)
+- https://www.montgomeryzoo.com/plan-your-visit/zoo-special-event-calendar  (special events only — skip daily admission/hours. Known WAF: often 403s automated fetches; if blocked, note it and move on)
 - https://www.newsouthbookstore.com/events
 - https://cloverdaleplayhouse.org/  (shows and improv nights)
 - https://www.pikeroad.us/events
 - https://www.montgomerychamber.com/events/  (ONLY community-facing items: markets, festivals, public recreation — skip networking, ribbon cuttings, member luncheons)
 Skip: anything without an explicit date, anything past, duplicates you already saw in another source this run (the writer also dedupes — belt and suspenders), bar drink-specials with no event content, and anything that reads as an ad rather than an event.
-Include with confidence: public workshops, classes, tech meetups, and educational events count as community events whenever anyone can show up (free or ticketed). Only skip closed-door networking, member-only functions, sales-pitch seminars (real estate, MLM, "grand opening" promos), volunteer-signup pages standing in for the event itself, and syndicated online-only listings dressed up with a local address.
+Include with confidence: public workshops, classes, tech meetups, and educational events count as community events whenever anyone can show up (free or ticketed). Only skip closed-door networking, member-only functions, sales-pitch seminars (real estate, MLM, "grand opening" promos), volunteer-signup pages standing in for the event itself, syndicated online-only listings dressed up with a local address, and nationally syndicated multi-city certification bootcamps (PMP, Six Sigma, and the like at generic coworking addresses) — the test is whether a local person organized it, not whether it is educational.
 
 ## 3. Write extracted events
 Save all extracted events (step 2) as one JSON array to `extracted-events.json` in the repo root (never commit it), then:
