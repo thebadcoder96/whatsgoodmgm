@@ -203,7 +203,10 @@ export default async function EventPage({ params }: { params: Promise<{ slug: st
               rel="noopener noreferrer"
               className="link-gold text-sm font-medium"
             >
-              add to calendar →
+              google calendar →
+            </a>
+            <a href={`/api/calendar.ics?event=${encodeURIComponent(slug)}`} className="link-gold text-sm font-medium">
+              apple / .ics →
             </a>
           </div>
         </div>
