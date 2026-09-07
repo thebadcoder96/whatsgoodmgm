@@ -38,7 +38,9 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" data-theme="light" className={`${fraunces.variable} ${epilogue.variable} ${plexMono.variable}`}>
+    // suppressHydrationWarning: the pre-paint script in <body> legitimately
+    // flips data-theme before React hydrates when the visitor has dark stored
+    <html lang="en" data-theme="light" suppressHydrationWarning className={`${fraunces.variable} ${epilogue.variable} ${plexMono.variable}`}>
       <body className="min-h-screen antialiased">
         {/* runs before paint so a stored dark preference never flashes cream */}
         <script
