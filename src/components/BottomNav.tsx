@@ -30,8 +30,8 @@ const tabs: Tab[] = [
     ),
   },
   {
-    href: '/events',
-    label: 'events',
+    href: '/calendar',
+    label: 'calendar',
     icon: (
       <svg {...iconProps}>
         <rect x="3.5" y="4.5" width="17" height="16" rx="2" />

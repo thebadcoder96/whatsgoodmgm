@@ -10,7 +10,7 @@ const APPROVED_EVENT_SLUGS = groq`
 
 type SitemapEvent = { slug: string; _updatedAt: string }
 
-const STATIC_PATHS = ['', '/events', '/map', '/archive', '/submit', '/about', '/privacy', '/guide']
+const STATIC_PATHS = ['', '/calendar', '/calendar/week', '/map', '/archive', '/submit', '/about', '/privacy']
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const now = new Date()
