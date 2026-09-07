@@ -12,10 +12,8 @@ export default function PrivacyPage() {
         The <a href="/submit" className="link-gold text-[var(--ink)]">submit form</a> stores exactly
         what you type (the event info, and an optional handle or email) so a human can review it.
         If you leave an email, we only use it to ask questions about your submission. Ask us to
-        delete yours anytime, either through the submit form or over on{' '}
-        <a href="https://www.reddit.com/r/Montgomery/" className="link-gold text-[var(--ink)]" target="_blank" rel="noopener noreferrer">
-          r/Montgomery
-        </a>.
+        delete yours anytime, through the submit form or at{' '}
+        <a href="mailto:info@mmintelligence.ai" className="link-gold text-[var(--ink)]">info@mmintelligence.ai</a>.
       </p>
       <p className="leading-7 text-[var(--ink-dim)]">
         Our hosting and CMS providers (Vercel, Sanity) keep standard server logs to run the

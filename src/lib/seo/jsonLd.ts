@@ -148,12 +148,12 @@ export function buildWebsiteJsonLd(): Record<string, unknown> {
     name: 'WhatsGoodMGM',
     url: SITE_URL,
     description:
-      'A free, community-made guide to what\'s good in Montgomery, Alabama. Events, curated weekly.',
+      'a free, community-made guide to what\'s good in Montgomery, Alabama. events, maps, and a calendar you can subscribe to.',
     potentialAction: {
       '@type': 'SearchAction',
       target: {
         '@type': 'EntryPoint',
-        urlTemplate: `${SITE_URL}/events?q={search_term_string}`,
+        urlTemplate: `${SITE_URL}/?q={search_term_string}`,
       },
       'query-input': 'required name=search_term_string',
     },
