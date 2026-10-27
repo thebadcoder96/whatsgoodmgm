@@ -133,6 +133,8 @@ export default async function EventPage({ params }: { params: Promise<{ slug: st
         <FlyerImage
           src={event.imageUrl}
           alt={`Flyer for ${event.title}`}
+          title={event.title}
+          category={event.category}
           width={1344}
           height={896}
           sizes="(min-width: 704px) 672px, 100vw"

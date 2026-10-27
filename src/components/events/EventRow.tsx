@@ -36,6 +36,8 @@ export function EventRow({ event, occursAt }: { event: EventDoc; occursAt: strin
         <FlyerImage
           src={event.imageUrl}
           alt=""
+          title={event.title}
+          category={event.category}
           width={64}
           height={48}
           className="h-12 w-16 shrink-0 rounded object-cover ring-1 ring-[var(--line-soft)]"

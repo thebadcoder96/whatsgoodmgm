@@ -32,6 +32,8 @@ export function EventList({ groups }: { groups: DayGroup[] }) {
                     <FlyerImage
                       src={e.imageUrl!}
                       alt={`flyer for ${e.title}`}
+                      title={e.title}
+                      category={e.category}
                       width={128}
                       height={80}
                       className="h-20 w-32 rounded-md object-cover ring-1 ring-[var(--line-soft)] transition-opacity hover:opacity-90"
